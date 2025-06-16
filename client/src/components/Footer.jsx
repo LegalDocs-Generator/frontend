@@ -8,12 +8,11 @@ const Footer = () => {
         <div className="mb-4 md:mb-0">
           <Link
             to="/"
-            className="text-2xl font-semibold tracking-tight text-decoration-none"
-            style={{ color: "gray" }}
+            className="text-2xl font-semibold tracking-tight text-decoration-none navbar-element"
           >
             LegalDocs
           </Link>
-          <p className="mt-1 text-sm" style={{ color: "gray" }}>
+          <p className="mt-1 text-sm  navbar-element">
             © {new Date().getFullYear()} LegalDocs. All rights reserved.
           </p>
         </div>
@@ -22,22 +21,19 @@ const Footer = () => {
         <div className="flex flex-wrap justify-center md:justify-end gap-4">
           <Link
             to="/privacy"
-            className="text-sm font-medium text-decoration-none"
-            style={{ color: "gray" }}
+            className="text-sm font-medium text-decoration-none navbar-element"
           >
             Privacy Policy
           </Link>
           <Link
             to="/terms"
-            className="text-sm font-medium text-decoration-none"
-            style={{ color: "gray" }}
+            className="text-sm font-medium text-decoration-none navbar-element"
           >
             Terms of Service
           </Link>
           <Link
             to="/contact"
-            className="text-sm font-medium text-decoration-none"
-            style={{ color: "gray" }}
+            className="text-sm font-medium text-decoration-none navbar-element"
           >
             Contact
           </Link>

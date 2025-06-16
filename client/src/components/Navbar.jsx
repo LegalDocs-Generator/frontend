@@ -20,8 +20,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl text-decoration-none font-semibold tracking-tight"
-          style={{color:"gray"}}
+          className="text-2xl text-decoration-none font-semibold tracking-tight navbar-element"
         >
           LegalDocs
         </Link>
@@ -32,15 +31,14 @@ const Navbar = () => {
             <Link
               key={link.to}
               to={link.to}
-              className="text-decoration-none font-medium transition-colors duration-300"
-              style={{color:"gray"}}
+              className="text-decoration-none font-medium transition-colors duration-300 navbar-element"
             >
               {link.label}
             </Link>
           ))}
           <Link
             to="/login"
-            className="ml-4 bg-gray-600 text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
+            className="button ml-4 save_button text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
           >
             Login
           </Link>
@@ -50,8 +48,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-2xl focus:outline-none"
-            style={{color:"black"}}
+            className="text-2xl focus:outline-none  navbar-element"
           >
             {menuOpen ? <FiX /> : <FiMenu />}
           </button>
@@ -66,8 +63,7 @@ const Navbar = () => {
               key={link.to}
               to={link.to}
               onClick={() => setMenuOpen(false)}
-              className="block font-medium  text-decoration-none hover:text-gray-800 transition-colors"
-              style={{color:"gray"}}
+              className="block font-medium  text-decoration-none hover:text-gray-800 transition-colors navbar-element"
             >
               {link.label}
             </Link>
@@ -75,7 +71,7 @@ const Navbar = () => {
           <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="inline-block mt-2 bg-gray-600 text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition"
+            className="button save_button inline-block mt-2 text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium transition"
           >
             Login
           </Link>
