@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import img from "../../../public/images/form98.png";
+import img from "/images/form98.png";
 import DynamicInputSection from "../../utils/DynamicInputSection";
 const Form98 = () => {
   const [formData, setFormData] = useState({
@@ -77,11 +77,11 @@ const Form98 = () => {
     }));
   };
 
-  const handleBankAccountChange = (index, field, value) => {
-    const updatedAccounts = [...formData.bankAccounts];
-    updatedAccounts[index][field] = value;
-    setFormData({ ...formData, bankAccounts: updatedAccounts });
-  };
+  // const handleBankAccountChange = (index, field, value) => {
+  //   const updatedAccounts = [...formData.bankAccounts];
+  //   updatedAccounts[index][field] = value;
+  //   setFormData({ ...formData, bankAccounts: updatedAccounts });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,23 +98,24 @@ const Form98 = () => {
   };
 
   return (
-   <div className="border m-4 md:m-10 rounded-2xl p-4 md:p-6 bg-white w-full max-w-[1200px] mx-auto">
-
+    <div className="border m-4 md:m-10 rounded-2xl p-4 md:p-10 bg-white w-full max-w-[900px] mx-auto">
       <div className="flex gap-2.5 justify-center  !items-center">
         <img src={img} alt="image" className="w-12 h-12 " />
-        <p className="text-center text-3xl mt-2 mb-2 font-semibold">
+        <p className="text-center text-3xl mt-2 mb-2 font-semibold w-full md:w-[60%]">
           Schedule of property of the deceased
         </p>
       </div>
 
       <p className="text-center text-3xl  font-semibold ">Form 98</p>
       <form onSubmit={handleSubmit} className="p-0.5 md:p-12 ">
-        <div className="flex flex-col gap-3">
+        <div className=" flex flex-col gap-3">
           {/* basic details */}
-          <div className="flex flex-col gap-2">
-            <p className="mb-0 text-2xl font-semibold">Basic Details</p>
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+          <div className="flex flex-col gap-4 text-sm md:text-base">
+            <p className="mb-0 text-xl md:text-2xl font-semibold">
+              Basic Details
+            </p>
+            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Name of Deceased <span className="text-red-600">*</span>
                 </label>
@@ -126,7 +127,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Residence of Deceased <span className="text-red-600">*</span>
                 </label>
@@ -140,8 +141,8 @@ const Form98 = () => {
               </div>
             </div>
 
-            <div className="flex  justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+            <div className="flex flex-col gap-4 md:flex-row  justify-between w-full">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Occupation of Deceased <span className="text-red-600">*</span>
                 </label>
@@ -153,7 +154,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Name of Petitioner <span className="text-red-600">*</span>
                 </label>
@@ -169,13 +170,13 @@ const Form98 = () => {
           </div>
           <hr />
           {/* details of movable properties */}
-          <div className="flex flex-col gap-2">
-            <p className="mb-0 text-2xl font-semibold">
+          <div className="flex flex-col gap-4 text-sm md:text-base">
+            <p className="mb-0 text-xl md:text-2xl  font-semibold">
               Details of Movable Properties
             </p>
 
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[30%]">
+            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount of Plates <span className="text-red-600">*</span>
                 </label>
@@ -187,7 +188,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[30%]">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount of Jewel <span className="text-red-600">*</span>
                 </label>
@@ -199,7 +200,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[30%]">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount of Books <span className="text-red-600">*</span>
                 </label>
@@ -212,8 +213,8 @@ const Form98 = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[30%]">
+            <div className="flex flex-col gap-4 md:flex-row  justify-between w-full">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount of Furniture <span className="text-red-600">*</span>
                 </label>
@@ -225,7 +226,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[30%]">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount Wearing apparel <span className="text-red-600">*</span>
                 </label>
@@ -237,7 +238,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[30%]">
+              <div className="flex flex-col w-full md:w-[30%]">
                 <label className="mb-1 font-medium">
                   Amount of Household Goods{" "}
                   <span className="text-red-600">*</span>
@@ -252,7 +253,7 @@ const Form98 = () => {
               </div>
             </div>
 
-            <div className="flex flex-col w-[30%]">
+            <div className="flex flex-col  w-full md:w-[30%]">
               <label className="mb-1 font-medium">
                 Cash in house <span className="text-red-600">*</span>
               </label>
@@ -280,9 +281,9 @@ const Form98 = () => {
               value: "Current Value",
             }}
             fieldWidths={{
-              bankName: "30%",
-              accountNumber: "30%",
-              value: "30%",
+              bankName: "100% md:30%",
+              accountNumber: "100% md:30%",
+              value: "100% md:30%",
             }}
           />
           <hr />
@@ -301,9 +302,9 @@ const Form98 = () => {
               value: "Deposit Value",
             }}
             fieldWidths={{
-              bankName: "30%",
-              receiptDetails: "30%",
-              value: "30%",
+              bankName: "100% md:30%",
+              receiptDetails: "100% md:30%",
+              value: "3100% md:30%",
             }}
           />
           <hr />
@@ -320,8 +321,8 @@ const Form98 = () => {
               value: "Assessed  Value",
             }}
             fieldWidths={{
-              description: "45%",
-              value: "45%",
+              description: "100% md:45%",
+              value: "100% md:45%",
             }}
           />
           <hr />
@@ -337,8 +338,8 @@ const Form98 = () => {
               value: "Current  Value",
             }}
             fieldWidths={{
-              description: "45%",
-              value: "45%",
+              description: "100% md:45%",
+              value: "100% md:45%",
             }}
           />
           <hr />
@@ -364,11 +365,11 @@ const Form98 = () => {
               currentValue: "Current Value (Rs)",
             }}
             fieldWidths={{
-              folio: "30%",
-              schemeName: "30%",
-              currentUnits: "30%",
-              currentNav: "30%",
-              currentValue: "30%",
+              folio: "100% md:30%",
+              schemeName: "100% md:30%",
+              currentUnits: "100% md:30%",
+              currentNav: "100% md:30%",
+              currentValue: "100% md:30%",
             }}
           />
           <hr />
@@ -389,9 +390,9 @@ const Form98 = () => {
               UnclaimedAmount: "Unclaimed Amount",
             }}
             fieldWidths={{
-              folio: "30%",
-              UnclaimedSchemeName: "30%",
-              UnclaimedAmount: "30%",
+              folio: "100% md:30%",
+              UnclaimedSchemeName: "100% md:30%",
+              UnclaimedAmount: "100% md:30%",
             }}
           />
           <hr />
@@ -411,20 +412,20 @@ const Form98 = () => {
               earnedIncome: "Earned Income",
             }}
             fieldWidths={{
-              bookName: "45%",
-              earnedIncome: "45%",
+              bookName: "100% md:45%",
+              earnedIncome: "100% md:45%",
             }}
           />
           <hr />
 
           {/* details of Other Assets */}
-          <div className="flex flex-col gap-2">
-            <p className="mb-0 text-2xl font-semibold">
+          <div className="flex flex-col gap-4 text-sm md:text-base">
+            <p className="mb-0 text-xl md:text-2xl font-semibold">
               Details of Movable Properties
             </p>
 
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Adani Electricity Account Number
                   <span className="text-red-600">*</span>
@@ -437,7 +438,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Adani Security Deposit <span className="text-red-600">*</span>
                 </label>
@@ -451,8 +452,8 @@ const Form98 = () => {
               </div>
             </div>
 
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Mahanagar Gas connection bearing BP No
                   <span className="text-red-600">*</span>
@@ -465,7 +466,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Mahanagar Gas connection bearing CA No{" "}
                   <span className="text-red-600">*</span>
@@ -480,8 +481,8 @@ const Form98 = () => {
               </div>
             </div>
 
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+            <div className="flex flex-col gap-4 md:flex-row justify-between w-full md:w-full">
+              <div className="flex flex-col w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Security Deposit for Mahanagar Connection{" "}
                   <span className="text-red-600">*</span>
@@ -494,7 +495,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Mahanagar Gas connection BP No{" "}
                   <span className="text-red-600">*</span>
@@ -509,8 +510,8 @@ const Form98 = () => {
               </div>
             </div>
 
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col w-[47%]">
+            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Mahanagar Gas connection CA No{" "}
                   <span className="text-red-600">*</span>
@@ -523,7 +524,7 @@ const Form98 = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex flex-col w-[47%]">
+              <div className="flex flex-col  w-full md:w-[47%]">
                 <label className="mb-1 font-medium">
                   Sim Card Number <span className="text-red-600">*</span>
                 </label>
@@ -538,15 +539,24 @@ const Form98 = () => {
             </div>
           </div>
           <hr />
-
-          <div className="flex flex-col md:flex-row gap-3 w-full md:w-[50%] ml-auto">
-            <button type="submit" className="save_button button">
+          {/* Buttons */}
+          <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-4">
+            <button type="submit" className="button previous w-full md:w-auto">
+              Previous
+            </button>
+            <button
+              type="submit"
+              className="button save_button w-full md:w-auto"
+            >
               Save Changes
             </button>
-            <button type="submit" className="save_next button">
+            <button type="submit" className="button save_next w-full md:w-auto">
               Save and Next
             </button>
-            <button type="submit" className="generate_pdf button">
+            <button
+              type="submit"
+              className="button generate_pdf w-full md:w-auto"
+            >
               Generate PDF
             </button>
           </div>

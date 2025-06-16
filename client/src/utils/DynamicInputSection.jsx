@@ -11,8 +11,8 @@ const DynamicInputSection = ({
   fieldWidths = {},
 }) => {
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-2xl font-semibold mb-0">{title}</p>
+    <div className="flex flex-col gap-4 text-sm md:text-base">
+      <p className="text-lg md:text-2xl font-semibold mb-0">{title}</p>
 
       <div className="flex flex-col gap-4">
         {formData[field]?.map((item, index) => (
@@ -47,7 +47,7 @@ const DynamicInputSection = ({
             <button
               type="button"
               onClick={() => removeItem(setFormData, field, index)}
-              className="text-red-600 font-bold !text-2xl hover:text-red-800 mt-7"
+              className="text-red-600 font-bold !text-2xl hover:text-red-800 !mt-7"
               title="Delete"
             >
               &times;
