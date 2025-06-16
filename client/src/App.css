@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+body{
+  background-color: #F8F9FA;
+  color: #212529;
+  font-family: 'Lato', sans-serif;
+
+
+}
+
 /* input field */
 .input {
   padding: 7px;

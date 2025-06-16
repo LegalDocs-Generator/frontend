@@ -1,8 +1,73 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import img from "../../../public/images/form98.png";
+import DynamicInputSection from "../../utils/DynamicInputSection";
 const Form98 = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    petitionNumber: "",
+    deceasedName: "",
+    deceasedAddress: "",
+    deceasedOccupation: "",
+    petitionerName: "",
+
+    // Movable Assets
+    movableAssets: {
+      cashInHouse: "",
+      householdGoods: "",
+      wearingApparel: "",
+      books: "",
+      plates: "",
+      jewels: "",
+      furniture: "",
+    },
+
+    // Dynamic Lists
+    bankAccounts: [{ bankName: "", accountNumber: "", value: "" }],
+
+    fixedDeposits: [{ bankName: "", receiptDetails: "", value: "" }],
+
+    immovableProperty: [{ description: "", value: "" }],
+
+    debenture: [{ description: "", value: "" }],
+
+    mutualFunds: [
+      {
+        folio: "",
+        schemeName: "",
+        currentUnits: "",
+        currentNav: "",
+        currentValue: "",
+      },
+    ],
+
+    mutualFundsMissedDividends: [
+      {
+        folio: "",
+        UnclaimedSchemeName: "",
+        UnclaimedAmount: "",
+      },
+    ],
+
+    royalties: [
+      {
+        bookName: "",
+        earnedIncome: "",
+      },
+    ],
+
+    otherAssets: {
+      adaniAccountNumber: "",
+      adaniSecurityDeposit: "",
+      mahanagarGPBearingBPNo: "",
+      mahanagarBearingCANo: "",
+      mahanagarSecurityDeposit: "",
+      mahanagarGPBPNo: "",
+      mahanagarCANo: "",
+      simCardNumber: "",
+    },
+
+    deductedLiabilities: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -10,6 +75,12 @@ const Form98 = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleBankAccountChange = (index, field, value) => {
+    const updatedAccounts = [...formData.bankAccounts];
+    updatedAccounts[index][field] = value;
+    setFormData({ ...formData, bankAccounts: updatedAccounts });
   };
 
   const handleSubmit = async (e) => {
@@ -27,321 +98,458 @@ const Form98 = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit} className="p-5">
-        <div className="flex flex-col gap-4">
-          <p> Details of Movable Properties</p>
-          <input
-            type="text"
-            placeholder="Name of Deceased"
-            name="deceasedName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Rescidence of Deceased"
-            name="deceasedAddress"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Occupation of Deceased"
-            name="deceasedOccupation"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Name of Petitioner"
-            name="petitionerName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Cash in house"
-            name="cashInHouse"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount of Household Goods"
-            name="householdGoods"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount Wearing apparel"
-            name="wearingApparel"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount of Books"
-            name="books"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount of Plates"
-            name="plates"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount of Jewel"
-            name="jewels"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount of Furniture"
-            name="furniture"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Bank Accounts</p>
-          <input
-            type="text"
-            placeholder="Bank Name"
-            name="bankName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Bank Account Number"
-            name="accountNumber"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Current Value"
-            name="value"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Fixed Deposits</p>
-          <input
-            type="text"
-            placeholder="Bank Name"
-            name="bankName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Certificate Details"
-            name="receiptDetails"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Current Value"
-            name="value"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Immovable property</p>
-          <input
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Assessed Value"
-            name="value"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Debenture/Bond</p>
-          <input
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Value"
-            name="value"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Mutual Funds</p>
-          <input
-            type="text"
-            placeholder="Folio"
-            name="folio"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Scheme Name"
-            name="schemeName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Current units"
-            name="currentUnits"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Current NAV (Rs.)"
-            name="currentNav"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Current value (Rs.)"
-            name="currentValue"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Mutual Fund Missed Dividends</p>
-          <input
-            type="text"
-            placeholder="Folio"
-            name="folio"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Unclaimed Scheme"
-            name="UnclaimedSchemeName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Unclaimed Amount (in Rs.)"
-            name="UnclaimedAmount"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Details of Royalties/Fees from Sale of Books</p>
-          <input
-            type="text"
-            placeholder="Book Name"
-            name="bookName"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Earned Income"
-            name="earnedIncome"
-            className="input"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <p>Other Assets</p>
-          <input
-            type="text"
-            placeholder="Adani Electricity Account Number"
-            name="adaniAccountNumber"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Adani Security Deposit"
-            name="adaniSecurityDeposit"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Mahanagar Gas connection bearing BP No"
-            name="mahanagarGPBearingBPNo"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Mahanagar Gas connection bearing CA No"
-            name="mahanagarBearingCANo"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Security Deposit for Mahanagar Connection"
-            name="mahanagarSecurityDeposit"
-            className="input"
-            onChange={handleChange}
-          />
+   <div className="border m-4 md:m-10 rounded-2xl p-4 md:p-6 bg-white w-full max-w-[1200px] mx-auto">
 
-          <input
-            type="text"
-            placeholder="Mahanagar Gas connection bearing BP No"
-            name="mahanagarGPBPNo"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Mahanagar Gas connection bearing CA No"
-            name="mahanagarCANo"
-            className="input"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Deduct Amount"
-            name="deductedLiabilities"
-            className="input"
-            onChange={handleChange}
-          />
+      <div className="flex gap-2.5 justify-center  !items-center">
+        <img src={img} alt="image" className="w-12 h-12 " />
+        <p className="text-center text-3xl mt-2 mb-2 font-semibold">
+          Schedule of property of the deceased
+        </p>
+      </div>
 
-          <input
-            type="text"
-            placeholder="SIM Card Number"
-            name="simCardNumber"
-            className="input"
-            onChange={handleChange}
+      <p className="text-center text-3xl  font-semibold ">Form 98</p>
+      <form onSubmit={handleSubmit} className="p-0.5 md:p-12 ">
+        <div className="flex flex-col gap-3">
+          {/* basic details */}
+          <div className="flex flex-col gap-2">
+            <p className="mb-0 text-2xl font-semibold">Basic Details</p>
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Name of Deceased <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="deceasedName"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Residence of Deceased <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="deceasedAddress"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex  justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Occupation of Deceased <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="deceasedOccupation"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Name of Petitioner <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="petitionerName"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
+          <hr />
+          {/* details of movable properties */}
+          <div className="flex flex-col gap-2">
+            <p className="mb-0 text-2xl font-semibold">
+              Details of Movable Properties
+            </p>
+
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount of Plates <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="plates"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount of Jewel <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="jewels"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount of Books <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="books"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount of Furniture <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="furniture"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount Wearing apparel <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="wearingApparel"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[30%]">
+                <label className="mb-1 font-medium">
+                  Amount of Household Goods{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="householdGoods"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col w-[30%]">
+              <label className="mb-1 font-medium">
+                Cash in house <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="cashInHouse"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <hr />
+
+          {/* bank account details */}
+          <DynamicInputSection
+            title="Bank Accounts"
+            field="bankAccounts"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{ bankName: "", accountNumber: "", value: "" }}
+            labels={{
+              bankName: "Bank Name",
+              accountNumber: "Account Number",
+              value: "Current Value",
+            }}
+            fieldWidths={{
+              bankName: "30%",
+              accountNumber: "30%",
+              value: "30%",
+            }}
           />
-        </div>
-        <div className="flex flex-row gap-6 mt-3">
-          <button type="submit " className="save_button button">Save Changes</button>
-          <button type="submit " className="save_next button">Save and Next</button>
-          <button type="submit " className="generate_pdf button">Generate PDF</button>
+          <hr />
+
+          {/* fixed deposite Details */}
+
+          <DynamicInputSection
+            title="Fixed Deposits"
+            field="fixedDeposits"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{ bankName: "", receiptDetails: "", value: "" }}
+            labels={{
+              bankName: "Bank Name",
+              receiptDetails: "Receipt Details",
+              value: "Deposit Value",
+            }}
+            fieldWidths={{
+              bankName: "30%",
+              receiptDetails: "30%",
+              value: "30%",
+            }}
+          />
+          <hr />
+
+          {/* details of immovable properties */}
+          <DynamicInputSection
+            title="Details of Immovable property"
+            field="immovableProperty"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{ description: "", value: "" }}
+            labels={{
+              description: "Description",
+              value: "Assessed  Value",
+            }}
+            fieldWidths={{
+              description: "45%",
+              value: "45%",
+            }}
+          />
+          <hr />
+          {/* Details of Debenture/Bond */}
+          <DynamicInputSection
+            title="Details of Debenture/Bond"
+            field="debenture"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{ description: "", value: "" }}
+            labels={{
+              description: "Description",
+              value: "Current  Value",
+            }}
+            fieldWidths={{
+              description: "45%",
+              value: "45%",
+            }}
+          />
+          <hr />
+
+          {/* details of Mutual Funds */}
+          <DynamicInputSection
+            title="Mutual Funds"
+            field="mutualFunds"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{
+              folio: "",
+              schemeName: "",
+              currentUnits: "",
+              currentNav: "",
+              currentValue: "",
+            }}
+            labels={{
+              folio: "Folio",
+              schemeName: "Scheme Name",
+              currentUnits: "Current Units",
+              currentNav: "Current NAV (Rs)",
+              currentValue: "Current Value (Rs)",
+            }}
+            fieldWidths={{
+              folio: "30%",
+              schemeName: "30%",
+              currentUnits: "30%",
+              currentNav: "30%",
+              currentValue: "30%",
+            }}
+          />
+          <hr />
+          {/* details of Mutual Fund Missed Dividends */}
+          <DynamicInputSection
+            title="Mutual Fund Missed Dividends"
+            field="mutualFundsMissedDividends"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{
+              folio: "",
+              UnclaimedSchemeName: "",
+              UnclaimedAmount: "",
+            }}
+            labels={{
+              folio: "Folio",
+              UnclaimedSchemeName: "Unclaimed Scheme Name",
+              UnclaimedAmount: "Unclaimed Amount",
+            }}
+            fieldWidths={{
+              folio: "30%",
+              UnclaimedSchemeName: "30%",
+              UnclaimedAmount: "30%",
+            }}
+          />
+          <hr />
+
+          {/* details of Royalties */}
+          <DynamicInputSection
+            title="Royalties/Fees from Sale of Books"
+            field="royalties"
+            formData={formData}
+            setFormData={setFormData}
+            schema={{
+              bookName: "",
+              earnedIncome: "",
+            }}
+            labels={{
+              bookName: "Book Name",
+              earnedIncome: "Earned Income",
+            }}
+            fieldWidths={{
+              bookName: "45%",
+              earnedIncome: "45%",
+            }}
+          />
+          <hr />
+
+          {/* details of Other Assets */}
+          <div className="flex flex-col gap-2">
+            <p className="mb-0 text-2xl font-semibold">
+              Details of Movable Properties
+            </p>
+
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Adani Electricity Account Number
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="adaniAccountNumber"
+                  className="input"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Adani Security Deposit <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="number"
+                  required
+                  name="adaniSecurityDeposit"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Mahanagar Gas connection bearing BP No
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="mahanagarGPBearingBPNo"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Mahanagar Gas connection bearing CA No{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="mahanagarBearingCANo"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Security Deposit for Mahanagar Connection{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="mahanagarSecurityDeposit"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Mahanagar Gas connection BP No{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="mahanagarGPBPNo"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Mahanagar Gas connection CA No{" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="mahanagarCANo"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-[47%]">
+                <label className="mb-1 font-medium">
+                  Sim Card Number <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="simCardNumber"
+                  className="input"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
+          <hr />
+
+          <div className="flex flex-col md:flex-row gap-3 w-full md:w-[50%] ml-auto">
+            <button type="submit" className="save_button button">
+              Save Changes
+            </button>
+            <button type="submit" className="save_next button">
+              Save and Next
+            </button>
+            <button type="submit" className="generate_pdf button">
+              Generate PDF
+            </button>
+          </div>
         </div>
       </form>
     </div>
