@@ -1,14 +1,18 @@
-import 'bootstrap/dist/css/bootstrap.min.css';      
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';  
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css'
-import Form98 from './pages/forms/Form98'
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
-  
+
 
   return (
     <>
-     <Form98/>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   )
 }
