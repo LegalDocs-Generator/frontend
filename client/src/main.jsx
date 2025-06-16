@@ -9,6 +9,7 @@ import Form100 from './pages/forms/Form100.jsx'
 import Form101 from './pages/forms/Form101.jsx'
 import Form102 from './pages/forms/Form102.jsx'
 import Form97 from './pages/forms/Form97.jsx'
+import AuthPage from './pages/AuthPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path:'/',
         element: <Form97/>
+      },
+      {
+        path:'/login',
+        element: <AuthPage/>
       },
       {
         path:'*',
