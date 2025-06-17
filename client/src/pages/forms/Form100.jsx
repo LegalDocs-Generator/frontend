@@ -32,104 +32,118 @@ const Form100 = () => {
     }
   };
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white w-full  max-w-[900px] mx-auto text-sm md:text-base">
-      <div className="flex gap-2.5 justify-center  !items-center">
-        <img src={img} alt="image" className="w-12 h-12 " />
-        <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold w-full md:w-[60%] ">
+    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white   text-sm md:text-base">
+      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+        <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
           Schedule of trust property held by the deceased
         </p>
-      </div>
-      <p className="text-center text-xl md:text-3xl  font-semibold ">Form 100</p>
-      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+
+        <p className="text-center mb-1">(Rules 374, 37S and 376)</p>
+        <p className="text-center text-md md:text-xl  font-semibold  mb-1">
+          Form 100
+        </p>
+        <p className="text-center text-md md:text-xl  font-semibold ">
+          IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+        </p>
+        <p className="text-center text-md md:text-xl  font-semibold ">
+          TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+          2020
+        </p>
+
         {/* Basic Details Section */}
-        <div className="space-y-4">
-          <p className="text-lg md:text-2xl font-semibold">Basic Details</p>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Residence of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedAddress"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
+        <div className="space-y-4 mt-12">
+          <div className="flex gap-2 text-sm md:text-base font-semibold justify-center">
+            Petition for probate of a will of
+            <input
+              type="text"
+              name="deceasedName"
+              placeholder=" Name of Deceased* "
+              className="input !-mt-1"
+              required
+              onChange={handleChange}
+            />{" "}
+            resident{" "}
+            <input
+              type="text"
+              name="deceasedAddress"
+              placeholder=" Residence of Deceased*"
+              className="input"
+              required
+              onChange={handleChange}
+            />{" "}
+            having occupation of{" "}
+            <input
+              type="text"
+              name="deceasedOccupation"
+              placeholder=" Occupation of Deceased*"
+              className="input"
+              required
+              onChange={handleChange}
+            />
           </div>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Occupation of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedOccupation"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Petitioner <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="petitionerName"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
+          <div className="flex gap-2 text-sm md:text-base font-semibold justify-center">
+            Deceased.
+            <input
+              type="text"
+              name="petitionerName"
+              placeholder=" Executor of Will*"
+              className="input"
+              required
+              onChange={handleChange}
+            />
+            Petitioner.
           </div>
         </div>
-
+        <div className=" gap-3 text-sm md:text-base !mt-12">
+          <p className="text-center text-md md:text-xl  font-semibold mb-0 ">
+            SCHEDULE No. III
+          </p>
+          <p className="text-center text-md md:text-lg   ">
+            Schedule of Trust Property
+          </p>
+        </div>
         <hr />
-
-        {/* Property Details Section */}
-        <div className="space-y-4">
-          <p className="text-lg md:text-2xl  font-semibold">Property held in trust</p>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            
-
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Beneficial interest <span className="text-red-600">*</span>
-              </label>
-              <input
+         {/* Property Details Section */}
+        <div className=" gap-3 text-sm md:text-base !mt-12">
+          <p className=" text-md md:text-lg   mb-0 ">
+            Property held in trust for another and not beneficially or with
+            general
+          </p>
+          <div className="flex justify-between">
+            <p className=" text-md md:text-lg   ">
+              Power to confer a beneficial interest
+            </p>
+            <input
                 type="number"
                 name="property"
                 className="input"
+                placeholder=" Beneficial interest"
                 required
                 onChange={handleChange}
               />
-            </div>
-          </div>
-        </div>
 
+          </div>
+        </div> 
         <hr />
+        <div className="flex gap-3">
+            <p className=" text-md md:text-lg   ">
+              Petitioner:
+            </p>
+            <input
+                type="text"
+                name="petitionerName"
+                className="input"
+                placeholder=" Petitioner Name"
+                required
+                onChange={handleChange}
+              />
+
+          </div>
+
+
 
         {/* Buttons */}
-        <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-4">
+        <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-16">
           <button type="submit" className="button previous w-full md:w-auto">
             Previous
           </button>
