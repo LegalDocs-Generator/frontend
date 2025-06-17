@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import img from "/images/form101.png";
+import { Link } from "react-router-dom";
 
 const Form101 = () => {
   const [formData, setFormData] = useState({
@@ -53,213 +53,218 @@ const Form101 = () => {
     }
   };
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white w-full  max-w-[900px] mx-auto text-sm md:text-base">
-      <div className="flex gap-2.5 justify-center  !items-center">
-        <img src={img} alt="image" className="w-12 h-12 " />
-        <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold  ">
-          Executor’s oath
-        </p>
+   <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+  <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+    <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
+      Executor’s oath
+    </p>
+    <p className="text-center mb-1">(See rules 374)</p>
+    <p className="text-center text-md md:text-xl font-semibold mb-1">
+      Form 101
+    </p>
+    <p className="text-center text-md md:text-xl font-semibold">
+      IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+    </p>
+    <p className="text-center text-md md:text-xl font-semibold">
+      TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of 2020
+    </p>
+
+    <div className="space-y-4 mt-12">
+      <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
+        Petition for probate of a will of
+        <input
+          type="text"
+          name="deceasedName"
+          placeholder=" Name of Deceased* "
+          className="input min-w-[200px] w-full md:w-auto"
+          required
+          onChange={handleChange}
+        />
+        resident
+        <input
+          type="text"
+          name="deceasedAddress"
+          placeholder=" Residence of Deceased*"
+          className="input min-w-[200px] w-full md:w-auto"
+          required
+          onChange={handleChange}
+        />
+        having occupation of
+        <input
+          type="text"
+          name="deceasedOccupation"
+          placeholder=" Occupation of Deceased*"
+          className="input min-w-[200px] w-full md:w-auto"
+          required
+          onChange={handleChange}
+        />
       </div>
-      <p className="text-center text-xl md:text-3xl  font-semibold ">
-        Form 101
-      </p>
-      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
-        {/* Basic Details Section */}
-        <div className="space-y-4">
-          <p className="text-lg md:text-2xl font-semibold">Basic Details</p>
 
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Residence of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedAddress"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Occupation of Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedOccupation"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Petitioner <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="petitionerName"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-
-        <hr />
-
-        {/*  Details Section */}
-        <div className="space-y-4">
-          <p className="text-lg md:text-2xl  font-semibold">Details</p>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Relation with Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="relationWithDeeceased"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased 1 <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName1"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased 3<span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName2"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased 3 <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName3"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Name of Deceased 4<span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="deceasedName4"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Swearing Location <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="swearingLocation"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Date of Swearing<span className="text-red-600">*</span>
-              </label>
-              <input
-                type="date"
-                name="swornDate"
-                className="input"
-                required
-                onChange={handleDateChange}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[47%]">
-              <label className="mb-1 font-medium">
-                Advocate for <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="advocateFor"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-
-        <hr />
-
-        {/* Buttons */}
-        <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-4">
-          <button type="submit" className="button previous w-full md:w-auto">
-            Previous
-          </button>
-          <button type="submit" className="button save_button w-full md:w-auto">
-            Save Changes
-          </button>
-          <button type="submit" className="button save_next w-full md:w-auto">
-            Save and Next
-          </button>
-          <button
-            type="submit"
-            className="button generate_pdf w-full md:w-auto"
-          >
-            Generate PDF
-          </button>
-        </div>
-      </form>
+      <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
+        Deceased.
+        <input
+          type="text"
+          name="petitionerName"
+          placeholder=" Executor of Will*"
+          className="input min-w-[200px] w-full md:w-auto"
+          required
+          onChange={handleChange}
+        />
+        Petitioner.
+      </div>
     </div>
+
+
+    <hr className="!mt-4 !mb-7"/>
+
+    {/* Paragraph Details Section */}
+    <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
+      I,
+      <input
+        type="text"
+        name="petitionerName"
+        placeholder=" Name of Petitioner*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="relationWithDeeceased"
+        placeholder="Relation with Deceased*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      , the Petitioner, swear in the name of God that I believe and state that the Will referred to
+    </div>
+
+    <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
+      in the petition herein and marked Exhibit “B” is the last Will and testament of
+      <input
+        type="text"
+        name="deceasedName1"
+        placeholder="Name of Deceased 1*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      alias
+      <input
+        type="text"
+        name="deceasedName2"
+        placeholder="Name of Deceased 2*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      alias
+    </div>
+
+    <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
+      <input
+        type="text"
+        name="deceasedName3"
+        placeholder="Name of Deceased 3*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      alias
+      <input
+        type="text"
+        name="deceasedName4"
+        placeholder="Name of Deceased 4*"
+        className="input min-w-[200px] w-full md:w-auto"
+        required
+        onChange={handleChange}
+      />
+      deceased, and that I am the executor therein named and that I will faithfully administer
+    </div>
+
+    <div className="text-sm md:text-base   mb-2 px-2">
+      <p>
+        the property and credits of the said deceased and in any way concerning
+        his will by paying his debts and then the legacies therein bequeathed
+        so far as
+      </p>
+      <p>
+        the said assets will extend, and that I will make and exhibit a full and
+        true inventory of the said property and credits in this Hon'ble Court
+        within six months
+      </p>
+      <p>
+        from the date of the grant to be made to me or within such further time
+        as the said Court may from time to time appoint and also render a true
+        account of
+      </p>
+      <p>
+        my administration to this Hon'ble Court within one year from the same
+        date or within such further time as the said Court may from time to time
+        appoint.
+      </p>
+    </div>
+
+    <hr />
+
+    <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
+      <div className="flex items-center w-full md:w-[310px] justify-between">
+        <p>Sworn at</p>
+        <input
+          type="text"
+          name="swearingLocation"
+          placeholder="Swearing Location*"
+          className="input w-[65%]"
+          required
+          onChange={handleChange}
+        />
+      </div>
+      <div className="flex items-center w-full md:w-[200px] justify-between">
+        <p>this</p>
+        <input
+          type="date"
+          name="swornDate"
+          placeholder="Date of Swearing*"
+          className="input w-[65%]"
+          required
+          onChange={handleDateChange}
+        />
+      </div>
+      <div className="flex items-center w-full md:w-[350px] justify-between">
+        <p>Advocate for:</p>
+        <input
+          type="text"
+          name="advocateFor"
+          placeholder="Advocate for*"
+          className="input w-[65%]"
+          required
+          onChange={handleChange}
+        />
+      </div>
+    </div>
+
+    <hr />
+
+    {/* Buttons Section */}
+    <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-6 gap-4">
+      <Link to='/form100' type="submit" className="button previous w-full md:w-auto">
+        Previous
+      </Link>
+      <div className="flex flex-col md:flex-row justify-end gap-3 w-full md:w-auto">
+        <button type="submit" className="button save_button w-full md:w-auto">
+          Save Changes
+        </button>
+        <Link to='/form102' type="submit" className="button save_next w-full md:w-auto">
+          Save and Next
+        </Link>
+        <button type="submit" className="button generate_pdf w-full md:w-auto">
+          Generate PDF
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
   );
 };
 

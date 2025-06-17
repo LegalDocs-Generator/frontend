@@ -18,7 +18,7 @@ const DynamicInputSection = ({
         {formData[field]?.map((item, index) => (
           <div
             key={index}
-            className="flex flex-wrap gap-4 items-start w-full"
+            className="flex flex-wrap gap-3 items-start w-full"
           >
             {Object.keys(schema).map((key) => (
               <div
