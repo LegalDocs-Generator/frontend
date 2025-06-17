@@ -15,32 +15,10 @@ const router = createBrowserRouter([
     path:'/',
     element: <App/>,
     children:[
-     
        {
         path:'/',
-        element: <Form97/>
-      },
-       {
-        path:'/form98',
-        element: <Form98/>
-      },
-       {
-        path:'/form99',
-        element: <Form99/>
-      },
-       {
-        path:'/form100',
         element: <Form100/>
       },
-      {
-        path:'/form101',
-        element: <Form101/>
-      },
-      {
-        path:'/form102',
-        element: <Form102/>
-      },
-
       {
         path:'*',
         element: <NotFound/>
