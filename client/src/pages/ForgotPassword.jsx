@@ -22,7 +22,7 @@ const ForgotPassword = () => {
             </label>
             <input
               type="email"
-              className="w-full input px-4 py-2 rounded-md"
+              className="w-full input px-4 py-2 "
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
 
           <button
             type="submit"
-            className="w-full button save_button text-white py-2 rounded-md font-medium hover:bg-blue-700 transition"
+            className="w-full button save_button  py-2  "
           >
             Send Reset Link
           </button>
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
 
         <p className="mt-4 text-sm text-gray-500 text-center">
           Remember your password?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline ml-1">
+          <Link to="/login" className="!no-underline hover:!underline ml-1">
             Sign in
           </Link>
         </p>

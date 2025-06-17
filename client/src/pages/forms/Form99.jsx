@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import img from "/images/form99.png";
+
 import { Link } from "react-router-dom";
 
 const Form99 = () => {
