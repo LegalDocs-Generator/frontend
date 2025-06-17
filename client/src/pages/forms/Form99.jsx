@@ -35,23 +35,22 @@ const Form99 = () => {
   };
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+      <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
+        Schedule of debts of the deceased etc.
+      </p>
+
+      <p className="text-center mb-1">(Rules 374, 37S and 376)</p>
+      <p className="text-center text-md md:text-xl font-semibold mb-1">
+        Form 99
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+        2020
+      </p>
       <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
-        <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
-          Schedule of debts of the deceased etc.
-        </p>
-
-        <p className="text-center mb-1">(Rules 374, 37S and 376)</p>
-        <p className="text-center text-md md:text-xl font-semibold mb-1">
-          Form 99
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          IN THE HIGH COURT OF JUDICATURE AT BOMBAY
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
-          2020
-        </p>
-
         {/* Basic Details Section */}
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
@@ -60,7 +59,7 @@ const Form99 = () => {
               type="text"
               name="deceasedName"
               placeholder="Name of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -69,7 +68,7 @@ const Form99 = () => {
               type="text"
               name="deceasedAddress"
               placeholder="Residence of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -78,7 +77,7 @@ const Form99 = () => {
               type="text"
               name="deceasedOccupation"
               placeholder="Occupation of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -90,7 +89,7 @@ const Form99 = () => {
               type="text"
               name="petitionerName"
               placeholder="Executor of Will*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -120,7 +119,7 @@ const Form99 = () => {
             <input
               type="number"
               name="funeralExpenses"
-              className="input min-w-[200px] w-full md:w-[250px]"
+              className="input  w-full md:w-[250px]"
               placeholder="Funeral expenses*"
               required
               onChange={handleChange}
@@ -133,7 +132,7 @@ const Form99 = () => {
             <input
               type="number"
               name="mortgageEncumbrances"
-              className="input min-w-[200px] w-full md:w-[250px]"
+              className="input w-full md:w-[250px]"
               placeholder="Mortgage Encumbrances*"
               required
               onChange={handleChange}
@@ -147,7 +146,7 @@ const Form99 = () => {
           <input
             type="text"
             name="petitionerName"
-            className="input min-w-[200px] w-full md:w-[300px]"
+            className="input  w-full md:w-[200px]"
             placeholder="Petitioner Name*"
             required
             onChange={handleChange}
@@ -158,7 +157,11 @@ const Form99 = () => {
 
         {/* Buttons */}
         <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-16 gap-4">
-          <Link to='/form98' type="submit" className="button previous w-full md:w-auto ">
+          <Link
+            to="/form98"
+            type="submit"
+            className="button previous w-full md:w-auto "
+          >
             Previous
           </Link>
 
@@ -169,7 +172,11 @@ const Form99 = () => {
             >
               Save Changes
             </button>
-            <Link to='/form100' type="submit" className="button save_next w-full md:w-auto ">
+            <Link
+              to="/form100"
+              type="submit"
+              className="button save_next w-full md:w-auto "
+            >
               Save and Next
             </Link>
             <button

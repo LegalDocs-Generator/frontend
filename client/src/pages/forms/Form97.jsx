@@ -6,7 +6,6 @@ const Form97 = () => {
   const [formData, setFormData] = useState({
     petitionNumber: "",
     petitionYear: "",
-
     // Deceased details
     deceasedFullName: "",
     deceasedNationality: "",
@@ -65,37 +64,42 @@ const Form97 = () => {
   });
 
   const handledeceasedDeathDateChange = (e) => {
-    const value = e.target.value; // e.g., "2025-06-16"
+    const value = e.target.value;
+    if (!value) return;
+
     const [year, month, day] = value.split("-");
 
     setFormData((prev) => ({
       ...prev,
-      deceasedDeathYear: year,
+      deceasedDeathYear: Number(year),
       deceasedDeathMonth: month,
-      deceasedDeathDate: day,
+      deceasedDeathDate: Number(day),
     }));
   };
+
   const handleExecutionDateChange = (e) => {
-    const value = e.target.value; // e.g., "2025-06-16"
+    const value = e.target.value;
+    if (!value) return;
     const [year, month, day] = value.split("-");
 
     setFormData((prev) => ({
       ...prev,
-      ExecutionDate: year,
+      ExecutionDate: Number(year),
       ExecutionMonth: month,
-      ExecutionYear: day,
+      ExecutionYear: Number(day),
     }));
   };
 
   const handleswornDateChange = (e) => {
-    const value = e.target.value; // e.g., "2025-06-16"
+    const value = e.target.value;
+    if (!value) return;
     const [year, month, day] = value.split("-");
 
     setFormData((prev) => ({
       ...prev,
-      swornDate: year,
+      swornDate: Number(year),
       swornMonth: month,
-      swornYear: day,
+      swornYear: Number(day),
     }));
   };
   const handleChange = (e) => {
@@ -227,24 +231,27 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedRescidenceAtTimeOfDeath"
-                placeholder="Rescidence At Time Of Deat"
+                placeholder="Residence at the time of death*"
                 className="input"
                 required
                 onChange={handleChange}
               />
             </div>
-            <div className="flex flex-row w-full gap-3 md:w-[40%]">
-              <label className="mb-1 font-medium">
-                Deceased <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="Date"
-                name="deceasedDeathDate"
-                placeholder="Death Date"
+
+            <div className="flex flex-col w-full md:w-[20%]">
+              <select
+                name="deceasedstatus"
                 className="input"
                 required
-                onChange={handledeceasedDeathDateChange}
-              />
+                onChange={handleChange}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Status of Deceased
+                </option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Spinster">Spinster</option>
+              </select>
             </div>
           </div>
         </div>
@@ -354,31 +361,6 @@ const Form97 = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Place Of Execution Of Will{" "}
-                <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                name="placeOfExecutionOfWill"
-                className="input"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Date of Execution <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="Date"
-                name="ExecutionDate"
-                className="input"
-                required
-                onChange={handleExecutionDateChange}
-              />
-            </div>
           </div>
         </div>
         <hr />
@@ -412,14 +394,14 @@ const Form97 = () => {
             />{" "}
             on or about the{" "}
             <input
-              type="text"
+              type="date"
               name="deceasedDeathDate"
               placeholder=" Date  of Death*"
               className="input me-2"
               required
               onChange={handledeceasedDeathDateChange}
             />
-            A true copy of
+            (insert date of death of the Deceased) .A true copy of
           </p>
           <p className="mb-0">
             Death Certificate of the Deceased is annexed hereto and marked as
@@ -440,7 +422,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number*"
               className="input me-2"
               required
-              onChange={handledeceasedDeathDateChange}
+              onChange={handleChange}
             />
             (If no identity proof is available, say so and mention reason and
             annexe a true copy of documentary proof in support thereof).
@@ -482,7 +464,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number*"
               className="input me-2"
               required
-              onChange={handledeceasedDeathDateChange}
+              onChange={handleChange}
             />
           </p>
           <p className="mt-4 mb-3">
@@ -494,7 +476,7 @@ const Form97 = () => {
               placeholder=" Place Of Execution*"
               className="input me-2"
               required
-              onChange={handledeceasedDeathDateChange}
+              onChange={handleChange}
             />{" "}
             on the{" "}
             <input
@@ -503,7 +485,7 @@ const Form97 = () => {
               placeholder=" Execution Date*"
               className="input me-2"
               required
-              onChange={handledeceasedDeathDateChange}
+              onChange={handleExecutionDateChange}
             />{" "}
             (insert date of execution of Will and Codicil, if any) . (if Will
             and Codicil, if any, has been registered, mention details of
@@ -601,14 +583,14 @@ const Form97 = () => {
             (10 ) That the said Deceased left him surviving as his only heirs
             and next-of- kin according to
             <input
-              type="number"
+              type="text"
               name="lawApplicableToTheDeceased"
               placeholder="Law*"
               className="input me-2"
               required
               onChange={handleChange}
             />{" "}
-            state what Law / name of the Act / name of the personal law
+            (state what Law / name of the Act / name of the personal law
             applicable to the Deceased), the following persons, who are residing
             at the addresses set out against their respective names :-
           </p>
@@ -662,44 +644,41 @@ const Form97 = () => {
         </p>
         <hr />
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
-          <div className=" w-full">
+          <div className=" flex items-center w-full md:w-[400px] justify-between">
             <p>
               Sworn / Solemnly affirmed at{" "}
-              <input
+              
+            </p>
+            <input
                 type="text"
                 name="swornPlace"
                 placeholder="Swearing Location*"
-                className="input "
+                className="input w-[40%]"
                 required
                 onChange={handleChange}
               />
-            </p>
           </div>
-          <div className="w-full">
-            <p>
-              this{" "}
-              <input
-                type="date"
-                name="swornDate"
-                placeholder="Date of Swearing*"
-                className="input "
-                required
-                onChange={handleChange}
-              />
-            </p>
+          <div className="flex items-center w-full md:w-[200px] justify-between">
+            <p>this</p>
+            <input
+              type="date"
+              name="swornDate"
+              placeholder="Date of Swearing*"
+              className="input w-[65%]"
+              required
+              onChange={handleswornDateChange}
+            />
           </div>
-          <div className="w-full">
-            <p>
-              Advocate for:{" "}
-              <input
-                type="text"
-                name="advocateFor"
-                placeholder="Advocate for*"
-                className="input "
-                required
-                onChange={handleChange}
-              />
-            </p>
+          <div className="flex items-center w-full md:w-[350px] justify-between">
+            <p>Advocate for:</p>
+            <input
+              type="text"
+              name="advocateFor"
+              placeholder="Advocate for*"
+              className="input w-[65%]"
+              required
+              onChange={handleChange}
+            />
           </div>
         </div>
 
