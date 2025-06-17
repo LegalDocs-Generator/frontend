@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import img from "/images/form98.png";
 import DynamicInputSection from "../../utils/DynamicInputSection";
+import { Link } from "react-router-dom";
 const Form98 = () => {
   const [formData, setFormData] = useState({
     petitionNumber: "",
@@ -98,162 +99,105 @@ const Form98 = () => {
   };
 
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:p-10 bg-white w-full max-w-[900px] mx-auto">
-      <div className="flex gap-2.5 justify-center  !items-center">
-        <img src={img} alt="image" className="w-12 h-12 " />
-        <p className="text-center text-3xl mt-2 mb-2 font-semibold w-full md:w-[60%]">
+    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+        <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
           Schedule of property of the deceased
         </p>
-      </div>
 
-      <p className="text-center text-3xl  font-semibold ">Form 98</p>
-      <form onSubmit={handleSubmit} className="p-0.5 md:p-12 ">
-        <div className=" flex flex-col gap-3">
-          {/* basic details */}
-          <div className="flex flex-col gap-4 text-sm md:text-base">
-            <p className="mb-0 text-xl md:text-2xl font-semibold">
-              Basic Details
-            </p>
-            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Name of Deceased <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="deceasedName"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Residence of Deceased <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="deceasedAddress"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+        <p className="text-center mb-1">(see Rule 374, 375 and 376)</p>
+        <p className="text-center text-md md:text-xl font-semibold mb-1">
+          Form 98
+        </p>
+        <p className="text-center text-md md:text-xl font-semibold">
+          IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+        </p>
+        <p className="text-center text-md md:text-xl font-semibold">
+          TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+          2020
+        </p>
 
-            <div className="flex flex-col gap-4 md:flex-row  justify-between w-full">
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Occupation of Deceased <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="deceasedOccupation"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Name of Petitioner <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="petitionerName"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+        {/* Basic Details Section */}
+        <div className="space-y-4 mt-12">
+          <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
+            Petition for probate of a will of
+            <input
+              type="text"
+              name="deceasedName"
+              placeholder="Name of Deceased*"
+              className="input min-w-[200px] w-full md:w-auto"
+              required
+              onChange={handleChange}
+            />
+            resident
+            <input
+              type="text"
+              name="deceasedAddress"
+              placeholder="Residence of Deceased*"
+              className="input min-w-[200px] w-full md:w-auto"
+              required
+              onChange={handleChange}
+            />
+            having occupation of
+            <input
+              type="text"
+              name="deceasedOccupation"
+              placeholder="Occupation of Deceased*"
+              className="input min-w-[200px] w-full md:w-auto"
+              required
+              onChange={handleChange}
+            />
           </div>
-          <hr />
-          {/* details of movable properties */}
-          <div className="flex flex-col gap-4 text-sm md:text-base">
-            <p className="mb-0 text-xl md:text-2xl  font-semibold">
-              Details of Movable Properties
-            </p>
 
-            <div className="flex flex-col md:flex-row justify-between w-full gap-4">
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount of Plates <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="plates"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount of Jewel <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="jewels"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount of Books <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="books"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-4 md:flex-row  justify-between w-full">
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount of Furniture <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="furniture"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount Wearing apparel <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="wearingApparel"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-full md:w-[30%]">
-                <label className="mb-1 font-medium">
-                  Amount of Household Goods{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="householdGoods"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
+            Deceased.
+            <input
+              type="text"
+              name="petitionerName"
+              placeholder="Executor of Will*"
+              className="input min-w-[200px] w-full md:w-auto"
+              required
+              onChange={handleChange}
+            />
+            Petitioner.
+          </div>
+        </div>
 
-            <div className="flex flex-col  w-full md:w-[30%]">
+        {/* Title Section */}
+        <div className="gap-3 text-sm md:text-base !mt-12">
+          <p className="text-center text-md md:text-xl font-semibold mb-0">
+            SCHEDULE No. I
+          </p>
+          <p className="text-center text-md mb-0 md:text-lg">
+            Schedule of Property
+          </p>
+          <p className="text-center text-md md:text-lg">
+            Valuation of the movable and immovable property of the deceased.
+          </p>
+        </div>
+
+        <hr />
+        {/* details of movable properties */}
+        <div className="flex flex-col gap-4 text-sm md:text-base">
+          <p className="mb-0 text-xl md:text-2xl  font-semibold">
+            Details of Cash in the house, household goods, wearing apparel,
+            books, plate, jewels
+          </p>
+
+          <div className="flex flex-col md:flex-row justify-between w-full gap-4">
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount of Furniture <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="furniture"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
                 Cash in house <span className="text-red-600">*</span>
               </label>
@@ -265,9 +209,77 @@ const Form98 = () => {
                 onChange={handleChange}
               />
             </div>
-          </div>
-          <hr />
 
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount of Plates <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="plates"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount of Jewel <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="jewels"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount of Books <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="books"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4 md:flex-row   w-full">
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount Wearing apparel <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="wearingApparel"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-medium">
+                Amount of Household Goods{" "}
+                <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="number"
+                name="householdGoods"
+                className="input"
+                required
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col  w-full md:w-[30%]"></div>
+        </div>
+        <hr />
+          
+        <div className=" flex flex-col gap-3">
           {/* bank account details */}
           <DynamicInputSection
             title="Bank Accounts"
@@ -421,144 +433,161 @@ const Form98 = () => {
           {/* details of Other Assets */}
           <div className="flex flex-col gap-4 text-sm md:text-base">
             <p className="mb-0 text-xl md:text-2xl font-semibold">
-              Details of Movable Properties
+              Details of Other Assets:
             </p>
 
-            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Adani Electricity Account Number
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="adaniAccountNumber"
-                  className="input"
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Adani Security Deposit <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="number"
-                  required
-                  name="adaniSecurityDeposit"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <p className="mb-0">
+              1. Adani Electricity Account Number
+              <input
+                type="text"
+                name="adaniAccountNumber"
+                placeholder="Account Number"
+                className="input ms-2"
+                required
+                onChange={handleChange}
+              />
+            </p>
+            <p className="mb-0">
+              2. Security Deposit of
+              <input
+                type="number"
+                name="adaniSecurityDeposit"
+                placeholder="Security Deposit"
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />{" "}
+              for Adani Electricity Account Number
+              <input
+                type="text"
+                name="adaniAccountNumber"
+                placeholder="Account Number"
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />
+            </p>
 
-            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Mahanagar Gas connection bearing BP No
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="mahanagarGPBearingBPNo"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Mahanagar Gas connection bearing CA No{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="mahanagarBearingCANo"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <p className="mb-0">
+              3. Mahanagar Gas connection bearing BP No. :
+              <input
+                type="text"
+                name="mahanagarGPBearingBPNo"
+                placeholder="BP No."
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />{" "}
+              / CA No. :
+              <input
+                type="text"
+                name="mahanagarBearingCANo"
+                placeholder="CA No."
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />
+            </p>
 
-            <div className="flex flex-col gap-4 md:flex-row justify-between w-full md:w-full">
-              <div className="flex flex-col w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Security Deposit for Mahanagar Connection{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="mahanagarSecurityDeposit"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Mahanagar Gas connection BP No{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="mahanagarGPBPNo"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Mahanagar Gas connection CA No{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="mahanagarCANo"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col  w-full md:w-[47%]">
-                <label className="mb-1 font-medium">
-                  Sim Card Number <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="simCardNumber"
-                  className="input"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <p className="mb-0">
+              4. Security Deposit of Rs:
+              <input
+                type="number"
+                name="mahanagarSecurityDeposit"
+                placeholder="Security Deposit"
+                className="input w-[200px] ms-2 me-2"
+                required
+                onChange={handleChange}
+              />{" "}
+              for Mahanagar Gas connection BP No. :
+              <input
+                type="text"
+                name="mahanagarGPBPNo"
+                placeholder="BP No."
+                className="input  w-[200px] ms-2 me-2"
+                required
+                onChange={handleChange}
+              />/ CA No. : <input
+                type="text"
+                name="mahanagarCANo"
+                placeholder="CA No."
+                className="input w-[200px] ms-2"
+                required
+                onChange={handleChange}
+              />
+            </p>
+            <p className="mb-0">
+              5. Mahanagar Gas connection bearing BP No. :
+              <input
+                type="text"
+                name="mahanagarGPBearingBPNo"
+                placeholder="BP No."
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />{" "}
+              / CA No. :
+              <input
+                type="text"
+                name="mahanagarBearingCANo"
+                placeholder="CA No."
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />
+            </p>
+            <p className="mb-0">
+              6. SIM Card with number:
+              <input
+                type="text"
+                name="simCardNumber"
+                placeholder="Card No."
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />{" "}
+              
+            </p>
           </div>
           <hr />
+          <p>
+            Deduct Amount shown in Schedule No II., not subject to any Duty :-
+             <input
+                type="nuber"
+                name="deductedLiabilities"
+                placeholder="Deduct Amount"
+                className="input ms-2 me-2"
+                required
+                onChange={handleChange}
+              />
+          </p>
+          <hr/>
           {/* Buttons */}
-          <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-4">
-            <button type="submit" className="button previous w-full md:w-auto">
+          <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-16 gap-4">
+            <Link to='/' type="submit" className="button previous w-full md:w-auto ">
               Previous
-            </button>
-            <button
-              type="submit"
-              className="button save_button w-full md:w-auto"
-            >
-              Save Changes
-            </button>
-            <button type="submit" className="button save_next w-full md:w-auto">
-              Save and Next
-            </button>
-            <button
-              type="submit"
-              className="button generate_pdf w-full md:w-auto"
-            >
-              Generate PDF
-            </button>
+            </Link>
+
+            <div className="flex flex-col md:flex-row justify-end gap-3 w-full md:w-auto">
+              <button
+                type="submit"
+                className="button save_button w-full md:w-auto"
+              >
+                Save Changes
+              </button>
+              <Link to='/form99'
+                type="submit"
+                className="button save_next w-full md:w-auto"
+              >
+                Save and Next
+              </Link>
+              <button
+                type="submit"
+                className="button generate_pdf w-full md:w-auto"
+              >
+                Generate PDF
+              </button>
+            </div>
           </div>
         </div>
       </form>
