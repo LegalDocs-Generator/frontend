@@ -27,7 +27,7 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
-              className="w-full input px-4 py-2 rounded-md"
+              className="w-full input px-4 py-2 "
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -41,7 +41,7 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
-              className="w-full input px-4 py-2 rounded-md"
+              className="w-full input px-4 py-2 "
               placeholder="••••••••"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
@@ -51,7 +51,7 @@ const ResetPassword = () => {
 
           <button
             type="submit"
-            className="w-full button save_button text-white py-2 rounded-md font-medium hover:bg-blue-700 transition"
+            className="w-full button save_button  py-2  "
           >
             Reset Password
           </button>
@@ -59,7 +59,7 @@ const ResetPassword = () => {
 
         <p className="mt-4 text-sm text-gray-500 text-center">
           Back to{' '}
-          <Link to="/login" className="text-blue-600 hover:underline ml-1">
+          <Link to="/login" className="!no-underline hover:!underline ml-1">
             Sign in
           </Link>
         </p>

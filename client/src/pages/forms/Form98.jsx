@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import img from "/images/form98.png";
+
 import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 const Form98 = () => {

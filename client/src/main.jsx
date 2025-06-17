@@ -12,6 +12,7 @@ import Form97 from "./pages/forms/Form97.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
+import Home from "./pages/Home.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/form97",
         element: <Form97 />,
       },
       {
@@ -52,7 +57,7 @@ const router = createBrowserRouter([
         element: <ForgotPassword />,
       },
       {
-        path: "/reset-password/:resetToken",
+        path: "/reset-password",
         element: <ResetPassword />,
       },
       {
