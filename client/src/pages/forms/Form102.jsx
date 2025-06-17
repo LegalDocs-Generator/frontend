@@ -19,14 +19,15 @@ const Form102 = () => {
     advocateFor: "",
   });
   const handleDateChange = (e) => {
-    const value = e.target.value; // e.g., "2025-06-16"
+    const value = e.target.value; 
+    if (!value) return;
     const [year, month, day] = value.split("-");
 
     setFormData((prev) => ({
       ...prev,
-      swornYear: year,
+      swornYear: Number(year),
       swornMonth: month,
-      swornDay: day,
+      swornDay: Number(day),
     }));
   };
   const handleChange = (e) => {
@@ -51,8 +52,7 @@ const Form102 = () => {
   };
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
-      <form onSubmit={handleSubmit} className=" text-md md:text-md ">
-        <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
+      <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
           Affidavit of the attesting witness
         </p>
         <p className="text-center mb-1">(See rules 374 and 375)</p>
@@ -66,6 +66,8 @@ const Form102 = () => {
           TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
           2020
         </p>
+      <form onSubmit={handleSubmit} className=" text-md md:text-md ">
+        
 
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
@@ -74,7 +76,7 @@ const Form102 = () => {
               type="text"
               name="deceasedName"
               placeholder=" Name of Deceased* "
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -83,7 +85,7 @@ const Form102 = () => {
               type="text"
               name="deceasedAddress"
               placeholder=" Residence of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -92,7 +94,7 @@ const Form102 = () => {
               type="text"
               name="deceasedOccupation"
               placeholder=" Occupation of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -104,7 +106,7 @@ const Form102 = () => {
               type="text"
               name="petitionerName"
               placeholder=" Executor of Will*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -119,7 +121,7 @@ const Form102 = () => {
           <input
             type="text"
             name="witnessName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input w-full md:w-auto"
             placeholder="Witness Name*"
             required
             onChange={handleChange}
@@ -128,7 +130,7 @@ const Form102 = () => {
           <input
             type="number"
             name="witnessAge"
-            className="input min-w-[100px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Witness Age*"
             required
             onChange={handleChange}
@@ -137,7 +139,7 @@ const Form102 = () => {
           <input
             type="text"
             name="witnessAddress"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Witness Address*"
             required
             onChange={handleChange}
@@ -153,7 +155,7 @@ const Form102 = () => {
           <input
             type="text"
             name="deceasedName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Deceased Name*"
             required
             onChange={handleChange}
@@ -167,7 +169,7 @@ const Form102 = () => {
           <input
             type="date"
             name="dateOfDeath"
-            className="input min-w-[160px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Date Of Death*"
             required
             onChange={handleChange}
@@ -176,7 +178,7 @@ const Form102 = () => {
           <input
             type="text"
             name="petitionerName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Executor of Will*"
             required
             onChange={handleChange}
@@ -185,7 +187,7 @@ const Form102 = () => {
           <input
             type="text"
             name="deceasedName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Deceased Name*"
             required
             onChange={handleChange}
@@ -206,7 +208,7 @@ const Form102 = () => {
           <input
             type="text"
             name="petitionerName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input w-full md:w-auto"
             placeholder="Executor of Will*"
             required
             onChange={handleChange}
@@ -227,7 +229,7 @@ const Form102 = () => {
           <input
             type="text"
             name="deceasedName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input w-full md:w-auto"
             placeholder="Deceased Name*"
             required
             onChange={handleChange}
@@ -251,7 +253,7 @@ const Form102 = () => {
           <input
             type="text"
             name="deceasedName"
-            className="input min-w-[200px] w-full md:w-auto"
+            className="input  w-full md:w-auto"
             placeholder="Deceased Name*"
             required
             onChange={handleChange}

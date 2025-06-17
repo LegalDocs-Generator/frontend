@@ -78,12 +78,6 @@ const Form98 = () => {
     }));
   };
 
-  // const handleBankAccountChange = (index, field, value) => {
-  //   const updatedAccounts = [...formData.bankAccounts];
-  //   updatedAccounts[index][field] = value;
-  //   setFormData({ ...formData, bankAccounts: updatedAccounts });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -100,23 +94,22 @@ const Form98 = () => {
 
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+      <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
+        Schedule of property of the deceased
+      </p>
+
+      <p className="text-center mb-1">(see Rule 374, 375 and 376)</p>
+      <p className="text-center text-md md:text-xl font-semibold mb-1">
+        Form 98
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+        2020
+      </p>
       <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
-        <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
-          Schedule of property of the deceased
-        </p>
-
-        <p className="text-center mb-1">(see Rule 374, 375 and 376)</p>
-        <p className="text-center text-md md:text-xl font-semibold mb-1">
-          Form 98
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          IN THE HIGH COURT OF JUDICATURE AT BOMBAY
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
-          2020
-        </p>
-
         {/* Basic Details Section */}
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
@@ -125,7 +118,7 @@ const Form98 = () => {
               type="text"
               name="deceasedName"
               placeholder="Name of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input  w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -134,7 +127,7 @@ const Form98 = () => {
               type="text"
               name="deceasedAddress"
               placeholder="Residence of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -143,7 +136,7 @@ const Form98 = () => {
               type="text"
               name="deceasedOccupation"
               placeholder="Occupation of Deceased*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -155,7 +148,7 @@ const Form98 = () => {
               type="text"
               name="petitionerName"
               placeholder="Executor of Will*"
-              className="input min-w-[200px] w-full md:w-auto"
+              className="input w-full md:w-auto"
               required
               onChange={handleChange}
             />
@@ -278,7 +271,7 @@ const Form98 = () => {
           <div className="flex flex-col  w-full md:w-[30%]"></div>
         </div>
         <hr />
-          
+
         <div className=" flex flex-col gap-3">
           {/* bank account details */}
           <DynamicInputSection
@@ -311,7 +304,7 @@ const Form98 = () => {
             labels={{
               bankName: "Bank Name",
               receiptDetails: "Receipt Details",
-              value: "Deposit Value",
+              value: "Current Value",
             }}
             fieldWidths={{
               bankName: "100% md:30%",
@@ -507,7 +500,9 @@ const Form98 = () => {
                 className="input  w-[200px] ms-2 me-2"
                 required
                 onChange={handleChange}
-              />/ CA No. : <input
+              />
+              / CA No. :{" "}
+              <input
                 type="text"
                 name="mahanagarCANo"
                 placeholder="CA No."
@@ -546,25 +541,28 @@ const Form98 = () => {
                 required
                 onChange={handleChange}
               />{" "}
-              
             </p>
           </div>
           <hr />
           <p>
             Deduct Amount shown in Schedule No II., not subject to any Duty :-
-             <input
-                type="nuber"
-                name="deductedLiabilities"
-                placeholder="Deduct Amount"
-                className="input ms-2 me-2"
-                required
-                onChange={handleChange}
-              />
+            <input
+              type="number"
+              name="deductedLiabilities"
+              placeholder="Deduct Amount"
+              className="input ms-2 me-2"
+              required
+              onChange={handleChange}
+            />
           </p>
-          <hr/>
+          <hr />
           {/* Buttons */}
           <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-16 gap-4">
-            <Link to='/' type="submit" className="button previous w-full md:w-auto ">
+            <Link
+              to="/"
+              type="submit"
+              className="button previous w-full md:w-auto "
+            >
               Previous
             </Link>
 
@@ -575,7 +573,8 @@ const Form98 = () => {
               >
                 Save Changes
               </button>
-              <Link to='/form99'
+              <Link
+                to="/form99"
                 type="submit"
                 className="button save_next w-full md:w-auto"
               >
