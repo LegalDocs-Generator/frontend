@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false); // for dropdown
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleServices = () => setServicesOpen(!servicesOpen);
@@ -53,8 +53,8 @@ const Navbar = () => {
                         key={child.to}
                         to={child.to}
                         onClick={() => {
-                          setServicesOpen(false); // Optional: hide dropdown after click
-                          setMenuOpen(false); // also close mobile menu if any
+                          setServicesOpen(false); 
+                          setMenuOpen(false); 
                         }}
                         className="block px-4 py-2 hover:bg-gray-100 text-sm text-black !no-underline"
                       >
