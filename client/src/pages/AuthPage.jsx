@@ -13,7 +13,7 @@ const AuthPage = () => {
     };
 
     return (
-        <div className=" mt-4 mb-4 flex items-center min-h-[500px] justify-center px-4">
+        <div className=" mt-4 text-sm md:text-base mb-4 flex items-center min-h-[500px] justify-center px-4">
             <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
                     {isLogin ? 'Sign In to LegalDocs' : 'Create an Account'}

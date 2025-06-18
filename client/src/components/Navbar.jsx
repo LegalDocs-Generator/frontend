@@ -30,7 +30,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="md:text-3xl text-2xl font-semibold tracking-tight navbar-element transition-all duration-300 !no-underline"
+          className="md:text-4xl text-2xl font-semibold tracking-tight navbar-element transition-all duration-300 !no-underline"
         >
           LegalDocs
         </Link>
