@@ -147,9 +147,8 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedFullName"
-                placeholder="Name*"
+                placeholder="Name"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -158,9 +157,8 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedNationality"
-                placeholder="Nationality*"
+                placeholder="Nationality"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -168,9 +166,8 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedAddress"
-                placeholder="Address*"
+                placeholder="Address"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -179,8 +176,7 @@ const Form97 = () => {
                 type="text"
                 name="deceasedReligion"
                 className="input"
-                placeholder="Religion*"
-                required
+                placeholder="Religion"
                 onChange={handleChange}
               />
             </div>
@@ -190,7 +186,6 @@ const Form97 = () => {
                 name="deceasedsect"
                 className="input"
                 placeholder="Section (If mulsim)"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -203,7 +198,6 @@ const Form97 = () => {
               <select
                 name="deceasedMaritalStatus"
                 className="input"
-                required
                 onChange={handleChange}
                 defaultValue=""
               >
@@ -221,9 +215,8 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedOccupation"
-                placeholder="Occupation*"
+                placeholder="Occupation"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -231,9 +224,8 @@ const Form97 = () => {
               <input
                 type="text"
                 name="deceasedRescidenceAtTimeOfDeath"
-                placeholder="Residence at the time of death*"
+                placeholder="Residence at the time of death"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -242,7 +234,6 @@ const Form97 = () => {
               <select
                 name="deceasedstatus"
                 className="input"
-                required
                 onChange={handleChange}
                 defaultValue=""
               >
@@ -263,78 +254,62 @@ const Form97 = () => {
 
           <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Name of Petitoner <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Name of Petitoner</label>
               <input
                 type="text"
                 name="petitionerFullName"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
 
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Age of Petitoner <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Age of Petitoner</label>
               <input
                 type="number"
                 name="petitionerage"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
-                Nationality of Petitoner <span className="text-red-600">*</span>
+                Nationality of Petitoner
               </label>
               <input
                 type="text"
                 name="petitionerNationality"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Domilcile of Petitoner<span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Domilcile of Petitoner</label>
               <input
                 type="text"
                 name="petitionerDomicile"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
                 Full Address of Petitioner
-                <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
                 name="petitionerFullAddress"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="flex flex-col md:flex-row md:justify-start gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Executor
-                <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Executor</label>
               <select
                 name="executor"
                 className="input"
-                required
                 onChange={handleChange}
                 defaultValue=""
               >
@@ -351,13 +326,12 @@ const Form97 = () => {
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
-                Occupation of Petitoner <span className="text-red-600">*</span>
+                Occupation of Petitoner
               </label>
               <input
                 type="text"
                 name="petitionerOccupation"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -378,9 +352,8 @@ const Form97 = () => {
             <input
               type="text"
               name="deceasedFullName"
-              placeholder="Name of Deceased *"
+              placeholder="Name of Deceased"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             died at{" "}
@@ -389,16 +362,14 @@ const Form97 = () => {
               name="deceasedRescidenceAtTimeOfDeath"
               placeholder="Place of death of the Deceased*"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             on or about the{" "}
             <input
               type="date"
               name="deceasedDeathDate"
-              placeholder=" Date  of Death*"
+              placeholder=" Date  of Death"
               className="input me-2"
-              required
               onChange={handledeceasedDeathDateChange}
             />
             (insert date of death of the Deceased) .A true copy of
@@ -409,9 +380,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber1"
-              placeholder=" Exhibit Number*"
+              placeholder=" Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />
             and a true copy of identity proof of the Deceased is annexed hereto
@@ -419,9 +389,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber2"
-              placeholder=" Exhibit Number*"
+              placeholder=" Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />
             (If no identity proof is available, say so and mention reason and
@@ -433,9 +402,8 @@ const Form97 = () => {
             <input
               type="text"
               name="placeOfAbode"
-              placeholder=" Place Of Abode*"
+              placeholder=" Place Of Abode"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             and/or left property within Greater Bombay and in the State of
@@ -449,9 +417,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber3"
-              placeholder=" Exhibit Number*"
+              placeholder=" Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             and (insert word “Photocopy or Certified copy”, if original is not
@@ -461,9 +428,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber4"
-              placeholder=" Exhibit Number*"
+              placeholder=" Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />
           </p>
@@ -473,18 +439,16 @@ const Form97 = () => {
             <input
               type="text"
               name="placeOfExecutionOfWill"
-              placeholder=" Place Of Execution*"
+              placeholder=" Place Of Execution"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             on the{" "}
             <input
               type="Date"
               name="ExecutionDate"
-              placeholder=" Execution Date*"
+              placeholder=" Execution Date"
               className="input me-2"
-              required
               onChange={handleExecutionDateChange}
             />{" "}
             (insert date of execution of Will and Codicil, if any) . (if Will
@@ -499,10 +463,9 @@ const Form97 = () => {
             <select
               name="capacity"
               className="input me-2"
-              required
               onChange={handleChange}
             >
-              <option value="">Select Capacity*</option>
+              <option value="">Select Capacity</option>
               <option value="soleExecutor">Sole Executor</option>
               <option value="oneOfExecutor">One of the Executors</option>
             </select>{" "}
@@ -519,9 +482,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber5"
-              placeholder="Exhibit Number*"
+              placeholder="Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             all the property and credits which the Deceased died possessed of or
@@ -538,9 +500,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber6"
-              placeholder="Exhibit Number*"
+              placeholder="Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             all the items that by law, he is allowed to deduct for the purpose
@@ -553,9 +514,8 @@ const Form97 = () => {
             <input
               type="text"
               name="exhibitNumber7"
-              placeholder="Exhibit Number*"
+              placeholder="Exhibit Number"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             he property held by the Deceased as a trustee for another and not
@@ -571,9 +531,8 @@ const Form97 = () => {
             <input
               type="number"
               name="schduleAmount"
-              placeholder="Schdule Amount*"
+              placeholder="Schdule Amount"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             (insert net total amount of Schedule of Petition).
@@ -585,9 +544,8 @@ const Form97 = () => {
             <input
               type="text"
               name="lawApplicableToTheDeceased"
-              placeholder="Law*"
+              placeholder="Law"
               className="input me-2"
-              required
               onChange={handleChange}
             />{" "}
             (state what Law / name of the Act / name of the personal law
@@ -645,27 +603,22 @@ const Form97 = () => {
         <hr />
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
           <div className=" flex items-center w-full md:w-[400px] justify-between">
-            <p>
-              Sworn / Solemnly affirmed at{" "}
-              
-            </p>
+            <p>Sworn / Solemnly affirmed at </p>
             <input
-                type="text"
-                name="swornPlace"
-                placeholder="Swearing Location*"
-                className="input w-[40%]"
-                required
-                onChange={handleChange}
-              />
+              type="text"
+              name="swornPlace"
+              placeholder="Swearing Location"
+              className="input w-[40%]"
+              onChange={handleChange}
+            />
           </div>
           <div className="flex items-center w-full md:w-[200px] justify-between">
             <p>this</p>
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing*"
+              placeholder="Date of Swearing"
               className="input w-[65%]"
-              required
               onChange={handleswornDateChange}
             />
           </div>
@@ -674,9 +627,8 @@ const Form97 = () => {
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for*"
+              placeholder="Advocate for"
               className="input w-[65%]"
-              required
               onChange={handleChange}
             />
           </div>

@@ -58,27 +58,27 @@ const Form99 = () => {
             <input
               type="text"
               name="deceasedName"
-              placeholder="Name of Deceased*"
+              placeholder="Name of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             resident
             <input
               type="text"
               name="deceasedAddress"
-              placeholder="Residence of Deceased*"
+              placeholder="Residence of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             having occupation of
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder="Occupation of Deceased*"
+              placeholder="Occupation of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -88,9 +88,9 @@ const Form99 = () => {
             <input
               type="text"
               name="petitionerName"
-              placeholder="Executor of Will*"
+              placeholder="Executor of Will"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             Petitioner.
@@ -120,8 +120,8 @@ const Form99 = () => {
               type="number"
               name="funeralExpenses"
               className="input  w-full md:w-[250px]"
-              placeholder="Funeral expenses*"
-              required
+              placeholder="Funeral expenses"
+              
               onChange={handleChange}
             />
           </div>
@@ -133,8 +133,8 @@ const Form99 = () => {
               type="number"
               name="mortgageEncumbrances"
               className="input w-full md:w-[250px]"
-              placeholder="Mortgage Encumbrances*"
-              required
+              placeholder="Mortgage Encumbrances"
+              
               onChange={handleChange}
             />
           </div>
@@ -147,8 +147,8 @@ const Form99 = () => {
             type="text"
             name="petitionerName"
             className="input  w-full md:w-[200px]"
-            placeholder="Petitioner Name*"
-            required
+            placeholder="Petitioner Name"
+            
             onChange={handleChange}
           />
         </div>
