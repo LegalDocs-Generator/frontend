@@ -10,7 +10,10 @@ const Navbar = () => {
   const toggleServices = () => setServicesOpen(!servicesOpen);
 
   const navLinks = [
-    { to: "/", label: "Home" },
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/contact', label: 'Contact' },
+    { to: '/profile', label: 'Profile' },
     {
       label: "Services",
       dropdown: true,
