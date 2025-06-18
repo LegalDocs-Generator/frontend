@@ -3,7 +3,7 @@ import { FaRegSadTear } from 'react-icons/fa';
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 bg-gray-50 text-center animate-fade-in">
+    <div className="min-h-screen text-sm md:text-base flex flex-col justify-center items-center px-4 bg-gray-50 text-center animate-fade-in">
       <FaRegSadTear className="text-7xl text-[#2e3a59] mb-4 animate-bounce" />
       <p className="text-7xl font-bold text-[#2e3a59] mb-2">404</p>
       <p className="text-2xl font-semibold text-[#2e3a59] mb-2">

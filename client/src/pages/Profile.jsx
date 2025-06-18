@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen text-sm md:text-base bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
         <div className="flex justify-center -mt-16">
           <div className="relative">
@@ -78,7 +78,7 @@ const Profile = () => {
                   name="fullName"
                   value={user.fullName}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full py-2 input"
                 />
               </div>
 
@@ -89,7 +89,7 @@ const Profile = () => {
                   name="phone"
                   value={user.phone}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full input py-2"
                 />
               </div>
 
@@ -100,20 +100,20 @@ const Profile = () => {
                   value={user.bio}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-300 resize-none"
+                  className="w-full py-2 input"
                 />
               </div>
 
               <div className="flex justify-between">
                 <button
                   onClick={handleEditToggle}
-                  className="px-4 py-2 cancel_button text-gray-700 rounded-lg transition"
+                  className="px-4  cancel_button text-gray-700 rounded transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 edit_button text-white rounded-lg transition"
+                  className="button save_button !px-10"
                 >
                   Save
                 </button>
@@ -139,7 +139,7 @@ const Profile = () => {
           <div className="mt-6 flex justify-center">
             <button
               onClick={handleEditToggle}
-              className="px-6 py-2 edit_button text-white rounded-lg transition"
+              className="save_button button"
             >
               Edit Profile
             </button>
