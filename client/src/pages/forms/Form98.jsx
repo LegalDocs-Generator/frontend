@@ -523,7 +523,7 @@ const Form98 = () => {
           {/* Buttons */}
           <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-16 gap-4">
             <Link
-              to="/"
+              to="/form97"
               type="submit"
               className="button previous w-full md:w-auto "
             >
