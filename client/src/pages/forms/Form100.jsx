@@ -56,9 +56,9 @@ const Form100 = () => {
             <input
               type="text"
               name="deceasedName"
-              placeholder="Name of Deceased*"
+              placeholder="Name of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             resident
@@ -67,16 +67,16 @@ const Form100 = () => {
               name="deceasedAddress"
               placeholder="Residence of Deceased*"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             having occupation of
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder="Occupation of Deceased*"
+              placeholder="Occupation of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -86,9 +86,9 @@ const Form100 = () => {
             <input
               type="text"
               name="petitionerName"
-              placeholder="Executor of Will*"
+              placeholder="Executor of Will"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             Petitioner.
@@ -121,8 +121,8 @@ const Form100 = () => {
               type="number"
               name="property"
               className="input  w-full md:w-[250px]"
-              placeholder="Beneficial interest*"
-              required
+              placeholder="Beneficial interest"
+              
               onChange={handleChange}
             />
           </div>
@@ -137,8 +137,8 @@ const Form100 = () => {
             type="text"
             name="petitionerName"
             className="input  w-full md:w-[300px]"
-            placeholder="Petitioner Name*"
-            required
+            placeholder="Petitioner Name"
+            
             onChange={handleChange}
           />
         </div>

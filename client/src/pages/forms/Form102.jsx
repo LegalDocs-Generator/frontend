@@ -75,18 +75,18 @@ const Form102 = () => {
             <input
               type="text"
               name="deceasedName"
-              placeholder=" Name of Deceased* "
+              placeholder=" Name of Deceased "
               className="input w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             resident
             <input
               type="text"
               name="deceasedAddress"
-              placeholder=" Residence of Deceased*"
+              placeholder=" Residence of Deceased"
               className="input w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             having occupation of
@@ -95,7 +95,7 @@ const Form102 = () => {
               name="deceasedOccupation"
               placeholder=" Occupation of Deceased*"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -105,9 +105,9 @@ const Form102 = () => {
             <input
               type="text"
               name="petitionerName"
-              placeholder=" Executor of Will*"
+              placeholder=" Executor of Will"
               className="input w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             Petitioner.
@@ -122,8 +122,8 @@ const Form102 = () => {
             type="text"
             name="witnessName"
             className="input w-full md:w-auto"
-            placeholder="Witness Name*"
-            required
+            placeholder="Witness Name"
+            
             onChange={handleChange}
           />
           aged about
@@ -131,8 +131,8 @@ const Form102 = () => {
             type="number"
             name="witnessAge"
             className="input  w-full md:w-auto"
-            placeholder="Witness Age*"
-            required
+            placeholder="Witness Age"
+            
             onChange={handleChange}
           />
           years, residing at
@@ -140,8 +140,8 @@ const Form102 = () => {
             type="text"
             name="witnessAddress"
             className="input  w-full md:w-auto"
-            placeholder="Witness Address*"
-            required
+            placeholder="Witness Address"
+            
             onChange={handleChange}
           />
           swear in the name of God and say as
@@ -156,8 +156,8 @@ const Form102 = () => {
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name*"
-            required
+            placeholder="Deceased Name"
+            
             onChange={handleChange}
           />
           above named.
@@ -170,8 +170,8 @@ const Form102 = () => {
             type="date"
             name="dateOfDeath"
             className="input  w-full md:w-auto"
-            placeholder="Date Of Death*"
-            required
+            placeholder="Date Of Death"
+            
             onChange={handleChange}
           />
           , I was present together with
@@ -179,8 +179,8 @@ const Form102 = () => {
             type="text"
             name="petitionerName"
             className="input  w-full md:w-auto"
-            placeholder="Executor of Will*"
-            required
+            placeholder="Executor of Will"
+            
             onChange={handleChange}
           />
           at the house of
@@ -188,8 +188,8 @@ const Form102 = () => {
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name*"
-            required
+            placeholder="Deceased Name"
+            
             onChange={handleChange}
           />
         </div>
@@ -209,8 +209,8 @@ const Form102 = () => {
             type="text"
             name="petitionerName"
             className="input w-full md:w-auto"
-            placeholder="Executor of Will*"
-            required
+            placeholder="Executor of Will"
+            
             onChange={handleChange}
           />
           did at the request of the said deceased and in his presence and in the
@@ -230,8 +230,8 @@ const Form102 = () => {
             type="text"
             name="deceasedName"
             className="input w-full md:w-auto"
-            placeholder="Deceased Name*"
-            required
+            placeholder="Deceased Name"
+            
             onChange={handleChange}
           />
           subscribed at the foot of the testamentary paper as of the party
@@ -254,8 +254,8 @@ const Form102 = () => {
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name*"
-            required
+            placeholder="Deceased Name"
+            
             onChange={handleChange}
           />
           he was of sound
@@ -274,9 +274,9 @@ const Form102 = () => {
             <input
               type="text"
               name="swearingLocation"
-              placeholder="Swearing Location*"
+              placeholder="Swearing Location"
               className="input w-[65%]"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -285,9 +285,9 @@ const Form102 = () => {
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing*"
+              placeholder="Date of Swearing"
               className="input w-[65%]"
-              required
+              
               onChange={handleDateChange}
             />
           </div>
@@ -296,9 +296,9 @@ const Form102 = () => {
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for*"
+              placeholder="Advocate for"
               className="input w-[65%]"
-              required
+              
               onChange={handleChange}
             />
           </div>

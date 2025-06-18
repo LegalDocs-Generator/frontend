@@ -117,27 +117,24 @@ const Form98 = () => {
             <input
               type="text"
               name="deceasedName"
-              placeholder="Name of Deceased*"
+              placeholder="Name of Deceased"
               className="input  w-full md:w-auto"
-              required
               onChange={handleChange}
             />
             resident
             <input
               type="text"
               name="deceasedAddress"
-              placeholder="Residence of Deceased*"
+              placeholder="Residence of Deceased"
               className="input w-full md:w-auto"
-              required
               onChange={handleChange}
             />
             having occupation of
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder="Occupation of Deceased*"
+              placeholder="Occupation of Deceased"
               className="input w-full md:w-auto"
-              required
               onChange={handleChange}
             />
           </div>
@@ -147,9 +144,8 @@ const Form98 = () => {
             <input
               type="text"
               name="petitionerName"
-              placeholder="Executor of Will*"
+              placeholder="Executor of Will"
               className="input w-full md:w-auto"
-              required
               onChange={handleChange}
             />
             Petitioner.
@@ -179,90 +175,70 @@ const Form98 = () => {
 
           <div className="flex flex-col md:flex-row justify-between w-full gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Amount of Furniture <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Amount of Furniture</label>
               <input
                 type="number"
                 name="furniture"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Cash in house <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Cash in house</label>
               <input
                 type="number"
                 name="cashInHouse"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
 
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Amount of Plates <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Amount of Plates</label>
               <input
                 type="number"
                 name="plates"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Amount of Jewel <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Amount of Jewel</label>
               <input
                 type="number"
                 name="jewels"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Amount of Books <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Amount of Books</label>
               <input
                 type="number"
                 name="books"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="flex flex-col gap-4 md:flex-row   w-full">
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Amount Wearing apparel <span className="text-red-600">*</span>
-              </label>
+              <label className="mb-1 font-medium">Amount Wearing apparel</label>
               <input
                 type="number"
                 name="wearingApparel"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
                 Amount of Household Goods{" "}
-                <span className="text-red-600">*</span>
               </label>
               <input
                 type="number"
                 name="householdGoods"
                 className="input"
-                required
                 onChange={handleChange}
               />
             </div>
@@ -436,7 +412,6 @@ const Form98 = () => {
                 name="adaniAccountNumber"
                 placeholder="Account Number"
                 className="input ms-2"
-                required
                 onChange={handleChange}
               />
             </p>
@@ -447,7 +422,6 @@ const Form98 = () => {
                 name="adaniSecurityDeposit"
                 placeholder="Security Deposit"
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />{" "}
               for Adani Electricity Account Number
@@ -456,7 +430,6 @@ const Form98 = () => {
                 name="adaniAccountNumber"
                 placeholder="Account Number"
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />
             </p>
@@ -468,7 +441,6 @@ const Form98 = () => {
                 name="mahanagarGPBearingBPNo"
                 placeholder="BP No."
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />{" "}
               / CA No. :
@@ -477,7 +449,6 @@ const Form98 = () => {
                 name="mahanagarBearingCANo"
                 placeholder="CA No."
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />
             </p>
@@ -489,7 +460,6 @@ const Form98 = () => {
                 name="mahanagarSecurityDeposit"
                 placeholder="Security Deposit"
                 className="input w-[200px] ms-2 me-2"
-                required
                 onChange={handleChange}
               />{" "}
               for Mahanagar Gas connection BP No. :
@@ -498,7 +468,6 @@ const Form98 = () => {
                 name="mahanagarGPBPNo"
                 placeholder="BP No."
                 className="input  w-[200px] ms-2 me-2"
-                required
                 onChange={handleChange}
               />
               / CA No. :{" "}
@@ -507,7 +476,6 @@ const Form98 = () => {
                 name="mahanagarCANo"
                 placeholder="CA No."
                 className="input w-[200px] ms-2"
-                required
                 onChange={handleChange}
               />
             </p>
@@ -518,7 +486,6 @@ const Form98 = () => {
                 name="mahanagarGPBearingBPNo"
                 placeholder="BP No."
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />{" "}
               / CA No. :
@@ -527,7 +494,6 @@ const Form98 = () => {
                 name="mahanagarBearingCANo"
                 placeholder="CA No."
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />
             </p>
@@ -538,7 +504,6 @@ const Form98 = () => {
                 name="simCardNumber"
                 placeholder="Card No."
                 className="input ms-2 me-2"
-                required
                 onChange={handleChange}
               />{" "}
             </p>
@@ -551,7 +516,6 @@ const Form98 = () => {
               name="deductedLiabilities"
               placeholder="Deduct Amount"
               className="input ms-2 me-2"
-              required
               onChange={handleChange}
             />
           </p>

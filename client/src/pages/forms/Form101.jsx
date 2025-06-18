@@ -76,27 +76,27 @@ if (!value) return;
             <input
               type="text"
               name="deceasedName"
-              placeholder=" Name of Deceased* "
+              placeholder=" Name of Deceased "
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             resident
             <input
               type="text"
               name="deceasedAddress"
-              placeholder=" Residence of Deceased*"
+              placeholder=" Residence of Deceased"
               className="input  w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             having occupation of
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder=" Occupation of Deceased*"
+              placeholder=" Occupation of Deceased"
               className="input w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -106,9 +106,9 @@ if (!value) return;
             <input
               type="text"
               name="petitionerName"
-              placeholder=" Executor of Will*"
+              placeholder=" Executor of Will"
               className="input w-full md:w-auto"
-              required
+              
               onChange={handleChange}
             />
             Petitioner.
@@ -123,17 +123,17 @@ if (!value) return;
           <input
             type="text"
             name="petitionerName"
-            placeholder=" Name of Petitioner*"
+            placeholder=" Name of Petitioner"
             className="input w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           <input
             type="text"
             name="relationWithDeeceased"
-            placeholder="Relation with Deceased*"
+            placeholder="Relation with Deceased"
             className="input  w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           , the Petitioner, swear in the name of God that I believe and state
@@ -146,18 +146,18 @@ if (!value) return;
           <input
             type="text"
             name="deceasedName1"
-            placeholder="Name of Deceased 1*"
+            placeholder="Name of Deceased 1"
             className="input  w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           alias
           <input
             type="text"
             name="deceasedName2"
-            placeholder="Name of Deceased 2*"
+            placeholder="Name of Deceased 2"
             className="input w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           alias
@@ -167,18 +167,18 @@ if (!value) return;
           <input
             type="text"
             name="deceasedName3"
-            placeholder="Name of Deceased 3*"
+            placeholder="Name of Deceased 3"
             className="input w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           alias
           <input
             type="text"
             name="deceasedName4"
-            placeholder="Name of Deceased 4*"
+            placeholder="Name of Deceased 4"
             className="input  w-full md:w-auto"
-            required
+            
             onChange={handleChange}
           />
           deceased, and that I am the executor therein named and that I will
@@ -216,9 +216,9 @@ if (!value) return;
             <input
               type="text"
               name="swearingLocation"
-              placeholder="Swearing Location*"
+              placeholder="Swearing Location"
               className="input w-[65%]"
-              required
+              
               onChange={handleChange}
             />
           </div>
@@ -227,9 +227,9 @@ if (!value) return;
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing*"
+              placeholder="Date of Swearing"
               className="input w-[65%]"
-              required
+              
               onChange={handleDateChange}
             />
           </div>
@@ -238,9 +238,9 @@ if (!value) return;
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for*"
+              placeholder="Advocate for"
               className="input w-[65%]"
-              required
+              
               onChange={handleChange}
             />
           </div>
