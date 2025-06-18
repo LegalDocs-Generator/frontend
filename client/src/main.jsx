@@ -17,6 +17,7 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import Terms from './pages/Terms.jsx'
+import Home from './pages/Home.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home/>,
       },
       {
         path: "/form97",
