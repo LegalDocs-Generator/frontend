@@ -10,7 +10,7 @@ body{
 
 /* input field */
 .input {
-  padding: 7px;
+  padding: 4px;
   border-radius: 5px;
   border: 2px solid #c2c6ca;
   outline: none;
@@ -28,6 +28,8 @@ body{
   color: white;
   border:5px solid white;
    transition: border 0.3s;
+   text-decoration: none;
+   text-align: center;
 }
 .save_button {
   background: #2e3a59;
@@ -92,3 +94,4 @@ body{
 .navbar-element:hover{
   color: #15945a;
 }
+

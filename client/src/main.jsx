@@ -20,24 +20,24 @@ import Terms from './pages/Terms.jsx'
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element: <App/>,
-    children:[
+    path: "/",
+    element: <App />,
+    children: [
       {
-        path:'/',
-        element: <Form97/>
+        path: "/",
+        element: <Home />,
       },
       {
-        path:'/login',
-        element: <AuthPage/>
+        path: "/form97",
+        element: <Form97 />,
       },
       {
-        path:'/forgot-password',
-        element: <ForgotPassword/>
+        path: "/form98",
+        element: <Form98 />,
       },
       {
-        path:'/reset-password/:resetToken',
-        element: <ResetPassword/>
+        path: "/form99",
+        element: <Form99 />,
       },
       {
         path:'/profile',
@@ -60,15 +60,39 @@ const router = createBrowserRouter([
         element: <Terms/>
       },
       {
-        path:'*',
-        element: <NotFound/>
+        path: "/form100",
+        element: <Form100 />,
       },
-    ]
-  }
-])
+      {
+        path: "/form101",
+        element: <Form101 />,
+      },
+      {
+        path: "/form102",
+        element: <Form102 />,
+      },
+      {
+        path: "/login",
+        element: <AuthPage />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}/>
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);

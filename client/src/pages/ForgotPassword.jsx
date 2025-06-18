@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
           Forgot Password
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
             </label>
             <input
               type="email"
-              className="w-full input px-4 py-2 rounded-md"
+              className="w-full input px-4 py-2 "
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
 
           <button
             type="submit"
-            className="w-full button save_button text-white py-2 rounded-md font-medium hover:bg-blue-700 transition"
+            className="w-full button save_button  py-2  "
           >
             Send Reset Link
           </button>
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
 
         <p className="mt-4 text-sm text-gray-500 text-center">
           Remember your password?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline ml-1">
+          <Link to="/login" className="!no-underline hover:!underline ml-1">
             Sign in
           </Link>
         </p>

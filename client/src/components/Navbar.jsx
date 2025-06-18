@@ -1,17 +1,27 @@
-import { useState } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false); // for dropdown
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleServices = () => setServicesOpen(!servicesOpen);
 
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
     { to: '/profile', label: 'Profile' },
+    {
+      label: "Services",
+      dropdown: true,
+      children: [
+        { to: "/services", label: "Services" },
+        { to: "/form97", label: "Forms" },
+      ],
+    },
   ];
 
   return (
@@ -20,25 +30,54 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl text-decoration-none font-semibold tracking-tight navbar-element"
+          className="md:text-3xl text-2xl font-semibold tracking-tight navbar-element transition-all duration-300 !no-underline"
         >
           LegalDocs
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="text-decoration-none font-medium transition-colors duration-300 navbar-element"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center space-x-8 relative">
+          {navLinks.map((link) =>
+            link.dropdown ? (
+              <div key={link.label} className="relative">
+                <button
+                  onClick={toggleServices}
+                  className="font-medium transition-colors navbar-element"
+                >
+                  {link.label}
+                </button>
+                {servicesOpen && (
+                  <div className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg z-10">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.to}
+                        to={child.to}
+                        onClick={() => {
+                          setServicesOpen(false); // Optional: hide dropdown after click
+                          setMenuOpen(false); // also close mobile menu if any
+                        }}
+                        className="block px-4 py-2 hover:bg-gray-100 text-sm text-black !no-underline"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="font-medium transition-colors navbar-element !no-underline"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+
           <Link
             to="/login"
-            className="button ml-4 save_button text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
+            className="button  save_button px-4 py-2  text-sm  "
           >
             Login
           </Link>
@@ -48,7 +87,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-2xl focus:outline-none  navbar-element"
+            className="text-2xl focus:outline-none navbar-element"
           >
             {menuOpen ? <FiX /> : <FiMenu />}
           </button>
@@ -58,20 +97,43 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pt-2 pb-4 space-y-2 bg-white border-t border-gray-200 rounded-b-lg shadow-md">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className="block font-medium  text-decoration-none hover:text-gray-800 transition-colors navbar-element"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.dropdown ? (
+              <div key={link.label}>
+                <button
+                  onClick={toggleServices}
+                  className="block font-medium w-full text-left text-black"
+                >
+                  {link.label}
+                </button>
+                {servicesOpen &&
+                  link.children.map((child) => (
+                    <Link
+                      key={child.to}
+                      to={child.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="block pl-4 text-sm py-1 text-black !no-underline"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+              </div>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className="block font-medium text-black !no-underline"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+
           <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="button save_button inline-block mt-2 text-decoration-none text-white px-4 py-2 rounded-full text-sm font-medium transition"
+            className="button save_button inline-block mt-2 text-white px-4 py-2 rounded-full text-sm font-medium transition"
           >
             Login
           </Link>

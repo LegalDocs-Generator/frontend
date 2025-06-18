@@ -13,7 +13,7 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="mt-4 mb-4 flex items-center justify-center px-4">
+        <div className=" mt-4 mb-4 flex items-center min-h-[500px] justify-center px-4">
             <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
                     {isLogin ? 'Sign In to LegalDocs' : 'Create an Account'}
@@ -27,7 +27,7 @@ const AuthPage = () => {
                             </label>
                             <input
                                 type="text"
-                                className="w-full input px-4 py-2 rounded-md"
+                                className="w-full input px-4 py-2 "
                                 placeholder="Your Name"
                             />
                         </div>
@@ -39,7 +39,7 @@ const AuthPage = () => {
                         </label>
                         <input
                             type="email"
-                            className="w-full input px-4 py-2 rounded-md"
+                            className="w-full input px-4 py-2 "
                             placeholder="you@example.com"
                         />
                     </div>
@@ -70,7 +70,7 @@ const AuthPage = () => {
 
                     <button
                         type="submit"
-                        className="w-full button save_button text-white py-2 rounded-md font-medium hover:bg-blue-700 transition"
+                        className="w-full button save_button  transition"
                     >
                         {isLogin ? 'Sign In' : 'Sign Up'}
                     </button>
@@ -97,7 +97,7 @@ const AuthPage = () => {
                     {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
                     <button
                         onClick={toggleForm}
-                        className="text-blue-600 hover:underline ml-1"
+                        className="text-blue-600 hover:!underline ml-1"
                     >
                         {isLogin ? 'Sign up' : 'Sign in'}
                     </button>
@@ -105,10 +105,7 @@ const AuthPage = () => {
 
                 {isLogin && (
                     <div className="mt-3 text-center">
-                        <Link
-                            to="/forgot-password"
-                            className="text-sm text-decoration-none text-gray-500 hover:underline"
-                        >
+                        <Link to="/forgot-password" className="text-sm text-decoration-none  hover:!underline">
                             Forgot password?
                         </Link>
                     </div>

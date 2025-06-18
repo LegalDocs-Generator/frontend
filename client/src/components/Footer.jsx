@@ -1,44 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 shadow-inner mt-12">
-      <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-        {/* Left section - Logo & Copyright */}
-        <div className="mb-4 md:mb-0">
-          <Link
-            to="/"
-            className="text-2xl font-semibold tracking-tight text-decoration-none navbar-element"
-          >
-            LegalDocs
-          </Link>
-          <p className="mt-1 text-sm  navbar-element">
-            © {new Date().getFullYear()} LegalDocs. All rights reserved.
-          </p>
-        </div>
-
-        {/* Right section - Footer Links */}
-        <div className="flex flex-wrap justify-center md:justify-end gap-4">
-          <Link
-            to="/privacy"
-            className="text-sm font-medium text-decoration-none navbar-element"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            to="/terms"
-            className="text-sm font-medium text-decoration-none navbar-element"
-          >
-            Terms of Service
-          </Link>
-          <Link
-            to="/contact"
-            className="text-sm font-medium text-decoration-none navbar-element"
-          >
-            Contact
-          </Link>
-        </div>
-      </div>
+    <footer className="bg-[#2e3a59]  border-t border-gray-200 shadow-inner p-6 flex flex-col justify-center items-center">
+      <Link
+        to="/"
+        className="text-2xl font-semibold tracking-tight text-decoration-none navbar-element !text-white"
+      >
+        LegalDocs
+      </Link>
+      <p className="mt-1 text-sm  navbar-element !text-white">
+        © {new Date().getFullYear()} LegalDocs. All rights reserved.
+      </p>
     </footer>
   );
 };
