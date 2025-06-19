@@ -1,13 +1,35 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { DocContext } from "../store/docsStore";
 
 const Navbar = () => {
+  const { user, handleLogoutUser } = useContext(DocContext)
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef(null);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleServices = () => setServicesOpen(!servicesOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        servicesOpen &&
+        servicesRef.current &&
+        !servicesRef.current.contains(event.target)
+      ) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("scroll", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("scroll", handleClickOutside);
+    };
+  }, [servicesOpen]);
 
   const navLinks = [
     { to: '/', label: 'Home' },
@@ -24,6 +46,7 @@ const Navbar = () => {
     },
   ];
 
+
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -39,7 +62,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-8 relative">
           {navLinks.map((link) =>
             link.dropdown ? (
-              <div key={link.label} className="relative">
+              <div key={link.label} className="relative" ref={servicesRef}>
                 <button
                   onClick={toggleServices}
                   className="font-medium transition-colors navbar-element"
@@ -53,8 +76,8 @@ const Navbar = () => {
                         key={child.to}
                         to={child.to}
                         onClick={() => {
-                          setServicesOpen(false); 
-                          setMenuOpen(false); 
+                          setServicesOpen(false);
+                          setMenuOpen(false);
                         }}
                         className="block px-4 py-2 hover:bg-gray-100 text-sm text-black !no-underline"
                       >
@@ -65,22 +88,38 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="font-medium transition-colors navbar-element !no-underline"
-              >
-                {link.label}
-              </Link>
+              link.label !== 'Profile' ? (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="font-medium transition-colors navbar-element !no-underline"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                user && <Link
+                  key={link.to}
+                  to={link.to}
+                  className="font-medium transition-colors navbar-element !no-underline"
+                >
+                  {link.label}
+                </Link>
+              )
             )
           )}
 
-          <Link
+          {!user ? <Link
             to="/login"
             className="button  save_button px-4 py-2  text-sm  "
           >
             Login
-          </Link>
+          </Link> : <Link
+            to=""
+            onClick={() => handleLogoutUser(setMenuOpen)}
+            className="button  save_button px-4 py-2  text-sm  "
+          >
+            Logout
+          </Link>}
         </div>
 
         {/* Mobile Toggle */}
@@ -99,7 +138,7 @@ const Navbar = () => {
         <div className="md:hidden px-4 pt-2 pb-4 space-y-2 bg-white border-t border-gray-200 rounded-b-lg shadow-md">
           {navLinks.map((link) =>
             link.dropdown ? (
-              <div key={link.label}>
+              <div key={link.label} ref={servicesRef}>
                 <button
                   onClick={toggleServices}
                   className="block font-medium w-full text-left text-black"
@@ -130,13 +169,19 @@ const Navbar = () => {
             )
           )}
 
-          <Link
+          {!user ? <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
             className="button save_button inline-block mt-2 text-white px-4 py-2 rounded-full text-sm font-medium transition"
           >
             Login
-          </Link>
+          </Link> : <Link
+            to=""
+            onClick={() => handleLogoutUser(setMenuOpen)}
+            className="button save_button inline-block mt-2 text-white px-4 py-2 rounded-full text-sm font-medium transition"
+          >
+            Logout
+          </Link>}
         </div>
       )}
     </nav>

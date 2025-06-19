@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import { DocContext } from '../store/docsStore';
 
 const AuthPage = () => {
+    const { error, setError, isProcessing, handleSignupUser, handleGoogle, handleLoginUser } = useContext(DocContext);
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        password: ''
+    });
+
     const [isLogin, setIsLogin] = useState(true);
 
-    const toggleForm = () => setIsLogin(!isLogin);
+    const toggleForm = () => {
+        setIsLogin(!isLogin);
+        setError(null);
+        setFormData({
+            fullName: '',
+            email: '',
+            password: ''
+        });
+    }
 
-    const handleGoogle = () => {
-      // TODO: invoke your Google OAuth flow here
-      console.log('Continue with Google');
-    };
+    const handleChange = (e) => {
+        e.preventDefault();
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!isLogin) {
+            console.log("Signing up for user : ", formData);
+            handleSignupUser(formData, toggleForm);
+        }
+        else {
+            console.log('Logging in for user : ', formData);
+            handleLoginUser(formData);
+        }
+    }
 
     return (
         <div className=" mt-4 text-sm md:text-base mb-4 flex items-center min-h-[500px] justify-center px-4">
@@ -18,8 +47,8 @@ const AuthPage = () => {
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
                     {isLogin ? 'Sign In to LegalDocs' : 'Create an Account'}
                 </h2>
-
-                <form className="space-y-4">
+                {error && <div className=' text-center text-danger'>{error}</div>}
+                <form onSubmit={handleSubmit} className="space-y-4">
                     {!isLogin && (
                         <div>
                             <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -27,8 +56,11 @@ const AuthPage = () => {
                             </label>
                             <input
                                 type="text"
+                                name="fullName"
                                 className="w-full input px-4 py-2 "
                                 placeholder="Your Name"
+                                value={formData.fullName}
+                                onChange={handleChange}
                             />
                         </div>
                     )}
@@ -39,12 +71,15 @@ const AuthPage = () => {
                         </label>
                         <input
                             type="email"
+                            name="email"
                             className="w-full input px-4 py-2 "
                             placeholder="you@example.com"
+                            value={formData.email}
+                            onChange={handleChange}
                         />
                     </div>
 
-                    {!isLogin && (
+                    {/* {!isLogin && (
                         <div>
                             <label className="block text-sm font-medium text-gray-600 mb-1">
                                 Phone
@@ -55,7 +90,7 @@ const AuthPage = () => {
                                 placeholder="Contact Number"
                             />
                         </div>
-                    )}
+                    )} */}
 
                     <div>
                         <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -63,16 +98,20 @@ const AuthPage = () => {
                         </label>
                         <input
                             type="password"
+                            name="password"
                             className="w-full input px-4 py-2 rounded-md"
                             placeholder="••••••••"
+                            value={formData.password}
+                            onChange={handleChange}
                         />
                     </div>
 
                     <button
                         type="submit"
                         className="w-full button save_button  transition"
+                        disabled={isProcessing}
                     >
-                        {isLogin ? 'Sign In' : 'Sign Up'}
+                        {isProcessing ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
                     </button>
 
                     {/* OR separator */}

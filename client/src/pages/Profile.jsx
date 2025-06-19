@@ -1,41 +1,49 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { DocContext } from '../store/docsStore';
 
 const Profile = () => {
-  const initialUser = {
-    avatarUrl: '/images/DefaultProfile.png',
-    fullName: 'Jane Doe',
-    email: 'jane.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    bio: 'Legal professional with 5 years of experience specializing in corporate law and compliance.',
-  };
+  const { user, handleUpdateProfile, isProcessing, error } = useContext(DocContext);
 
-  const [user, setUser] = useState(initialUser);
+  const [newUser, setNewUser] = useState(
+    {
+      fullName:user.fullName,
+      email:user.email,
+      profilePhoto:user.profilePhoto,
+      phone:user.phone || ''
+    });
+
   const [isEditing, setIsEditing] = useState(false);
-  const [preview, setPreview] = useState(user.avatarUrl);
+  const [preview, setPreview] = useState(newUser.profilePhoto);
   const fileInputRef = useRef(null);
 
   const handleEditToggle = () => {
     if (isEditing) {
-      setPreview(user.avatarUrl);
+      setPreview(newUser.profilePhoto);
     }
     setIsEditing(!isEditing);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser(prev => ({ ...prev, [name]: value }));
+    setNewUser(prev => ({ ...prev, [name]: value }));
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
+      setNewUser(prev => ({ ...prev, profilePhoto: file }));
     }
   };
 
   const handleSave = () => {
-    setUser(prev => ({ ...prev, avatarUrl: preview }));
-    setIsEditing(false);
+    const formData = new FormData();
+    formData.append('fullName', newUser.fullName);
+    formData.append('phone', newUser.phone);
+    formData.append('profilePhoto', newUser.profilePhoto);
+
+    console.log("Updating new profile to : ", newUser);
+    handleUpdateProfile(formData, setIsEditing);
   };
 
   return (
@@ -76,7 +84,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="fullName"
-                  value={user.fullName}
+                  value={newUser.fullName}
                   onChange={handleInputChange}
                   className="w-full py-2 input"
                 />
@@ -87,19 +95,8 @@ const Profile = () => {
                 <input
                   type="text"
                   name="phone"
-                  value={user.phone}
+                  value={newUser.phone}
                   onChange={handleInputChange}
-                  className="w-full input py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 text-sm mb-1">About</label>
-                <textarea
-                  name="bio"
-                  value={user.bio}
-                  onChange={handleInputChange}
-                  rows={4}
                   className="w-full py-2 input"
                 />
               </div>
@@ -112,28 +109,23 @@ const Profile = () => {
                   Cancel
                 </button>
                 <button
+                  disabled={isProcessing}
                   onClick={handleSave}
                   className="button save_button !px-10"
                 >
-                  Save
+                  {!isProcessing?'Save':'Updating...'}
                 </button>
               </div>
             </div>
           ) : (
             <div className="text-center">
-              <h1 className="text-2xl font-semibold text-gray-800">{user.fullName}</h1>
-              <p className="mt-2 text-gray-500">{user.email}</p>
-              <p className="text-gray-500">{user.phone}</p>
+              <h1 className="text-2xl font-semibold text-gray-800">{newUser.fullName}</h1>
+              <p className="mt-2 text-gray-500">{newUser.email}</p>
+              <p className="mt-2 text-gray-500">{newUser.phone}</p>
             </div>
+
           )}
         </div>
-
-        {!isEditing && (
-          <div className="mt-6">
-            <h2 className="text-gray-700 font-medium">About</h2>
-            <p className="mt-2 text-gray-600 text-sm">{user.bio}</p>
-          </div>
-        )}
 
         {!isEditing && (
           <div className="mt-6 flex justify-center">
