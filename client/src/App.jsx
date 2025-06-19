@@ -4,16 +4,17 @@ import './App.css'
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import DocProvider from './store/docsStore';
 
 function App() {
 
 
   return (
-    <>
+    <DocProvider>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </DocProvider>
   )
 }
 
