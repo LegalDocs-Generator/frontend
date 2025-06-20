@@ -12,6 +12,8 @@ export const DocContext = createContext({
     handleSignupUser: () => { },
     handleLoginUser: () => { },
     handleLogoutUser: () => { },
+    handleForgotPass: () => { },
+    handleResetPass: () => { },
     handleUpdateProfile: () => { },
     handleGoogle: () => { },
     setError: () => { },
@@ -122,6 +124,49 @@ const DocProvider = ({ children }) => {
         }
     };
 
+    //Handling Request for Forgot Password
+    const handleForgotPass = async (email) => {
+        setIsProcessing(true);
+        try {
+            const res = await axios.post(`${appURL}/api/auth/forgot-password`, {email});
+
+            if (res.data) {
+                console.log(res.data);
+                navigate('/')
+                setError(null);
+            }
+        } catch (error) {
+            console.error("Some error occured : ", error);
+            setError(
+                error.response.data.message || error.response.data.msg || error.message
+            );
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    //Handling Request for Reset Password
+    const handleResetPass = async (resetToken, newPassword) => {
+        setIsProcessing(true);
+        try {
+            const res = await axios.post(`${appURL}/api/auth/reset-password/${resetToken}`, {newPassword});
+
+            if (res.data) {
+                console.log(res.data);
+                navigate('/login')
+                setError(null);
+            }
+        } catch (error) {
+            console.error("Some error occured : ", error);
+            setError(
+                error.response.data.message || error.response.data.msg || error.message
+            );
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    //Handling Request for Google Auth
     const handleGoogle = () => {
         console.log("Continue with Google");
     };
@@ -138,6 +183,8 @@ const DocProvider = ({ children }) => {
                 handleLoginUser,
                 handleLogoutUser,
                 handleUpdateProfile,
+                handleForgotPass,
+                handleResetPass,
                 setError,
             }}
         >

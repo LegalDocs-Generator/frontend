@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DocContext } from '../store/docsStore';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const {handleForgotPass, isProcessing, error} = useContext(DocContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    handleForgotPass(email);
   };
 
   return (
@@ -14,7 +18,7 @@ const ForgotPassword = () => {
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
           Forgot Password
         </h2>
-
+        {error && <div className=' text-center text-danger'>{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -33,8 +37,9 @@ const ForgotPassword = () => {
           <button
             type="submit"
             className="w-full button save_button  py-2  "
+            disabled={isProcessing}
           >
-            Send Reset Link
+            {isProcessing?'Sending...':'Send Reset Link'}
           </button>
         </form>
 
