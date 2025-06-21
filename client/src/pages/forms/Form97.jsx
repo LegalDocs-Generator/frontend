@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/authStore";
+import { DocContext } from "../../store/docsStore";
+
 const Form97 = () => {
   const [formData, setFormData] = useState({
     petitionNumber: "",
@@ -10,6 +12,7 @@ const Form97 = () => {
     deceasedFullName: "",
     deceasedNationality: "",
     deceasedAddress: "",
+    deceasedReligion: "",
     deceasedsect: "",
     deceasedMaritalStatus: "",
     deceasedOccupation: "",
@@ -59,9 +62,29 @@ const Form97 = () => {
     swornDate: "",
     swornMonth: "",
     swornYear: "",
+    advocateFor: "",
     statedPara: "",
     remainingPara: "",
   });
+
+  const { user, navigate } = useContext(AuthContext);
+  const {
+    error,
+    isProcessing,
+    isGeneratingPdf,
+    isSavingChanges,
+    isSavingNext,
+    handleSubmitForm97,
+    handleFetchForm97,
+    handleGeneratePdfForm97,
+  } = useContext(DocContext);
+
+  useEffect(() => {
+    if (!user) navigate("/login");
+    else {
+      handleFetchForm97(setFormData);
+    }
+  }, []);
 
   const handledeceasedDeathDateChange = (e) => {
     const value = e.target.value;
@@ -71,9 +94,9 @@ const Form97 = () => {
 
     setFormData((prev) => ({
       ...prev,
-      deceasedDeathYear: Number(year),
+      deceasedDeathYear: year,
       deceasedDeathMonth: month,
-      deceasedDeathDate: Number(day),
+      deceasedDeathDate: day,
     }));
   };
 
@@ -84,9 +107,9 @@ const Form97 = () => {
 
     setFormData((prev) => ({
       ...prev,
-      ExecutionDate: Number(year),
+      ExecutionDate: day,
       ExecutionMonth: month,
-      ExecutionYear: Number(day),
+      ExecutionYear: year,
     }));
   };
 
@@ -97,11 +120,12 @@ const Form97 = () => {
 
     setFormData((prev) => ({
       ...prev,
-      swornDate: Number(year),
+      swornDate: day,
       swornMonth: month,
-      swornYear: Number(day),
+      swornYear: year,
     }));
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -109,19 +133,17 @@ const Form97 = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (e) => {
+
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
-    try {
-      //   await axios.post(
-      //     `${import.meta.env.VITE_BASE_URL}/form98/submit`,
-      //     formData
-      //   );
-      alert("Form submitted successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Form submission failed.");
-    }
+    handleSubmitForm97(formData, false);
   };
+  
+  const handleSaveNext = async (e) => {
+    e.preventDefault();
+    handleSubmitForm97(formData, true);
+  };
+
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
@@ -131,10 +153,10 @@ const Form97 = () => {
         TESTAMENTARY AND INTESTATE JURISDICTION
       </p>
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
-        PETITION NO. ...........OF 20....
+        PETITION NO. ...........OF 20….
       </p>
       <hr />
-      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+      <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Deceased Details Section */}
         <p className="text-lg md:text-2xl font-semibold">Deceased Details</p>
         <p className="mb-2">
@@ -150,6 +172,7 @@ const Form97 = () => {
                 placeholder="Name"
                 className="input"
                 onChange={handleChange}
+                value={formData.deceasedFullName}
               />
             </div>
 
@@ -160,6 +183,7 @@ const Form97 = () => {
                 placeholder="Nationality"
                 className="input"
                 onChange={handleChange}
+                value={formData.deceasedNationality}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
@@ -169,6 +193,7 @@ const Form97 = () => {
                 placeholder="Address"
                 className="input"
                 onChange={handleChange}
+                value={formData.deceasedAddress}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
@@ -178,6 +203,7 @@ const Form97 = () => {
                 className="input"
                 placeholder="Religion"
                 onChange={handleChange}
+                value={formData.deceasedReligion}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
@@ -185,8 +211,9 @@ const Form97 = () => {
                 type="text"
                 name="deceasedsect"
                 className="input"
-                placeholder="Section (If mulsim)"
+                placeholder="Section (If Muslim)"
                 onChange={handleChange}
+                value={formData.deceasedsect}
               />
             </div>
           </div>
@@ -199,7 +226,7 @@ const Form97 = () => {
                 name="deceasedMaritalStatus"
                 className="input"
                 onChange={handleChange}
-                defaultValue=""
+                value={formData.deceasedMaritalStatus}
               >
                 <option value="" disabled>
                   Marriage Status of Deceased
@@ -218,6 +245,7 @@ const Form97 = () => {
                 placeholder="Occupation"
                 className="input"
                 onChange={handleChange}
+                value={formData.deceasedOccupation}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
@@ -227,6 +255,7 @@ const Form97 = () => {
                 placeholder="Residence at the time of death"
                 className="input"
                 onChange={handleChange}
+                value={formData.deceasedRescidenceAtTimeOfDeath}
               />
             </div>
 
@@ -235,7 +264,7 @@ const Form97 = () => {
                 name="deceasedstatus"
                 className="input"
                 onChange={handleChange}
-                defaultValue=""
+                value={formData.deceasedstatus}
               >
                 <option value="" disabled>
                   Status of Deceased
@@ -248,48 +277,56 @@ const Form97 = () => {
         </div>
         <hr />
 
-        {/* Petitoner Details Section */}
+        {/* Petitioner Details Section */}
         <div className="space-y-4">
-          <p className="text-lg md:text-2xl font-semibold">Petitoner details</p>
+          <p className="text-lg md:text-2xl font-semibold">
+            Petitioner details
+          </p>
 
           <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">Name of Petitoner</label>
+              <label className="mb-1 font-medium">Name of Petitioner</label>
               <input
                 type="text"
                 name="petitionerFullName"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerFullName}
               />
             </div>
 
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">Age of Petitoner</label>
+              <label className="mb-1 font-medium">Age of Petitioner</label>
               <input
                 type="number"
                 name="petitionerage"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerage}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
-                Nationality of Petitoner
+                Nationality of Petitioner
               </label>
               <input
                 type="text"
                 name="petitionerNationality"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerNationality}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">Domilcile of Petitoner</label>
+              <label className="mb-1 font-medium">
+                Domilcile of Petitioner
+              </label>
               <input
                 type="text"
                 name="petitionerDomicile"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerDomicile}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
@@ -301,6 +338,7 @@ const Form97 = () => {
                 name="petitionerFullAddress"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerFullAddress}
               />
             </div>
           </div>
@@ -311,7 +349,7 @@ const Form97 = () => {
                 name="executor"
                 className="input"
                 onChange={handleChange}
-                defaultValue=""
+                value={formData.executor}
               >
                 <option value="" disabled>
                   Select Option
@@ -326,18 +364,20 @@ const Form97 = () => {
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
-                Occupation of Petitoner
+                Occupation of Petitioner
               </label>
               <input
                 type="text"
                 name="petitionerOccupation"
                 className="input"
                 onChange={handleChange}
+                value={formData.petitionerOccupation}
               />
             </div>
           </div>
         </div>
         <hr />
+
         <div className="space-y-4">
           <p className="text-md md:text-lg mt-2 mb-0 font-semibold  ">
             THE PETITION OF THE PETITIONER ABOVENAMED
@@ -355,6 +395,7 @@ const Form97 = () => {
               placeholder="Name of Deceased"
               className="input me-2"
               onChange={handleChange}
+              value={formData.deceasedFullName}
             />{" "}
             died at{" "}
             <input
@@ -363,6 +404,7 @@ const Form97 = () => {
               placeholder="Place of death of the Deceased*"
               className="input me-2"
               onChange={handleChange}
+              value={formData.deceasedRescidenceAtTimeOfDeath}
             />{" "}
             on or about the{" "}
             <input
@@ -371,6 +413,7 @@ const Form97 = () => {
               placeholder=" Date  of Death"
               className="input me-2"
               onChange={handledeceasedDeathDateChange}
+              value={`${formData.deceasedDeathYear}-${formData.deceasedDeathMonth}-${formData.deceasedDeathDate}`}
             />
             (insert date of death of the Deceased) .A true copy of
           </p>
@@ -383,6 +426,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber1}
             />
             and a true copy of identity proof of the Deceased is annexed hereto
             and marked as Exhibit{" "}
@@ -392,6 +436,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber2}
             />
             (If no identity proof is available, say so and mention reason and
             annexe a true copy of documentary proof in support thereof).
@@ -405,6 +450,7 @@ const Form97 = () => {
               placeholder=" Place Of Abode"
               className="input me-2"
               onChange={handleChange}
+              value={formData.placeOfAbode}
             />{" "}
             and/or left property within Greater Bombay and in the State of
             Maharashtra and elsewhere in India. (details may be corrected as per
@@ -420,6 +466,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber3}
             />{" "}
             and (insert word “Photocopy or Certified copy”, if original is not
             available) is handed in separately for being filed and kept in a
@@ -431,6 +478,7 @@ const Form97 = () => {
               placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber4}
             />
           </p>
           <p className="mt-4 mb-3">
@@ -442,14 +490,16 @@ const Form97 = () => {
               placeholder=" Place Of Execution"
               className="input me-2"
               onChange={handleChange}
+              value={formData.placeOfExecutionOfWill}
             />{" "}
             on the{" "}
             <input
-              type="Date"
+              type="date"
               name="ExecutionDate"
               placeholder=" Execution Date"
               className="input me-2"
               onChange={handleExecutionDateChange}
+              value={`${formData.ExecutionYear}-${formData.ExecutionMonth}-${formData.ExecutionDate}`}
             />{" "}
             (insert date of execution of Will and Codicil, if any) . (if Will
             and Codicil, if any, has been registered, mention details of
@@ -464,6 +514,7 @@ const Form97 = () => {
               name="capacity"
               className="input me-2"
               onChange={handleChange}
+              value={formData.capacity}
             >
               <option value="">Select Capacity</option>
               <option value="soleExecutor">Sole Executor</option>
@@ -485,6 +536,7 @@ const Form97 = () => {
               placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber5}
             />{" "}
             all the property and credits which the Deceased died possessed of or
             entitled to at the time of his death, which have or are likely to
@@ -503,6 +555,7 @@ const Form97 = () => {
               placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber6}
             />{" "}
             all the items that by law, he is allowed to deduct for the purpose
             of ascertaining the net estate of the Deceased. (Delete this para if
@@ -517,6 +570,7 @@ const Form97 = () => {
               placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
+              value={formData.exhibitNumber7}
             />{" "}
             he property held by the Deceased as a trustee for another and not
             beneficially or with general power to confer a beneficial interest.
@@ -534,6 +588,7 @@ const Form97 = () => {
               placeholder="Schdule Amount"
               className="input me-2"
               onChange={handleChange}
+              value={formData.schduleAmount}
             />{" "}
             (insert net total amount of Schedule of Petition).
           </p>
@@ -547,6 +602,7 @@ const Form97 = () => {
               placeholder="Law"
               className="input me-2"
               onChange={handleChange}
+              value={formData.lawApplicableToTheDeceased}
             />{" "}
             (state what Law / name of the Act / name of the personal law
             applicable to the Deceased), the following persons, who are residing
@@ -610,6 +666,7 @@ const Form97 = () => {
               placeholder="Swearing Location"
               className="input w-[40%]"
               onChange={handleChange}
+              value={formData.swornPlace}
             />
           </div>
           <div className="flex items-center w-full md:w-[200px] justify-between">
@@ -620,6 +677,7 @@ const Form97 = () => {
               placeholder="Date of Swearing"
               className="input w-[65%]"
               onChange={handleswornDateChange}
+              value={`${formData.swornYear}-${formData.swornMonth}-${formData.swornDate}`}
             />
           </div>
           <div className="flex items-center w-full md:w-[350px] justify-between">
@@ -630,27 +688,37 @@ const Form97 = () => {
               placeholder="Advocate for"
               className="input w-[65%]"
               onChange={handleChange}
+              value={formData.advocateFor}
             />
           </div>
         </div>
 
         {/* Buttons */}
         <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-4">
-          <button type="submit" className="button save_button w-full md:w-auto">
-            Save Changes
+          <button
+            type="button"
+            className="button save_button w-full md:w-auto"
+            disabled={isSavingChanges}
+            onClick={handleSaveChanges}
+          >
+            {isSavingChanges ? "Saving..." : "Save Changes"}
           </button>
           <Link
             to="/form98"
-            type="submit"
+            type="button"
             className="button save_next w-full md:w-auto"
+            disabled={isSavingNext}
+            onClick={handleSaveNext}
           >
-            Save and Next
+            {isSavingNext ? "Saving..." : "Save and Next"}
           </Link>
           <button
-            type="submit"
+            type="button"
             className="button generate_pdf w-full md:w-auto"
+            disabled={isGeneratingPdf}
+            onClick={handleGeneratePdfForm97}
           >
-            Generate PDF
+            {isGeneratingPdf?'Sending email...':'Generate PDF'}
           </button>
         </div>
       </form>

@@ -5,192 +5,115 @@ import { useNavigate } from "react-router-dom";
 const appURL = import.meta.env.VITE_APP_URL;
 
 export const DocContext = createContext({
-    user: null,
-    error: null,
-    isProcessing: false,
-    setUser: () => { },
-    handleSignupUser: () => { },
-    handleLoginUser: () => { },
-    handleLogoutUser: () => { },
-    handleForgotPass: () => { },
-    handleResetPass: () => { },
-    handleUpdateProfile: () => { },
-    handleGoogle: () => { },
-    setError: () => { },
+  error: null,
+  setError: () => {},
+  isProcessing: false,
+  isSavingChanges: false,
+  isSavingNext: false,
+  isGeneratingPdf: false,
+  handleSubmitForm97: () => {},
+  handleFetchForm97: () => {},
+  handleGeneratePdfForm97: () => {},
 });
 
 const DocProvider = ({ children }) => {
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("user")) || null
-    );
-    const [error, setError] = useState(null);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSavingChanges, setIsSavingChanges] = useState(false);
+  const [isSavingNext, setIsSavingNext] = useState(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [error, setError] = useState(null);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    //Handling Request for Signup
-    const handleSignupUser = async (formData, toggleForm) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.post(`${appURL}/api/auth/signup`, formData);
+  //Handling Request for Submit Form-97
+  const handleSubmitForm97 = async (formData, isNext) => {
+    isNext? setIsSavingNext(true):setIsSavingChanges(true);
+    try {
+      const res = await axios.post(
+        `${appURL}/api/user/forms/submit-form97`,
+        formData,
+        { withCredentials: true }
+      );
 
-            if (res.data) {
-                console.log(res.data);
-                setError(null);
-                toggleForm();
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
+      if (res.data) {
+        console.log(res.data);
+        setError(null);
+        if(isNext) navigate("/form98");
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      isNext?setIsSavingNext(false):setIsSavingChanges(false);
+    }
+  };
 
-    //Handling Request for Login
-    const handleLoginUser = async (formData) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.post(`${appURL}/api/auth/login`, formData, { withCredentials: true });
+  //Handling Request for Fetch Form-97
+  const handleFetchForm97 = async (setFormData) => {
+    setIsProcessing(true);
+    try {
+      const res = await axios.get(`${appURL}/api/user/forms/form97`, {
+        withCredentials: true,
+      });
 
-            if (res.data) {
-                console.log(res.data);
-                setUser(res.data.user);
+      if (res.data) {
+        console.log(res.data);
+        setFormData((prev) => ({ ...prev, ...res.data.data }));
+        setError(null);
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
-                localStorage.setItem('user', JSON.stringify(res.data.user))
-                setError(null);
+  //Handling Request for Fetch Form-97
+  const handleGeneratePdfForm97 = async () => {
+    setIsGeneratingPdf(true);
+    try {
+      const res = await axios.post(
+        `${appURL}/api/user/forms/send-97`,
+        {},
+        { withCredentials: true }
+      );
 
-                navigate('/');
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
+      if (res.data) {
+        console.log(res.data);
+        setError(null);
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
 
-    //Handling Request for Logout
-    const handleLogoutUser = async (setMenuOpen) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.post(`${appURL}/api/auth/logout`, {}, { withCredentials: true });
-
-            if (res.data) {
-                console.log(res.data);
-                localStorage.removeItem('user');
-                if (setMenuOpen) setMenuOpen(false);
-                setUser(null);
-                setError(null);
-                navigate('/');
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
-
-    //Handling Request for Profile Update
-    const handleUpdateProfile = async (formData, setIsEditing) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.put(`${appURL}/api/user/update-profile`, formData,
-                {
-                    withCredentials:true
-                });
-
-            if (res.data) {
-                console.log(res.data);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                setUser(res.data.user);
-                setError(null);
-                setIsEditing(false);
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
-
-    //Handling Request for Forgot Password
-    const handleForgotPass = async (email) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.post(`${appURL}/api/auth/forgot-password`, {email});
-
-            if (res.data) {
-                console.log(res.data);
-                navigate('/')
-                setError(null);
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
-
-    //Handling Request for Reset Password
-    const handleResetPass = async (resetToken, newPassword) => {
-        setIsProcessing(true);
-        try {
-            const res = await axios.post(`${appURL}/api/auth/reset-password/${resetToken}`, {newPassword});
-
-            if (res.data) {
-                console.log(res.data);
-                navigate('/login')
-                setError(null);
-            }
-        } catch (error) {
-            console.error("Some error occured : ", error);
-            setError(
-                error.response.data.message || error.response.data.msg || error.message
-            );
-        } finally {
-            setIsProcessing(false);
-        }
-    };
-
-    //Handling Request for Google Auth
-    const handleGoogle = () => {
-        console.log("Continue with Google");
-    };
-
-    return (
-        <DocContext.Provider
-            value={{
-                user,
-                setUser,
-                error,
-                isProcessing,
-                handleSignupUser,
-                handleGoogle,
-                handleLoginUser,
-                handleLogoutUser,
-                handleUpdateProfile,
-                handleForgotPass,
-                handleResetPass,
-                setError,
-            }}
-        >
-            {children}
-        </DocContext.Provider>
-    );
+  return (
+    <DocContext.Provider
+      value={{
+        error,
+        setError,
+        isProcessing,
+        isSavingChanges,
+        isSavingNext,
+        isGeneratingPdf,
+        handleSubmitForm97,
+        handleFetchForm97,
+        handleGeneratePdfForm97,
+      }}
+    >
+      {children}
+    </DocContext.Provider>
+  );
 };
 
 export default DocProvider;

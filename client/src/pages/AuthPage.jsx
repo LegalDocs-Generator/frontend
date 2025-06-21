@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { DocContext } from '../store/docsStore';
+import { AuthContext } from '../store/authStore';
 
 const AuthPage = () => {
-    const { error, setError, isProcessing, handleSignupUser, handleGoogle, handleLoginUser } = useContext(DocContext);
+    const { error, setError, isProcessing, handleSignupUser, handleGoogle, handleLoginUser } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',

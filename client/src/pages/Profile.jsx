@@ -1,8 +1,8 @@
 import React, { useState, useRef, useContext } from 'react';
-import { DocContext } from '../store/docsStore';
+import { AuthContext } from '../store/authStore';
 
 const Profile = () => {
-  const { user, handleUpdateProfile, isProcessing, error } = useContext(DocContext);
+  const { user, handleUpdateProfile, isProcessing, error } = useContext(AuthContext);
 
   const [newUser, setNewUser] = useState(
     {

@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { DocContext } from "../store/docsStore";
+import { AuthContext } from "../store/authStore";
 
 const Navbar = () => {
-  const { user, handleLogoutUser } = useContext(DocContext)
+  const { user, handleLogoutUser } = useContext(AuthContext)
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);

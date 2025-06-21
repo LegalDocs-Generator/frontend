@@ -4,17 +4,20 @@ import './App.css'
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AuthProvider from './store/authStore';
 import DocProvider from './store/docsStore';
 
 function App() {
 
 
   return (
-    <DocProvider>
+    <AuthProvider>
       <Navbar />
-      <Outlet />
+      <DocProvider>
+        <Outlet />
+      </DocProvider>
       <Footer />
-    </DocProvider>
+    </AuthProvider>
   )
 }
 

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/authStore";
 
 const Form102 = () => {
   const [formData, setFormData] = useState({
@@ -18,8 +18,15 @@ const Form102 = () => {
     swornMonth: "",
     advocateFor: "",
   });
+
+  const { user, navigate } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!user) navigate('/login');
+  }, [])
+
   const handleDateChange = (e) => {
-    const value = e.target.value; 
+    const value = e.target.value;
     if (!value) return;
     const [year, month, day] = value.split("-");
 
@@ -53,21 +60,21 @@ const Form102 = () => {
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
-          Affidavit of the attesting witness
-        </p>
-        <p className="text-center mb-1">(See rules 374 and 375)</p>
-        <p className="text-center text-md md:text-xl font-semibold mb-1">
-          Form 102
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          IN THE HIGH COURT OF JUDICATURE AT BOMBAY
-        </p>
-        <p className="text-center text-md md:text-xl font-semibold">
-          TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
-          2020
-        </p>
+        Affidavit of the attesting witness
+      </p>
+      <p className="text-center mb-1">(See rules 374 and 375)</p>
+      <p className="text-center text-md md:text-xl font-semibold mb-1">
+        Form 102
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        IN THE HIGH COURT OF JUDICATURE AT BOMBAY
+      </p>
+      <p className="text-center text-md md:text-xl font-semibold">
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+        2020
+      </p>
       <form onSubmit={handleSubmit} className=" text-md md:text-md ">
-        
+
 
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
@@ -77,7 +84,7 @@ const Form102 = () => {
               name="deceasedName"
               placeholder=" Name of Deceased "
               className="input w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             resident
@@ -86,7 +93,7 @@ const Form102 = () => {
               name="deceasedAddress"
               placeholder=" Residence of Deceased"
               className="input w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             having occupation of
@@ -95,7 +102,7 @@ const Form102 = () => {
               name="deceasedOccupation"
               placeholder=" Occupation of Deceased*"
               className="input  w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
           </div>
@@ -107,7 +114,7 @@ const Form102 = () => {
               name="petitionerName"
               placeholder=" Executor of Will"
               className="input w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             Petitioner.
@@ -123,7 +130,7 @@ const Form102 = () => {
             name="witnessName"
             className="input w-full md:w-auto"
             placeholder="Witness Name"
-            
+
             onChange={handleChange}
           />
           aged about
@@ -132,7 +139,7 @@ const Form102 = () => {
             name="witnessAge"
             className="input  w-full md:w-auto"
             placeholder="Witness Age"
-            
+
             onChange={handleChange}
           />
           years, residing at
@@ -141,7 +148,7 @@ const Form102 = () => {
             name="witnessAddress"
             className="input  w-full md:w-auto"
             placeholder="Witness Address"
-            
+
             onChange={handleChange}
           />
           swear in the name of God and say as
@@ -157,7 +164,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-            
+
             onChange={handleChange}
           />
           above named.
@@ -171,7 +178,7 @@ const Form102 = () => {
             name="dateOfDeath"
             className="input  w-full md:w-auto"
             placeholder="Date Of Death"
-            
+
             onChange={handleChange}
           />
           , I was present together with
@@ -180,7 +187,7 @@ const Form102 = () => {
             name="petitionerName"
             className="input  w-full md:w-auto"
             placeholder="Executor of Will"
-            
+
             onChange={handleChange}
           />
           at the house of
@@ -189,7 +196,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-            
+
             onChange={handleChange}
           />
         </div>
@@ -210,7 +217,7 @@ const Form102 = () => {
             name="petitionerName"
             className="input w-full md:w-auto"
             placeholder="Executor of Will"
-            
+
             onChange={handleChange}
           />
           did at the request of the said deceased and in his presence and in the
@@ -231,7 +238,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input w-full md:w-auto"
             placeholder="Deceased Name"
-            
+
             onChange={handleChange}
           />
           subscribed at the foot of the testamentary paper as of the party
@@ -255,7 +262,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-            
+
             onChange={handleChange}
           />
           he was of sound
@@ -276,7 +283,7 @@ const Form102 = () => {
               name="swearingLocation"
               placeholder="Swearing Location"
               className="input w-[65%]"
-              
+
               onChange={handleChange}
             />
           </div>
@@ -287,7 +294,7 @@ const Form102 = () => {
               name="swornDate"
               placeholder="Date of Swearing"
               className="input w-[65%]"
-              
+
               onChange={handleDateChange}
             />
           </div>
@@ -298,7 +305,7 @@ const Form102 = () => {
               name="advocateFor"
               placeholder="Advocate for"
               className="input w-[65%]"
-              
+
               onChange={handleChange}
             />
           </div>

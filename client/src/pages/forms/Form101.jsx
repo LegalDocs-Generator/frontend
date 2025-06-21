@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/authStore";
 
 const Form101 = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +20,17 @@ const Form101 = () => {
     swornYear: "",
     advocateFor: "",
   });
+
+  const { user, navigate } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!user) navigate('/login');
+  }, [])
+
+
   const handleDateChange = (e) => {
     const value = e.target.value;
-if (!value) return;
+    if (!value) return;
     const [year, month, day] = value.split("-");
 
     setFormData((prev) => ({
@@ -78,7 +86,7 @@ if (!value) return;
               name="deceasedName"
               placeholder=" Name of Deceased "
               className="input  w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             resident
@@ -87,7 +95,7 @@ if (!value) return;
               name="deceasedAddress"
               placeholder=" Residence of Deceased"
               className="input  w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             having occupation of
@@ -96,7 +104,7 @@ if (!value) return;
               name="deceasedOccupation"
               placeholder=" Occupation of Deceased"
               className="input w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
           </div>
@@ -108,7 +116,7 @@ if (!value) return;
               name="petitionerName"
               placeholder=" Executor of Will"
               className="input w-full md:w-auto"
-              
+
               onChange={handleChange}
             />
             Petitioner.
@@ -125,7 +133,7 @@ if (!value) return;
             name="petitionerName"
             placeholder=" Name of Petitioner"
             className="input w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           <input
@@ -133,7 +141,7 @@ if (!value) return;
             name="relationWithDeeceased"
             placeholder="Relation with Deceased"
             className="input  w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           , the Petitioner, swear in the name of God that I believe and state
@@ -148,7 +156,7 @@ if (!value) return;
             name="deceasedName1"
             placeholder="Name of Deceased 1"
             className="input  w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           alias
@@ -157,7 +165,7 @@ if (!value) return;
             name="deceasedName2"
             placeholder="Name of Deceased 2"
             className="input w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           alias
@@ -169,7 +177,7 @@ if (!value) return;
             name="deceasedName3"
             placeholder="Name of Deceased 3"
             className="input w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           alias
@@ -178,7 +186,7 @@ if (!value) return;
             name="deceasedName4"
             placeholder="Name of Deceased 4"
             className="input  w-full md:w-auto"
-            
+
             onChange={handleChange}
           />
           deceased, and that I am the executor therein named and that I will
@@ -218,7 +226,7 @@ if (!value) return;
               name="swearingLocation"
               placeholder="Swearing Location"
               className="input w-[65%]"
-              
+
               onChange={handleChange}
             />
           </div>
@@ -229,7 +237,7 @@ if (!value) return;
               name="swornDate"
               placeholder="Date of Swearing"
               className="input w-[65%]"
-              
+
               onChange={handleDateChange}
             />
           </div>
@@ -240,7 +248,7 @@ if (!value) return;
               name="advocateFor"
               placeholder="Advocate for"
               className="input w-[65%]"
-              
+
               onChange={handleChange}
             />
           </div>
