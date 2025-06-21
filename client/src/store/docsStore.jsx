@@ -12,8 +12,11 @@ export const DocContext = createContext({
   isSavingNext: false,
   isGeneratingPdf: false,
   handleSubmitForm97: () => {},
+  handleSubmitForm98: () => {},
   handleFetchForm97: () => {},
+  handleFetchForm98: () => {},
   handleGeneratePdfForm97: () => {},
+  handleGeneratePdfForm98: () => {},
 });
 
 const DocProvider = ({ children }) => {
@@ -49,6 +52,31 @@ const DocProvider = ({ children }) => {
       isNext?setIsSavingNext(false):setIsSavingChanges(false);
     }
   };
+  
+  //Handling Request for Submit Form-98
+  const handleSubmitForm98 = async (formData, isNext) => {
+    isNext? setIsSavingNext(true):setIsSavingChanges(true);
+    try {
+      const res = await axios.post(
+        `${appURL}/api/user/forms/submit-form98`,
+        formData,
+        { withCredentials: true }
+      );
+
+      if (res.data) {
+        console.log(res.data);
+        setError(null);
+        if(isNext) navigate("/form99");
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      isNext?setIsSavingNext(false):setIsSavingChanges(false);
+    }
+  };
 
   //Handling Request for Fetch Form-97
   const handleFetchForm97 = async (setFormData) => {
@@ -72,13 +100,60 @@ const DocProvider = ({ children }) => {
       setIsProcessing(false);
     }
   };
+  
+  //Handling Request for Fetch Form-98
+  const handleFetchForm98 = async (setFormData) => {
+    setIsProcessing(true);
+    try {
+      const res = await axios.get(`${appURL}/api/user/forms/form98`, {
+        withCredentials: true,
+      });
 
-  //Handling Request for Fetch Form-97
+      if (res.data) {
+        console.log(res.data);
+        setFormData((prev) => ({ ...prev, ...res.data.data }));
+        setError(null);
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  //Handling Request for Generating PDF Form-97
   const handleGeneratePdfForm97 = async () => {
     setIsGeneratingPdf(true);
     try {
       const res = await axios.post(
         `${appURL}/api/user/forms/send-97`,
+        {},
+        { withCredentials: true }
+      );
+
+      if (res.data) {
+        console.log(res.data);
+        setError(null);
+      }
+    } catch (error) {
+      console.log("Some error occured : ", error);
+      setError(
+        error.response.data.message || error.response.data.msg || error.message
+      );
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
+  
+  //Handling Request for Generating PDF Form-97
+  const handleGeneratePdfForm98 = async () => {
+    setIsGeneratingPdf(true);
+    try {
+      const res = await axios.post(
+        `${appURL}/api/user/forms/send-98`,
         {},
         { withCredentials: true }
       );
@@ -107,8 +182,11 @@ const DocProvider = ({ children }) => {
         isSavingNext,
         isGeneratingPdf,
         handleSubmitForm97,
+        handleSubmitForm98,
         handleFetchForm97,
+        handleFetchForm98,
         handleGeneratePdfForm97,
+        handleGeneratePdfForm98,
       }}
     >
       {children}

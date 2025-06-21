@@ -69,8 +69,6 @@ const Form97 = () => {
 
   const { user, navigate } = useContext(AuthContext);
   const {
-    error,
-    isProcessing,
     isGeneratingPdf,
     isSavingChanges,
     isSavingNext,
@@ -153,10 +151,33 @@ const Form97 = () => {
         TESTAMENTARY AND INTESTATE JURISDICTION
       </p>
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
-        PETITION NO. ...........OF 20….
+        PETITION NO. {formData.petitionNumber||'..............'} OF {formData.petitionYear||'20..'}.
       </p>
       <hr />
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
+        {/* Petition Number Field */}
+        <div className="flex flex-col justify-center mb-4 md:flex-row">
+          <label className="m-2 mr-2 font-medium">Petition Number:</label>
+          <input
+            type="text"
+            name="petitionNumber"
+            placeholder="Enter Petition No."
+            className="input w-[100px]"
+            onChange={handleChange}
+            value={formData.petitionNumber || ''}
+          />
+
+          <label className="m-2 mr-2 font-medium">Petition Year:</label>
+          <input
+            type="text"
+            name="petitionYear"
+            placeholder="Enter Petition No."
+            className="input w-[120px]"
+            onChange={handleChange}
+            value={formData.petitionYear || ''}
+          />
+        </div>
+
         {/* Deceased Details Section */}
         <p className="text-lg md:text-2xl font-semibold">Deceased Details</p>
         <p className="mb-2">
@@ -319,7 +340,7 @@ const Form97 = () => {
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
-                Domilcile of Petitioner
+                Domicile of Petitioner
               </label>
               <input
                 type="text"
