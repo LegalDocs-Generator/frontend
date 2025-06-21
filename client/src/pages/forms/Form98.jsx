@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 
 import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/authStore";
 const Form98 = () => {
   const [formData, setFormData] = useState({
     petitionNumber: "",
@@ -69,6 +69,12 @@ const Form98 = () => {
 
     deductedLiabilities: "",
   });
+
+  const {user, navigate} = useContext(AuthContext);
+
+  useEffect(()=>{
+      if(!user) navigate('/login');
+    },[])
 
   const handleChange = (e) => {
     const { name, value } = e.target;

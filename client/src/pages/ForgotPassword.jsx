@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DocContext } from '../store/docsStore';
+import { AuthContext } from '../store/authStore';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const {handleForgotPass, isProcessing, error} = useContext(DocContext);
+  const {handleForgotPass, isProcessing, error} = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();

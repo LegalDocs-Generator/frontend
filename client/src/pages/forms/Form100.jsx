@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/authStore";
 
 const Form100 = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,13 @@ const Form100 = () => {
     petitionerName: "",
     property: "",
   });
+
+  const {user, navigate} = useContext(AuthContext);
+  
+    useEffect(()=>{
+        if(!user) navigate('/login');
+      },[])
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

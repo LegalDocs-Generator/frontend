@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { DocContext } from '../store/docsStore';
+import { AuthContext } from '../store/authStore';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
 
-  const {handleResetPass, isProcessing, error, setError} = useContext(DocContext);
+  const {handleResetPass, isProcessing, error, setError} = useContext(AuthContext);
 
   const params = useParams();
   const resetToken = new window.URLSearchParams(params).get('resetToken');
