@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
+import { DocContext } from "../../store/docsStore";
 
 const Form100 = () => {
   const [formData, setFormData] = useState({
@@ -12,11 +13,22 @@ const Form100 = () => {
     property: "",
   });
 
-  const {user, navigate} = useContext(AuthContext);
-  
-    useEffect(()=>{
-        if(!user) navigate('/login');
-      },[])
+  const { user, navigate } = useContext(AuthContext);
+  const {
+    handleFetchForm100,
+    handleSubmitForm100,
+    handleGeneratePdfForm100,
+    isSavingChanges,
+    isSavingNext,
+    isGeneratingPdf,
+  } = useContext(DocContext);
+
+  useEffect(() => {
+    if (!user) navigate("/login");
+    else {
+      handleFetchForm100(setFormData);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,19 +37,17 @@ const Form100 = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (e) => {
+
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
-    try {
-      //   await axios.post(
-      //     `${import.meta.env.VITE_BASE_URL}/form98/submit`,
-      //     formData
-      //   );
-      alert("Form submitted successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Form submission failed.");
-    }
+    handleSubmitForm100(formData, false);
   };
+
+  const handleSaveNext = async (e) => {
+    e.preventDefault();
+    handleSubmitForm100(formData, true);
+  };
+
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
@@ -52,10 +62,24 @@ const Form100 = () => {
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
         2020
       </p>
-      <form onSubmit={handleSubmit} className="p-2 md:p-12 space-y-6">
+      <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
+        {/* Petition Number Field */}
+        <div className="flex flex-col md:flex-row justify-center mb-4">
+          <label className="mt-1 mr-2 font-medium font-semibold">
+            Petition Number:
+          </label>
+          <input
+            type="text"
+            name="petitionNumber"
+            placeholder="Enter Petition No."
+            className="input w-[100px]"
+            onChange={handleChange}
+            value={formData.petitionNumber || ""}
+          />
+        </div>
         {/* Basic Details Section */}
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
@@ -63,27 +87,27 @@ const Form100 = () => {
             <input
               type="text"
               name="deceasedName"
+              value={formData.deceasedName}
               placeholder="Name of Deceased"
               className="input  w-full md:w-auto"
-              
               onChange={handleChange}
             />
             resident
             <input
               type="text"
               name="deceasedAddress"
+              value={formData.deceasedAddress}
               placeholder="Residence of Deceased*"
               className="input  w-full md:w-auto"
-              
               onChange={handleChange}
             />
             having occupation of
             <input
               type="text"
               name="deceasedOccupation"
+              value={formData.deceasedOccupation}
               placeholder="Occupation of Deceased"
               className="input  w-full md:w-auto"
-              
               onChange={handleChange}
             />
           </div>
@@ -93,9 +117,9 @@ const Form100 = () => {
             <input
               type="text"
               name="petitionerName"
+              value={formData.petitionerName}
               placeholder="Executor of Will"
               className="input  w-full md:w-auto"
-              
               onChange={handleChange}
             />
             Petitioner.
@@ -127,9 +151,9 @@ const Form100 = () => {
             <input
               type="number"
               name="property"
+              value={formData.property}
               className="input  w-full md:w-[250px]"
               placeholder="Beneficial interest"
-              
               onChange={handleChange}
             />
           </div>
@@ -143,9 +167,9 @@ const Form100 = () => {
           <input
             type="text"
             name="petitionerName"
+            value={formData.petitionerName}
             className="input  w-full md:w-[300px]"
             placeholder="Petitioner Name"
-            
             onChange={handleChange}
           />
         </div>
@@ -162,23 +186,28 @@ const Form100 = () => {
 
           <div className="flex flex-col md:flex-row justify-end gap-3 w-full md:w-auto">
             <button
-              type="submit"
+              type="button"
               className="button save_button w-full md:w-auto"
+              disabled={isSavingChanges}
+              onClick={handleSaveChanges}
             >
-              Save Changes
+              {isSavingChanges ? "Saving..." : "Save Changes"}
             </button>
             <Link
-              to="/form101"
-              type="submit"
-              className="button save_next w-full md:w-auto "
+              to="/form99"
+              className="button save_next w-full md:w-auto"
+              disabled={isSavingNext}
+              onClick={handleSaveNext}
             >
-              Save and Next
+              {isSavingNext ? "Saving..." : "Save and Next"}
             </Link>
             <button
-              type="submit"
+              type="button"
               className="button generate_pdf w-full md:w-auto"
+              disabled={isGeneratingPdf}
+              onClick={handleGeneratePdfForm100}
             >
-              Generate PDF
+              {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
             </button>
           </div>
         </div>

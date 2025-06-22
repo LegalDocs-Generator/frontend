@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
+import { DocContext } from "../../store/docsStore";
 
 const Form102 = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +21,21 @@ const Form102 = () => {
   });
 
   const { user, navigate } = useContext(AuthContext);
+  const {
+    handleFetchForm102,
+    handleSubmitForm102,
+    handleGeneratePdfForm102,
+    handleGenerateAllPdf,
+    isSavingChanges,
+    isGeneratingPdf,
+  } = useContext(DocContext);
 
   useEffect(() => {
-    if (!user) navigate('/login');
-  }, [])
+    if (!user) navigate("/login");
+    else {
+      handleFetchForm102(setFormData);
+    }
+  }, []);
 
   const handleDateChange = (e) => {
     const value = e.target.value;
@@ -32,9 +44,9 @@ const Form102 = () => {
 
     setFormData((prev) => ({
       ...prev,
-      swornYear: Number(year),
+      swornYear: year,
       swornMonth: month,
-      swornDay: Number(day),
+      swornDay: day,
     }));
   };
   const handleChange = (e) => {
@@ -44,19 +56,21 @@ const Form102 = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (e) => {
+
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
-    try {
-      //   await axios.post(
-      //     `${import.meta.env.VITE_BASE_URL}/form98/submit`,
-      //     formData
-      //   );
-      alert("Form submitted successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Form submission failed.");
-    }
+    handleSubmitForm102(formData, false);
   };
+
+  // Reconstruct ISO date for the <input type="date"> control
+  const swornDateValue =
+    formData.swornYear && formData.swornMonth && formData.swornDay
+      ? `${formData.swornYear}-${formData.swornMonth.padStart(
+          2,
+          "0"
+        )}-${formData.swornDay.padStart(2, "0")}`
+      : "";
+
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-center text-xl md:text-3xl mt-2 mb-2 font-semibold">
@@ -70,12 +84,24 @@ const Form102 = () => {
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No .............. of
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
         2020
       </p>
-      <form onSubmit={handleSubmit} className=" text-md md:text-md ">
-
-
+      <form onSubmit={handleSaveChanges} className=" text-md md:text-md ">
+        {/* Petition Number Field */}
+        <div className="flex flex-col md:flex-row justify-center mb-4">
+          <label className="mt-1 mr-2 font-medium font-semibold">
+            Petition Number:
+          </label>
+          <input
+            type="text"
+            name="petitionNumber"
+            placeholder="Enter Petition No."
+            className="input w-[100px]"
+            onChange={handleChange}
+            value={formData.petitionNumber || ""}
+          />
+        </div>
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
@@ -84,7 +110,7 @@ const Form102 = () => {
               name="deceasedName"
               placeholder=" Name of Deceased "
               className="input w-full md:w-auto"
-
+              value={formData.deceasedName}
               onChange={handleChange}
             />
             resident
@@ -93,7 +119,7 @@ const Form102 = () => {
               name="deceasedAddress"
               placeholder=" Residence of Deceased"
               className="input w-full md:w-auto"
-
+              value={formData.deceasedAddress}
               onChange={handleChange}
             />
             having occupation of
@@ -102,7 +128,7 @@ const Form102 = () => {
               name="deceasedOccupation"
               placeholder=" Occupation of Deceased*"
               className="input  w-full md:w-auto"
-
+              value={formData.deceasedOccupation}
               onChange={handleChange}
             />
           </div>
@@ -114,7 +140,7 @@ const Form102 = () => {
               name="petitionerName"
               placeholder=" Executor of Will"
               className="input w-full md:w-auto"
-
+              value={formData.petitionerName}
               onChange={handleChange}
             />
             Petitioner.
@@ -130,7 +156,7 @@ const Form102 = () => {
             name="witnessName"
             className="input w-full md:w-auto"
             placeholder="Witness Name"
-
+            value={formData.witnessName}
             onChange={handleChange}
           />
           aged about
@@ -139,7 +165,7 @@ const Form102 = () => {
             name="witnessAge"
             className="input  w-full md:w-auto"
             placeholder="Witness Age"
-
+            value={formData.witnessAge}
             onChange={handleChange}
           />
           years, residing at
@@ -148,7 +174,7 @@ const Form102 = () => {
             name="witnessAddress"
             className="input  w-full md:w-auto"
             placeholder="Witness Address"
-
+            value={formData.witnessAddress}
             onChange={handleChange}
           />
           swear in the name of God and say as
@@ -164,7 +190,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-
+            value={formData.deceasedName}
             onChange={handleChange}
           />
           above named.
@@ -178,7 +204,7 @@ const Form102 = () => {
             name="dateOfDeath"
             className="input  w-full md:w-auto"
             placeholder="Date Of Death"
-
+            value={formData.dateOfDeath.split('T')[0]}
             onChange={handleChange}
           />
           , I was present together with
@@ -187,7 +213,7 @@ const Form102 = () => {
             name="petitionerName"
             className="input  w-full md:w-auto"
             placeholder="Executor of Will"
-
+            value={formData.petitionerName}
             onChange={handleChange}
           />
           at the house of
@@ -196,7 +222,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-
+            value={formData.deceasedName}
             onChange={handleChange}
           />
         </div>
@@ -217,7 +243,7 @@ const Form102 = () => {
             name="petitionerName"
             className="input w-full md:w-auto"
             placeholder="Executor of Will"
-
+            value={formData.petitionerName}
             onChange={handleChange}
           />
           did at the request of the said deceased and in his presence and in the
@@ -238,7 +264,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input w-full md:w-auto"
             placeholder="Deceased Name"
-
+            value={formData.deceasedName}
             onChange={handleChange}
           />
           subscribed at the foot of the testamentary paper as of the party
@@ -262,7 +288,7 @@ const Form102 = () => {
             name="deceasedName"
             className="input  w-full md:w-auto"
             placeholder="Deceased Name"
-
+            value={formData.deceasedName}
             onChange={handleChange}
           />
           he was of sound
@@ -283,7 +309,7 @@ const Form102 = () => {
               name="swearingLocation"
               placeholder="Swearing Location"
               className="input w-[65%]"
-
+              value={formData.swearingLocation}
               onChange={handleChange}
             />
           </div>
@@ -294,7 +320,7 @@ const Form102 = () => {
               name="swornDate"
               placeholder="Date of Swearing"
               className="input w-[65%]"
-
+              value={swornDateValue}
               onChange={handleDateChange}
             />
           </div>
@@ -305,7 +331,7 @@ const Form102 = () => {
               name="advocateFor"
               placeholder="Advocate for"
               className="input w-[65%]"
-
+              value={formData.advocateFor}
               onChange={handleChange}
             />
           </div>
@@ -316,31 +342,36 @@ const Form102 = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-6 gap-4">
           <Link
-            to="/form100"
-            type="submit"
+            to="/form101"
+            type="button"
             className="button previous w-full md:w-auto"
           >
             Previous
           </Link>
           <div className="flex flex-col md:flex-row justify-end gap-3 w-full md:w-auto">
             <button
-              type="submit"
+              type="button"
               className="button save_button w-full md:w-auto"
+              disabled={isSavingChanges}
+              onClick={handleSaveChanges}
             >
-              Save Changes
+              {isSavingChanges ? "Saving..." : "Save Changes"}
             </button>
             <Link
-              to="/form102"
-              type="submit"
+              type="button"
               className="button save_next w-full md:w-auto "
+              disabled={isGeneratingPdf}
+              onClick={handleGeneratePdfForm102}
             >
-              Generate PDF
+              {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
             </Link>
             <button
-              type="submit"
+              type="button"
               className="button generate_pdf w-full md:w-auto"
+              disabled={isGeneratingPdf}
+              onClick={handleGenerateAllPdf}
             >
-              Generate All PDFs
+              {isGeneratingPdf ? "Sending email..." : "Generate All PDFs"}
             </button>
           </div>
         </div>
