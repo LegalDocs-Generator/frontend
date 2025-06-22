@@ -6,6 +6,8 @@ const appURL = import.meta.env.VITE_APP_URL;
 
 export const DocContext = createContext({
   error: null,
+  showToast:false,
+  setShowToast:()=>{},
   setError: () => {},
   isProcessing: false,
   isSavingChanges: false,
@@ -37,6 +39,7 @@ const DocProvider = ({ children }) => {
   const [isSavingChanges, setIsSavingChanges] = useState(false);
   const [isSavingNext, setIsSavingNext] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -55,6 +58,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form98");
       }
     } catch (error) {
@@ -80,6 +84,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form99");
       }
     } catch (error) {
@@ -105,6 +110,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form100");
       }
     } catch (error) {
@@ -130,6 +136,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form101");
       }
     } catch (error) {
@@ -155,6 +162,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form102");
       }
     } catch (error) {
@@ -180,6 +188,7 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
+        setShowToast(true);
         if(isNext) navigate("/form102");
       }
     } catch (error) {
@@ -504,6 +513,8 @@ const DocProvider = ({ children }) => {
     <DocContext.Provider
       value={{
         error,
+        showToast,
+        setShowToast,
         setError,
         isProcessing,
         isSavingChanges,

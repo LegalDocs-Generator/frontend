@@ -3,6 +3,7 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form98 = () => {
   const [formData, setFormData] = useState({
@@ -14,13 +15,13 @@ const Form98 = () => {
 
     // Movable Assets
     movableAssets: {
-      cashInHouse: "",
-      householdGoods: "",
-      wearingApparel: "",
-      books: "",
-      plates: "",
-      jewels: "",
-      furniture: "",
+      cashInHouse: 0,
+      householdGoods: 0,
+      wearingApparel: 0,
+      books: 0,
+      plates: 0,
+      jewels: 0,
+      furniture: 0,
     },
 
     // Dynamic Lists
@@ -29,7 +30,13 @@ const Form98 = () => {
     immovableProperty: [{ description: "", value: "" }],
     debenture: [{ description: "", value: "" }],
     mutualFunds: [
-      { folio: "", schemeName: "", currentUnits: "", currentNav: "", currentValue: "" },
+      {
+        folio: "",
+        schemeName: "",
+        currentUnits: "",
+        currentNav: "",
+        currentValue: "",
+      },
     ],
     mutualFundsMissedDividends: [
       { folio: "", UnclaimedSchemeName: "", UnclaimedAmount: "" },
@@ -39,24 +46,33 @@ const Form98 = () => {
     // Other Assets
     otherAssets: {
       adaniAccountNumber: "",
-      adaniSecurityDeposit: "",
+      adaniSecurityDeposit: 0,
       mahanagarGPBearingBPNo: "",
       mahanagarBearingCANo: "",
-      mahanagarSecurityDeposit: "",
+      mahanagarSecurityDeposit: 0,
       mahanagarGPBPNo: "",
       mahanagarCANo: "",
       simCardNumber: "",
     },
 
-    deductedLiabilities: "",
+    deductedLiabilities: 0,
   });
 
   const { user, navigate } = useContext(AuthContext);
-  const { handleSubmitForm98, handleFetchForm98, handleGeneratePdfForm98, isSavingChanges, isSavingNext, isGeneratingPdf } = useContext(DocContext);
+  const {
+    handleSubmitForm98,
+    handleFetchForm98,
+    handleGeneratePdfForm98,
+    isSavingChanges,
+    isSavingNext,
+    isGeneratingPdf,
+    showToast,
+    setShowToast,
+  } = useContext(DocContext);
 
   useEffect(() => {
     if (!user) navigate("/login");
-    else{
+    else {
       handleFetchForm98(setFormData);
     }
   }, []);
@@ -110,26 +126,30 @@ const Form98 = () => {
         Schedule of property of the deceased
       </p>
       <p className="text-center mb-1">(see Rule 374, 375 and 376)</p>
-      <p className="text-center text-md md:text-xl font-semibold mb-1">Form 98</p>
+      <p className="text-center text-md md:text-xl font-semibold mb-1">
+        Form 98
+      </p>
       <p className="text-center text-md md:text-xl font-semibold">
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
-        2020
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No{" "}
+        {formData.petitionNumber || ".............."} of 2020
       </p>
 
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Petition Number Field */}
         <div className="flex flex-col md:flex-row justify-center mb-4">
-          <label className="mt-1 mr-2 font-medium font-semibold">Petition Number:</label>
+          <label className="mt-1 mr-2 font-medium font-semibold">
+            Petition Number:
+          </label>
           <input
             type="text"
             name="petitionNumber"
             placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
-            value={formData.petitionNumber || ''}
+            value={formData.petitionNumber || ""}
           />
         </div>
         {/* Basic Details Section */}
@@ -183,7 +203,9 @@ const Form98 = () => {
           <p className="text-center text-md md:text-xl font-semibold mb-0">
             SCHEDULE No. I
           </p>
-          <p className="text-center text-md mb-0 md:text-lg">Schedule of Property</p>
+          <p className="text-center text-md mb-0 md:text-lg">
+            Schedule of Property
+          </p>
           <p className="text-center text-md md:text-lg">
             Valuation of the movable and immovable property of the deceased.
           </p>
@@ -263,7 +285,9 @@ const Form98 = () => {
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">Amount of Household Goods</label>
+              <label className="mb-1 font-medium">
+                Amount of Household Goods
+              </label>
               <input
                 type="number"
                 name="householdGoods"
@@ -422,7 +446,9 @@ const Form98 = () => {
 
           {/* Other Assets */}
           <div className="flex flex-col gap-4 text-sm md:text-base">
-            <p className="mb-0 text-xl md:text-2xl font-semibold">Details of Other Assets:</p>
+            <p className="mb-0 text-xl md:text-2xl font-semibold">
+              Details of Other Assets:
+            </p>
             <p className="mb-0">
               1. Adani Electricity Account Number
               <input
@@ -567,6 +593,12 @@ const Form98 = () => {
           </div>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };
