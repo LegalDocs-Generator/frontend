@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form101 = () => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,8 @@ const Form101 = () => {
     isSavingChanges,
     isSavingNext,
     isGeneratingPdf,
+    showToast,
+    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -323,6 +326,12 @@ const Form101 = () => {
           </div>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={()=>setShowToast(false)}
+      />
     </div>
   );
 };

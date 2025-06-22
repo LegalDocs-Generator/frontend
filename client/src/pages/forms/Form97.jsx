@@ -3,6 +3,7 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form97 = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,8 @@ const Form97 = () => {
     deceasedAddress: "",
     deceasedReligion: "",
     deceasedsect: "",
-    deceasedMaritalStatus: "",
+    deceasedMaritalStatus: "Married",
+    deceasedstatus:"Bachelor",
     deceasedOccupation: "",
     deceasedRescidenceAtTimeOfDeath: "",
     deceasedDeathDate: "",
@@ -27,12 +29,12 @@ const Form97 = () => {
 
     // Petitioner details
     petitionerFullName: "",
-    petitionerage: "",
+    petitionerage: 0,
     petitionerNationality: "",
     petitionerDomicile: "",
     petitionerFullAddress: "",
     petitionerOccupation: "",
-    executor: "",
+    executor: "soleExecutor",
 
     exhibitNumber3: "",
     exhibitNumber4: "",
@@ -41,11 +43,11 @@ const Form97 = () => {
     ExecutionMonth: "",
     ExecutionYear: "",
 
-    capacity: "",
+    capacity: "soleExecutor",
     exhibitNumber5: "",
     exhibitNumber6: "",
     exhibitNumber7: "",
-    schduleAmount: "",
+    schduleAmount: 0,
     lawApplicableToTheDeceased: "",
 
     // People array (can initialize with one blank person if needed)
@@ -53,7 +55,7 @@ const Form97 = () => {
       {
         fullName: "",
         address: "",
-        age: "",
+        age: 0,
         relationshipWithDeceased: "",
       },
     ],
@@ -75,6 +77,8 @@ const Form97 = () => {
     handleSubmitForm97,
     handleFetchForm97,
     handleGeneratePdfForm97,
+    showToast,
+    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -141,6 +145,24 @@ const Form97 = () => {
     e.preventDefault();
     handleSubmitForm97(formData, true);
   };
+
+  // Reconstruct ISO date for the <input type="date"> control
+  const swornDateValue =
+    formData.swornYear && formData.swornMonth && formData.swornDate
+      ? `${formData.swornYear}-${formData.swornMonth.padStart(2, "0")}-${formData.swornDate.padStart(2, "0")}`
+      : "";
+  
+
+  const deceasedDateValue =
+    formData.deceasedDeathYear && formData.deceasedDeathMonth && formData.deceasedDeathDate
+      ? `${formData.deceasedDeathYear}-${formData.deceasedDeathMonth.padStart(2, "0")}-${formData.deceasedDeathDate.padStart(2, "0")}`
+      : "";
+
+  const executionDateValue =
+    formData.ExecutionYear && formData.ExecutionMonth && formData.ExecutionDate
+      ? `${formData.ExecutionYear}-${formData.ExecutionMonth.padStart(2, "0")}-${formData.ExecutionDate.padStart(2, "0")}`
+      : "";
+
 
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
@@ -434,7 +456,7 @@ const Form97 = () => {
               placeholder=" Date  of Death"
               className="input me-2"
               onChange={handledeceasedDeathDateChange}
-              value={`${formData.deceasedDeathYear}-${formData.deceasedDeathMonth}-${formData.deceasedDeathDate}`}
+              value={deceasedDateValue}
             />
             (insert date of death of the Deceased) .A true copy of
           </p>
@@ -520,7 +542,7 @@ const Form97 = () => {
               placeholder=" Execution Date"
               className="input me-2"
               onChange={handleExecutionDateChange}
-              value={`${formData.ExecutionYear}-${formData.ExecutionMonth}-${formData.ExecutionDate}`}
+              value={executionDateValue}
             />{" "}
             (insert date of execution of Will and Codicil, if any) . (if Will
             and Codicil, if any, has been registered, mention details of
@@ -698,7 +720,7 @@ const Form97 = () => {
               placeholder="Date of Swearing"
               className="input w-[65%]"
               onChange={handleswornDateChange}
-              value={`${formData.swornYear}-${formData.swornMonth}-${formData.swornDate}`}
+              value={swornDateValue}
             />
           </div>
           <div className="flex items-center w-full md:w-[350px] justify-between">
@@ -743,6 +765,12 @@ const Form97 = () => {
           </button>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={()=>setShowToast(false)}
+      />
     </div>
   );
 };
