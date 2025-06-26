@@ -18,7 +18,6 @@ const ForgotPassword = () => {
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
           Forgot Password
         </h2>
-        {error && <div className=' text-center text-danger'>{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">

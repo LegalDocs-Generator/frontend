@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
-import Toast from "../../components/Toaster";
 
 const Form102 = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +11,7 @@ const Form102 = () => {
     deceasedOccupation: "",
     petitionerName: "",
     witnessName: "",
-    witnessAge: "",
+    witnessAge: 0,
     witnessAddress: "",
     dateOfDeath: "",
     swearingLocation: "",
@@ -29,8 +28,6 @@ const Form102 = () => {
     handleGenerateAllPdf,
     isSavingChanges,
     isGeneratingPdf,
-    showToast,
-    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -207,7 +204,7 @@ const Form102 = () => {
             name="dateOfDeath"
             className="input  w-full md:w-auto"
             placeholder="Date Of Death"
-            value={formData.dateOfDeath.split('T')[0]}
+            value={formData.dateOfDeath?.split('T')[0] || ''}
             onChange={handleChange}
           />
           , I was present together with
@@ -379,12 +376,6 @@ const Form102 = () => {
           </div>
         </div>
       </form>
-      <Toast
-        show={showToast}
-        message="Form Submitted Successfully"
-        duration={3000}
-        onClose={()=>setShowToast(false)}
-      />
     </div>
   );
 };

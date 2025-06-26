@@ -47,7 +47,6 @@ const AuthPage = () => {
                 <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
                     {isLogin ? 'Sign In to LegalDocs' : 'Create an Account'}
                 </h2>
-                {error && <div className=' text-center text-danger'>{error}</div>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {!isLogin && (
                         <div>

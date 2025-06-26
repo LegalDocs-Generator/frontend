@@ -3,7 +3,6 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
-import Toast from "../../components/Toaster";
 
 const Form97 = () => {
   const [formData, setFormData] = useState({
@@ -77,8 +76,6 @@ const Form97 = () => {
     handleSubmitForm97,
     handleFetchForm97,
     handleGeneratePdfForm97,
-    showToast,
-    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -765,12 +762,6 @@ const Form97 = () => {
           </button>
         </div>
       </form>
-      <Toast
-        show={showToast}
-        message="Form Submitted Successfully"
-        duration={3000}
-        onClose={()=>setShowToast(false)}
-      />
     </div>
   );
 };

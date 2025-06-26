@@ -1,13 +1,12 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const appURL = import.meta.env.VITE_APP_URL;
 
 export const DocContext = createContext({
   error: null,
-  showToast:false,
-  setShowToast:()=>{},
   setError: () => {},
   isProcessing: false,
   isSavingChanges: false,
@@ -39,7 +38,6 @@ const DocProvider = ({ children }) => {
   const [isSavingChanges, setIsSavingChanges] = useState(false);
   const [isSavingNext, setIsSavingNext] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -58,11 +56,12 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
-        setShowToast(true);
+        toast.success("Form Submitted Successfully");
         if(isNext) navigate("/form98");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -84,11 +83,12 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
-        setShowToast(true);
+        toast.success("Form Submitted Successfully");
         if(isNext) navigate("/form99");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -109,12 +109,13 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("Form Submitted Successfully");
         setError(null);
-        setShowToast(true);
         if(isNext) navigate("/form100");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -136,11 +137,12 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
-        setShowToast(true);
+        toast.success("Form Submitted Successfully");
         if(isNext) navigate("/form101");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -162,11 +164,12 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
-        setShowToast(true);
+        toast.success("Form Submitted Successfully");
         if(isNext) navigate("/form102");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -188,11 +191,12 @@ const DocProvider = ({ children }) => {
       if (res.data) {
         console.log(res.data);
         setError(null);
-        setShowToast(true);
+        toast.success("Form Submitted Successfully");
         if(isNext) navigate("/form102");
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message);
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -353,10 +357,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully")
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -377,10 +383,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -401,10 +409,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -425,10 +435,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -449,10 +461,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -473,10 +487,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("PDF sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -497,10 +513,12 @@ const DocProvider = ({ children }) => {
 
       if (res.data) {
         console.log(res.data);
+        toast.success("All PDFs sent to email successfully");
         setError(null);
       }
     } catch (error) {
       console.log("Some error occured : ", error);
+      toast.error(error.response.data.message || error.response.data.msg || error.message)
       setError(
         error.response.data.message || error.response.data.msg || error.message
       );
@@ -513,8 +531,6 @@ const DocProvider = ({ children }) => {
     <DocContext.Provider
       value={{
         error,
-        showToast,
-        setShowToast,
         setError,
         isProcessing,
         isSavingChanges,

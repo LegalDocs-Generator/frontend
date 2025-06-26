@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const appURL = import.meta.env.VITE_APP_URL;
@@ -37,11 +38,13 @@ const AuthProvider = ({ children }) => {
 
             if (res.data) {
                 console.log(res.data);
+                toast.success("User registered successfully");
                 setError(null);
                 toggleForm();
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );
@@ -62,11 +65,13 @@ const AuthProvider = ({ children }) => {
 
                 localStorage.setItem('user', JSON.stringify(res.data.user))
                 setError(null);
+                toast.success("User logged in successfully");
 
                 navigate('/');
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );
@@ -87,10 +92,12 @@ const AuthProvider = ({ children }) => {
                 if (setMenuOpen) setMenuOpen(false);
                 setUser(null);
                 setError(null);
+                toast.success("User logged out successfully");
                 navigate('/');
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );
@@ -114,9 +121,11 @@ const AuthProvider = ({ children }) => {
                 setUser(res.data.user);
                 setError(null);
                 setIsEditing(false);
+                toast.success("User profile updated successfully");
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );
@@ -133,11 +142,13 @@ const AuthProvider = ({ children }) => {
 
             if (res.data) {
                 console.log(res.data);
+                toast.success("Reset link sent to email successfully");
                 navigate('/')
                 setError(null);
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );
@@ -156,9 +167,11 @@ const AuthProvider = ({ children }) => {
                 console.log(res.data);
                 navigate('/login')
                 setError(null);
+                toast.success("Password changed successfully");
             }
         } catch (error) {
             console.error("Some error occured : ", error);
+            toast.error(error.response.data.message || error.response.data.msg || error.message)
             setError(
                 error.response.data.message || error.response.data.msg || error.message
             );

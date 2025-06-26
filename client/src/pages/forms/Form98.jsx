@@ -3,11 +3,10 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
-import Toast from "../../components/Toaster";
 
 const Form98 = () => {
   const [formData, setFormData] = useState({
-    petitionNumber: "",
+    petitionNumber: 0,
     deceasedName: "",
     deceasedAddress: "",
     deceasedOccupation: "",
@@ -25,23 +24,23 @@ const Form98 = () => {
     },
 
     // Dynamic Lists
-    bankAccounts: [{ bankName: "", accountNumber: "", value: "" }],
-    fixedDeposits: [{ bankName: "", receiptDetails: "", value: "" }],
-    immovableProperty: [{ description: "", value: "" }],
-    debenture: [{ description: "", value: "" }],
+    bankAccounts: [{ bankName: "", accountNumber: "", value: 0 }],
+    fixedDeposits: [{ bankName: "", receiptDetails: "", value: 0 }],
+    immovableProperty: [{ description: "", value: 0 }],
+    debenture: [{ description: "", value: 0 }],
     mutualFunds: [
       {
         folio: "",
         schemeName: "",
-        currentUnits: "",
-        currentNav: "",
-        currentValue: "",
+        currentUnits: 0,
+        currentNav: 0,
+        currentValue: 0,
       },
     ],
     mutualFundsMissedDividends: [
-      { folio: "", UnclaimedSchemeName: "", UnclaimedAmount: "" },
+      { folio: "", UnclaimedSchemeName: "", UnclaimedAmount: 0 },
     ],
-    royalties: [{ bookName: "", earnedIncome: "" }],
+    royalties: [{ bookName: "", earnedIncome: 0 }],
 
     // Other Assets
     otherAssets: {
@@ -66,8 +65,6 @@ const Form98 = () => {
     isSavingChanges,
     isSavingNext,
     isGeneratingPdf,
-    showToast,
-    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -308,7 +305,7 @@ const Form98 = () => {
             field="bankAccounts"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bankName: "", accountNumber: "", value: "" }}
+            schema={{ bankName: "", accountNumber: "", value: 0 }}
             labels={{
               bankName: "Bank Name",
               accountNumber: "Account Number",
@@ -327,7 +324,7 @@ const Form98 = () => {
             field="fixedDeposits"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bankName: "", receiptDetails: "", value: "" }}
+            schema={{ bankName: "", receiptDetails: "", value: 0 }}
             labels={{
               bankName: "Bank Name",
               receiptDetails: "Receipt Details",
@@ -346,7 +343,7 @@ const Form98 = () => {
             field="immovableProperty"
             formData={formData}
             setFormData={setFormData}
-            schema={{ description: "", value: "" }}
+            schema={{ description: "", value: 0 }}
             labels={{
               description: "Description",
               value: "Assessed Value",
@@ -363,7 +360,7 @@ const Form98 = () => {
             field="debenture"
             formData={formData}
             setFormData={setFormData}
-            schema={{ description: "", value: "" }}
+            schema={{ description: "", value: 0 }}
             labels={{
               description: "Description",
               value: "Current Value",
@@ -383,9 +380,9 @@ const Form98 = () => {
             schema={{
               folio: "",
               schemeName: "",
-              currentUnits: "",
-              currentNav: "",
-              currentValue: "",
+              currentUnits: 0,
+              currentNav: 0,
+              currentValue: 0,
             }}
             labels={{
               folio: "Folio",
@@ -412,7 +409,7 @@ const Form98 = () => {
             schema={{
               folio: "",
               UnclaimedSchemeName: "",
-              UnclaimedAmount: "",
+              UnclaimedAmount: 0,
             }}
             labels={{
               folio: "Folio",
@@ -432,7 +429,7 @@ const Form98 = () => {
             field="royalties"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bookName: "", earnedIncome: "" }}
+            schema={{ bookName: "", earnedIncome: 0 }}
             labels={{
               bookName: "Book Name",
               earnedIncome: "Earned Income",
@@ -593,12 +590,6 @@ const Form98 = () => {
           </div>
         </div>
       </form>
-      <Toast
-        show={showToast}
-        message="Form Submitted Successfully"
-        duration={3000}
-        onClose={() => setShowToast(false)}
-      />
     </div>
   );
 };
