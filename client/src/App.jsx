@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AuthProvider from './store/authStore';
 import DocProvider from './store/docsStore';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <AuthProvider>
       <Navbar />
+      <Toaster containerClassName='mt-3' position='top-center' reverseOrder={false}/>
       <DocProvider>
         <Outlet />
       </DocProvider>

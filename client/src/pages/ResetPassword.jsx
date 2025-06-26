@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../store/authStore';
+import toast from 'react-hot-toast';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -14,7 +15,7 @@ const ResetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirm) {
-      setError('Password do not match');
+      toast.error("Password not matched")
       return;
     }
 
@@ -27,7 +28,6 @@ const ResetPassword = () => {
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
           Reset Your Password
         </h2>
-        {error && <div className=' text-center text-danger'>{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
