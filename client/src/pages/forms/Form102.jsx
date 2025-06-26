@@ -28,6 +28,7 @@ const Form102 = () => {
     handleGenerateAllPdf,
     isSavingChanges,
     isGeneratingPdf,
+    isGeneratingAllPdf,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -371,7 +372,7 @@ const Form102 = () => {
               disabled={isGeneratingPdf}
               onClick={handleGenerateAllPdf}
             >
-              {isGeneratingPdf ? "Sending email..." : "Generate All PDFs"}
+              {isGeneratingAllPdf ? "Sending email..." : "Generate All PDFs"}
             </button>
           </div>
         </div>
