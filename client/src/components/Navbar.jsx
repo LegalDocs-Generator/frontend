@@ -114,7 +114,6 @@ const Navbar = () => {
           >
             Login
           </Link> : <Link
-            to=""
             onClick={() => handleLogoutUser(setMenuOpen)}
             className="button  save_button px-4 py-2  text-sm  "
           >
@@ -176,7 +175,6 @@ const Navbar = () => {
           >
             Login
           </Link> : <Link
-            to=""
             onClick={() => handleLogoutUser(setMenuOpen)}
             className="button save_button inline-block mt-2 text-white px-4 py-2 rounded-full text-sm font-medium transition"
           >

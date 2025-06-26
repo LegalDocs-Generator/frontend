@@ -12,6 +12,7 @@ export const DocContext = createContext({
   isSavingChanges: false,
   isSavingNext: false,
   isGeneratingPdf: false,
+  isGeneratingAllPdf: false,
   handleSubmitForm97: () => {},
   handleSubmitForm98: () => {},
   handleSubmitForm99: () => {},
@@ -38,6 +39,7 @@ const DocProvider = ({ children }) => {
   const [isSavingChanges, setIsSavingChanges] = useState(false);
   const [isSavingNext, setIsSavingNext] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [isGeneratingAllPdf, setIsGeneratingAllPdf] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -503,7 +505,7 @@ const DocProvider = ({ children }) => {
   
   //Handling Request for Generating All PDFs 
   const handleGenerateAllPdf = async () => {
-    setIsGeneratingPdf(true);
+    setIsGeneratingAllPdf(true);
     try {
       const res = await axios.post(
         `${appURL}/api/user/forms/send-all`,
@@ -523,7 +525,7 @@ const DocProvider = ({ children }) => {
         error.response.data.message || error.response.data.msg || error.message
       );
     } finally {
-      setIsGeneratingPdf(false);
+      setIsGeneratingAllPdf(false);
     }
   };
 
@@ -536,6 +538,7 @@ const DocProvider = ({ children }) => {
         isSavingChanges,
         isSavingNext,
         isGeneratingPdf,
+        isGeneratingAllPdf,
         handleSubmitForm97,
         handleSubmitForm98,
         handleSubmitForm99,
