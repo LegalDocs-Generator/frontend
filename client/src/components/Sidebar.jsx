@@ -40,7 +40,7 @@ const Sidebar = () => {
       >
         {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <span className="text-2xl font-bold">Sidebar</span>
+          <span className="text-2xl font-bold">All Forms</span>
           <button
             onClick={() => setIsOpen(false)}
             className="md:hidden text-white"
