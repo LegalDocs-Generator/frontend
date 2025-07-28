@@ -3,6 +3,7 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form97 = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const Form97 = () => {
     deceasedReligion: "",
     deceasedsect: "",
     deceasedMaritalStatus: "Married",
-    deceasedstatus:"Bachelor",
+    deceasedstatus: "Bachelor",
     deceasedOccupation: "",
     deceasedRescidenceAtTimeOfDeath: "",
     deceasedDeathDate: "",
@@ -76,6 +77,8 @@ const Form97 = () => {
     handleSubmitForm97,
     handleFetchForm97,
     handleGeneratePdfForm97,
+    showToast,
+    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -137,7 +140,7 @@ const Form97 = () => {
     e.preventDefault();
     handleSubmitForm97(formData, false);
   };
-  
+
   const handleSaveNext = async (e) => {
     e.preventDefault();
     handleSubmitForm97(formData, true);
@@ -146,23 +149,32 @@ const Form97 = () => {
   // Reconstruct ISO date for the <input type="date"> control
   const swornDateValue =
     formData.swornYear && formData.swornMonth && formData.swornDate
-      ? `${formData.swornYear}-${formData.swornMonth.padStart(2, "0")}-${formData.swornDate.padStart(2, "0")}`
+      ? `${formData.swornYear}-${formData.swornMonth.padStart(
+          2,
+          "0"
+        )}-${formData.swornDate.padStart(2, "0")}`
       : "";
-  
 
   const deceasedDateValue =
-    formData.deceasedDeathYear && formData.deceasedDeathMonth && formData.deceasedDeathDate
-      ? `${formData.deceasedDeathYear}-${formData.deceasedDeathMonth.padStart(2, "0")}-${formData.deceasedDeathDate.padStart(2, "0")}`
+    formData.deceasedDeathYear &&
+    formData.deceasedDeathMonth &&
+    formData.deceasedDeathDate
+      ? `${formData.deceasedDeathYear}-${formData.deceasedDeathMonth.padStart(
+          2,
+          "0"
+        )}-${formData.deceasedDeathDate.padStart(2, "0")}`
       : "";
 
   const executionDateValue =
     formData.ExecutionYear && formData.ExecutionMonth && formData.ExecutionDate
-      ? `${formData.ExecutionYear}-${formData.ExecutionMonth.padStart(2, "0")}-${formData.ExecutionDate.padStart(2, "0")}`
+      ? `${formData.ExecutionYear}-${formData.ExecutionMonth.padStart(
+          2,
+          "0"
+        )}-${formData.ExecutionDate.padStart(2, "0")}`
       : "";
 
-
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+    <div className="border !m-4  rounded-2xl !p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
@@ -170,7 +182,8 @@ const Form97 = () => {
         TESTAMENTARY AND INTESTATE JURISDICTION
       </p>
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
-        PETITION NO. {formData.petitionNumber||'..............'} OF {formData.petitionYear||'20..'}.
+        PETITION NO. {formData.petitionNumber || ".............."} OF{" "}
+        {formData.petitionYear || "20.."}.
       </p>
       <hr />
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
@@ -183,7 +196,7 @@ const Form97 = () => {
             placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
-            value={formData.petitionNumber || ''}
+            value={formData.petitionNumber || ""}
           />
 
           <label className="m-2 mr-2 font-medium">Petition Year:</label>
@@ -193,7 +206,7 @@ const Form97 = () => {
             placeholder="Enter Petition No."
             className="input w-[120px]"
             onChange={handleChange}
-            value={formData.petitionYear || ''}
+            value={formData.petitionYear || ""}
           />
         </div>
 
@@ -246,6 +259,11 @@ const Form97 = () => {
                 value={formData.deceasedReligion}
               />
             </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
               <input
                 type="text"
@@ -256,11 +274,6 @@ const Form97 = () => {
                 value={formData.deceasedsect}
               />
             </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
               <select
                 name="deceasedMaritalStatus"
@@ -298,7 +311,11 @@ const Form97 = () => {
                 value={formData.deceasedRescidenceAtTimeOfDeath}
               />
             </div>
+          </div>
+        </div>
 
+        <div className="space-y-4">
+          <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
               <select
                 name="deceasedstatus"
@@ -358,9 +375,7 @@ const Form97 = () => {
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <label className="mb-1 font-medium">
-                Domicile of Petitioner
-              </label>
+              <label className="mb-1 font-medium">Domicile of Petitioner</label>
               <input
                 type="text"
                 name="petitionerDomicile"
@@ -369,7 +384,16 @@ const Form97 = () => {
                 value={formData.petitionerDomicile}
               />
             </div>
-            <div className="flex flex-col w-full md:w-[20%]">
+            
+          </div>
+
+           
+
+
+
+
+          <div className="flex flex-col md:flex-row md:!gap-16 gap-4">
+             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
                 Full Address of Petitioner
               </label>
@@ -381,8 +405,6 @@ const Form97 = () => {
                 value={formData.petitionerFullAddress}
               />
             </div>
-          </div>
-          <div className="flex flex-col md:flex-row md:justify-start gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">Executor</label>
               <select
@@ -758,10 +780,16 @@ const Form97 = () => {
             disabled={isGeneratingPdf}
             onClick={handleGeneratePdfForm97}
           >
-            {isGeneratingPdf?'Sending email...':'Generate PDF'}
+            {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
           </button>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form102 = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Form102 = () => {
     deceasedOccupation: "",
     petitionerName: "",
     witnessName: "",
-    witnessAge: 0,
+    witnessAge: "",
     witnessAddress: "",
     dateOfDeath: "",
     swearingLocation: "",
@@ -28,7 +29,8 @@ const Form102 = () => {
     handleGenerateAllPdf,
     isSavingChanges,
     isGeneratingPdf,
-    isGeneratingAllPdf,
+    showToast,
+    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -205,7 +207,7 @@ const Form102 = () => {
             name="dateOfDeath"
             className="input  w-full md:w-auto"
             placeholder="Date Of Death"
-            value={formData.dateOfDeath?.split('T')[0] || ''}
+            value={formData.dateOfDeath.split('T')[0]}
             onChange={handleChange}
           />
           , I was present together with
@@ -372,11 +374,17 @@ const Form102 = () => {
               disabled={isGeneratingPdf}
               onClick={handleGenerateAllPdf}
             >
-              {isGeneratingAllPdf ? "Sending email..." : "Generate All PDFs"}
+              {isGeneratingPdf ? "Sending email..." : "Generate All PDFs"}
             </button>
           </div>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={()=>setShowToast(false)}
+      />
     </div>
   );
 };

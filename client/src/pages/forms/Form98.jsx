@@ -3,10 +3,11 @@ import DynamicInputSection from "../../utils/DynamicInputSection";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
+import Toast from "../../components/Toaster";
 
 const Form98 = () => {
   const [formData, setFormData] = useState({
-    petitionNumber: 0,
+    petitionNumber: "",
     deceasedName: "",
     deceasedAddress: "",
     deceasedOccupation: "",
@@ -24,23 +25,23 @@ const Form98 = () => {
     },
 
     // Dynamic Lists
-    bankAccounts: [{ bankName: "", accountNumber: "", value: 0 }],
-    fixedDeposits: [{ bankName: "", receiptDetails: "", value: 0 }],
-    immovableProperty: [{ description: "", value: 0 }],
-    debenture: [{ description: "", value: 0 }],
+    bankAccounts: [{ bankName: "", accountNumber: "", value: "" }],
+    fixedDeposits: [{ bankName: "", receiptDetails: "", value: "" }],
+    immovableProperty: [{ description: "", value: "" }],
+    debenture: [{ description: "", value: "" }],
     mutualFunds: [
       {
         folio: "",
         schemeName: "",
-        currentUnits: 0,
-        currentNav: 0,
-        currentValue: 0,
+        currentUnits: "",
+        currentNav: "",
+        currentValue: "",
       },
     ],
     mutualFundsMissedDividends: [
-      { folio: "", UnclaimedSchemeName: "", UnclaimedAmount: 0 },
+      { folio: "", UnclaimedSchemeName: "", UnclaimedAmount: "" },
     ],
-    royalties: [{ bookName: "", earnedIncome: 0 }],
+    royalties: [{ bookName: "", earnedIncome: "" }],
 
     // Other Assets
     otherAssets: {
@@ -65,6 +66,8 @@ const Form98 = () => {
     isSavingChanges,
     isSavingNext,
     isGeneratingPdf,
+    showToast,
+    setShowToast,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -118,7 +121,7 @@ const Form98 = () => {
   };
 
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+    <div className="border m-2 md:m-10 lg:!w-[1000px] rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
         Schedule of property of the deceased
       </p>
@@ -137,7 +140,7 @@ const Form98 = () => {
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Petition Number Field */}
         <div className="flex flex-col md:flex-row justify-center mb-4">
-          <label className="mt-1 mr-2 font-medium font-semibold">
+          <label className="mt-1 mr-2 font-medium ">
             Petition Number:
           </label>
           <input
@@ -258,7 +261,11 @@ const Form98 = () => {
                 value={formData.movableAssets.jewels}
               />
             </div>
-            <div className="flex flex-col w-full md:w-[20%]">
+           
+          </div>
+
+          <div className="flex flex-col gap-4 md:flex-row w-full">
+             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">Amount of Books</label>
               <input
                 type="number"
@@ -268,9 +275,6 @@ const Form98 = () => {
                 value={formData.movableAssets.books}
               />
             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 md:flex-row w-full">
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">Amount Wearing apparel</label>
               <input
@@ -305,7 +309,7 @@ const Form98 = () => {
             field="bankAccounts"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bankName: "", accountNumber: "", value: 0 }}
+            schema={{ bankName: "", accountNumber: "", value: "" }}
             labels={{
               bankName: "Bank Name",
               accountNumber: "Account Number",
@@ -324,7 +328,7 @@ const Form98 = () => {
             field="fixedDeposits"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bankName: "", receiptDetails: "", value: 0 }}
+            schema={{ bankName: "", receiptDetails: "", value: "" }}
             labels={{
               bankName: "Bank Name",
               receiptDetails: "Receipt Details",
@@ -343,7 +347,7 @@ const Form98 = () => {
             field="immovableProperty"
             formData={formData}
             setFormData={setFormData}
-            schema={{ description: "", value: 0 }}
+            schema={{ description: "", value: "" }}
             labels={{
               description: "Description",
               value: "Assessed Value",
@@ -360,7 +364,7 @@ const Form98 = () => {
             field="debenture"
             formData={formData}
             setFormData={setFormData}
-            schema={{ description: "", value: 0 }}
+            schema={{ description: "", value: "" }}
             labels={{
               description: "Description",
               value: "Current Value",
@@ -380,9 +384,9 @@ const Form98 = () => {
             schema={{
               folio: "",
               schemeName: "",
-              currentUnits: 0,
-              currentNav: 0,
-              currentValue: 0,
+              currentUnits: "",
+              currentNav: "",
+              currentValue: "",
             }}
             labels={{
               folio: "Folio",
@@ -409,7 +413,7 @@ const Form98 = () => {
             schema={{
               folio: "",
               UnclaimedSchemeName: "",
-              UnclaimedAmount: 0,
+              UnclaimedAmount: "",
             }}
             labels={{
               folio: "Folio",
@@ -429,7 +433,7 @@ const Form98 = () => {
             field="royalties"
             formData={formData}
             setFormData={setFormData}
-            schema={{ bookName: "", earnedIncome: 0 }}
+            schema={{ bookName: "", earnedIncome: "" }}
             labels={{
               bookName: "Book Name",
               earnedIncome: "Earned Income",
@@ -590,6 +594,12 @@ const Form98 = () => {
           </div>
         </div>
       </form>
+      <Toast
+        show={showToast}
+        message="Form Submitted Successfully"
+        duration={3000}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };
