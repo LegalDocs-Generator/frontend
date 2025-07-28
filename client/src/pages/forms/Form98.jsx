@@ -121,7 +121,7 @@ const Form98 = () => {
   };
 
   return (
-    <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+    <div className="border m-2 md:m-10 lg:!w-[1000px] rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
       <p className="text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
         Schedule of property of the deceased
       </p>
@@ -140,7 +140,7 @@ const Form98 = () => {
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Petition Number Field */}
         <div className="flex flex-col md:flex-row justify-center mb-4">
-          <label className="mt-1 mr-2 font-medium font-semibold">
+          <label className="mt-1 mr-2 font-medium ">
             Petition Number:
           </label>
           <input
@@ -261,7 +261,11 @@ const Form98 = () => {
                 value={formData.movableAssets.jewels}
               />
             </div>
-            <div className="flex flex-col w-full md:w-[20%]">
+           
+          </div>
+
+          <div className="flex flex-col gap-4 md:flex-row w-full">
+             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">Amount of Books</label>
               <input
                 type="number"
@@ -271,9 +275,6 @@ const Form98 = () => {
                 value={formData.movableAssets.books}
               />
             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 md:flex-row w-full">
             <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">Amount Wearing apparel</label>
               <input
