@@ -174,7 +174,7 @@ const Form97 = () => {
       : "";
 
   return (
-    <div className="border !m-4  rounded-2xl !p-4 md:!p-10 bg-white text-sm md:text-base">
+    <div className="border !m-4  rounded-2xl !p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
       <p className="text-xl md:text-2xl mt-2 mb-2 font-semibold text-center ">
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
