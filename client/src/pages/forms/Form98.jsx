@@ -121,7 +121,7 @@ const Form98 = () => {
   };
 
   return (
-    <div className="border m-2 md:m-10 lg:!w-[1000px] rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base">
+    <div className="border m-2 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
       <p className="text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
         Schedule of property of the deceased
       </p>

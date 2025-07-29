@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes, FaArrowRight } from 'react-icons/fa'
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,51 +16,58 @@ const Sidebar = () => {
 
   return (
     <>
-    
-      <button
+      {/* Mobile Toggle Button */}
+      {!isOpen && <button
+        aria-label="Open sidebar"
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-18 left-4 z-50 text-white bg-gray-800 p-2 rounded"
+        className="md:hidden fixed top-22 left-4 bg-gray-800 text-white p-2 shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 z-0"
       >
-        <FaBars size={20} />
-      </button>
+        <FaArrowRight size={20} />
+      </button>}
+      
 
-     
+      {/* Overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-30 bg-black opacity-40 md:hidden"
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
         />
       )}
 
-     
+      {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white shadow-lg z-40 transform transition-transform duration-300
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-        md:translate-x-0 md:static md:block`}
+        className={`
+          fixed top-0 left-0 min-h-screen min-w-64 bg-gray-800 text-white shadow-lg z-40
+          transform transition-transform duration-300
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:translate-x-0 md:static md:block
+        `}
       >
-        {/* Sidebar Header */}
+        {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <span className="text-2xl font-bold">All Forms</span>
+          <span className="w-full text-2xl font-bold text-center">All Forms</span>
+          {/* Only show close on mobile */}
           <button
+            aria-label="Close sidebar"
             onClick={() => setIsOpen(false)}
-            className="md:hidden text-white"
+            className="md:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
           >
             <FaTimes size={20} />
           </button>
         </div>
 
-        <nav className="flex flex-col p-4 mt-4 space-y-4">
-          {menuItems.map((item, index) => (
+        {/* Navigation Links */}
+        <nav className="flex flex-col p-4 mt-2 space-y-2">
+          {menuItems.map((item, idx) => (
             <NavLink
-              key={index}
+              key={idx}
               to={item.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `px-3 py-2 rounded transition-colors !no-underline ${
-                  isActive
-                    ? 'bg-gray-700 text-white'
-                    : 'text-white hover:bg-gray-700'
-                }`
+                `block px-3 py-2 rounded-lg transition-colors !no-underline text-center
+                 ${isActive
+                   ? 'bg-gray-700 text-white'
+                   : 'text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-300'}`
               }
             >
               {item.name}
