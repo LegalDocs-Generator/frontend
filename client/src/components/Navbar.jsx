@@ -41,7 +41,7 @@ const Navbar = () => {
       dropdown: true,
       children: [
         { to: "/services", label: "Services" },
-        { to: "/form97", label: "Forms" },
+        { to: "/form97", label: "Bombay HC" },
       ],
     },
   ];
@@ -70,7 +70,7 @@ const Navbar = () => {
                   {link.label}
                 </button>
                 {servicesOpen && (
-                  <div className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg z-10">
+                  <div className="absolute text-center min-w-[180px] top-full -left-14 mt-2 bg-white border rounded shadow-lg z-10">
                     {link.children.map((child) => (
                       <Link
                         key={child.to}
@@ -79,7 +79,7 @@ const Navbar = () => {
                           setServicesOpen(false);
                           setMenuOpen(false);
                         }}
-                        className="block px-4 py-2 hover:bg-gray-100 text-sm text-black !no-underline"
+                        className="block px-4 py-2.5 hover:bg-gray-100 text-sm text-black !no-underline"
                       >
                         {child.label}
                       </Link>
@@ -125,9 +125,9 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-2xl focus:outline-none navbar-element"
+            className="focus:outline-none navbar-element"
           >
-            {menuOpen ? <FiX /> : <FiMenu />}
+            {menuOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
           </button>
         </div>
       </div>
@@ -156,7 +156,7 @@ const Navbar = () => {
                     </Link>
                   ))}
               </div>
-            ) : (
+            ) : (link.label!== 'Profile' || user) && (
               <Link
                 key={link.to}
                 to={link.to}
