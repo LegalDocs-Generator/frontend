@@ -104,7 +104,7 @@ const Form101 = () => {
           <input
             type="text"
             name="petitionNumber"
-            placeholder="Enter Petition No."
+            // placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
             value={formData.petitionNumber || ""}
@@ -114,10 +114,11 @@ const Form101 = () => {
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
+            <label >(Name of Deceased)</label>
             <input
               type="text"
               name="deceasedName"
-              placeholder=" Name of Deceased "
+              // placeholder=" Name of Deceased "
               className="input  w-full md:w-auto"
               value={formData.deceasedName}
               onChange={handleChange}
@@ -126,16 +127,17 @@ const Form101 = () => {
             <input
               type="text"
               name="deceasedAddress"
-              placeholder=" Residence of Deceased"
+              // placeholder=" Residence of Deceased"
               className="input  w-full md:w-auto"
               value={formData.deceasedAddress}
               onChange={handleChange}
             />
             having occupation of
+            <label >(Occupation of Deceased)</label>
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder=" Occupation of Deceased"
+              // placeholder=" Occupation of Deceased"
               className="input w-full md:w-auto"
               value={formData.deceasedOccupation}
               onChange={handleChange}
@@ -144,10 +146,11 @@ const Form101 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
+            <label >(Name of Executor of Will)</label>
             <input
               type="text"
               name="petitionerName"
-              placeholder=" Executor of Will"
+              // placeholder=" Executor of Will"
               className="input w-full md:w-auto"
               value={formData.petitionerName}
               onChange={handleChange}
@@ -161,18 +164,20 @@ const Form101 = () => {
         {/* Paragraph Details Section */}
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
           I,
+          <label >(Name of Petitioner)</label>
           <input
             type="text"
             name="petitionerName"
-            placeholder=" Name of Petitioner"
+            // placeholder=" Name of Petitioner"
             className="input w-full md:w-auto"
             value={formData.petitionerName}
             onChange={handleChange}
           />
+          <label >(Relation with Deceased)</label>
           <input
             type="text"
             name="relationWithDeeceased"
-            placeholder="Relation with Deceased"
+            // placeholder="Relation with Deceased"
             className="input  w-full md:w-auto"
             value={formData.relationWithDeeceased}
             onChange={handleChange}
@@ -184,19 +189,21 @@ const Form101 = () => {
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
           in the petition herein and marked Exhibit “B” is the last Will and
           testament of
+          <label >(Name of Deceased1)</label>
           <input
             type="text"
             name="deceasedName1"
-            placeholder="Name of Deceased 1"
+            // placeholder="Name of Deceased 1"
             className="input  w-full md:w-auto"
             value={formData.deceasedName1}
             onChange={handleChange}
           />
           alias
+          <label >(Name of Deceased 2)</label>
           <input
             type="text"
             name="deceasedName2"
-            placeholder="Name of Deceased 2"
+            // placeholder="Name of Deceased 2"
             className="input w-full md:w-auto"
             value={formData.deceasedName2}
             onChange={handleChange}
@@ -205,19 +212,22 @@ const Form101 = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
+          <label >(Name of Deceased 3)</label>
           <input
             type="text"
             name="deceasedName3"
-            placeholder="Name of Deceased 3"
+            // placeholder="Name of Deceased 3"
             className="input w-full md:w-auto"
             value={formData.deceasedName3}
             onChange={handleChange}
           />
           alias
+          <label >(Name of Deceased 4)</label>
+
           <input
             type="text"
             name="deceasedName4"
-            placeholder="Name of Deceased 4"
+            // placeholder="Name of Deceased 4"
             className="input  w-full md:w-auto"
             value={formData.deceasedName4}
             onChange={handleChange}
@@ -253,11 +263,11 @@ const Form101 = () => {
 
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
           <div className="flex items-center w-full md:w-[310px] justify-between">
-            <p>Sworn at</p>
+            <p>Sworn Location</p>
             <input
               type="text"
               name="swearingLocation"
-              placeholder="Swearing Location"
+              // placeholder="Swearing Location"
               className="input w-[65%]"
               value={formData.swearingLocation}
               onChange={handleChange}
@@ -268,7 +278,7 @@ const Form101 = () => {
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing"
+              // placeholder="Date of Swearing"
               className="input w-[65%]"
               value={swornDateValue}
               onChange={handleDateChange}
@@ -279,7 +289,7 @@ const Form101 = () => {
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for"
+              // placeholder="Advocate for"
               className="input w-[65%]"
               value={formData.advocateFor}
               onChange={handleChange}

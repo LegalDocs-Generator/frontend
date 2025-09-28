@@ -193,7 +193,7 @@ const Form97 = () => {
           <input
             type="text"
             name="petitionNumber"
-            placeholder="Enter Petition No."
+            // placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
             value={formData.petitionNumber || ""}
@@ -203,7 +203,7 @@ const Form97 = () => {
           <input
             type="text"
             name="petitionYear"
-            placeholder="Enter Petition No."
+            // placeholder="Enter Petition No."
             className="input w-[120px]"
             onChange={handleChange}
             value={formData.petitionYear || ""}
@@ -219,10 +219,11 @@ const Form97 = () => {
         <div className="space-y-4">
           <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Name of Deceased:</label>
               <input
                 type="text"
                 name="deceasedFullName"
-                placeholder="Name"
+                // placeholder="Name"
                 className="input"
                 onChange={handleChange}
                 value={formData.deceasedFullName}
@@ -230,51 +231,29 @@ const Form97 = () => {
             </div>
 
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Nationality of Deceased:</label>
               <input
                 type="text"
                 name="deceasedNationality"
-                placeholder="Nationality"
+                // placeholder="Nationality"
                 className="input"
                 onChange={handleChange}
                 value={formData.deceasedNationality}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Address of Deceased:</label>
               <input
                 type="text"
                 name="deceasedAddress"
-                placeholder="Address"
+                // placeholder="Address"
                 className="input"
                 onChange={handleChange}
                 value={formData.deceasedAddress}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
-              <input
-                type="text"
-                name="deceasedReligion"
-                className="input"
-                placeholder="Religion"
-                onChange={handleChange}
-                value={formData.deceasedReligion}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex flex-col md:flex-row md:justify-between gap-4">
-            <div className="flex flex-col w-full md:w-[20%]">
-              <input
-                type="text"
-                name="deceasedsect"
-                className="input"
-                placeholder="Section (If Muslim)"
-                onChange={handleChange}
-                value={formData.deceasedsect}
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Marital Status:</label>
               <select
                 name="deceasedMaritalStatus"
                 className="input"
@@ -291,21 +270,61 @@ const Form97 = () => {
                 <option value="Separated">Separated</option>
               </select>
             </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Religion of Deceased:</label>
+              <select
+                name="deceasedReligion"
+                className="input"
+                onChange={handleChange}
+                value={formData.deceasedReligion}
+              >
+                <option value="">Select Religion</option>
+                <option value="Hindu">Hindu</option>
+                <option value="Muslim">Muslim</option>
+                <option value="Christian">Christian</option>
+                <option value="Sikh">Sikh</option>
+                <option value="Buddhist">Buddhist</option>
+                <option value="Jain">Jain</option>
+              </select>
+            </div>
+
+            {/* Conditionally show section input only if Muslim is selected */}
+            {formData.deceasedReligion === "Muslim" && (
+              <div className="flex flex-col w-full md:w-[20%]">
+                <label className="mb-1 font-bold">Section:</label>
+                <input
+                  type="text"
+                  name="deceasedsect"
+                  className="input"
+                  // placeholder="Section (If Muslim)"
+                  onChange={handleChange}
+                  value={formData.deceasedsect}
+                />
+              </div>
+            )}
+
+            <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Occupation of Deceased:</label>
               <input
                 type="text"
                 name="deceasedOccupation"
-                placeholder="Occupation"
+                // placeholder="Occupation"
                 className="input"
                 onChange={handleChange}
                 value={formData.deceasedOccupation}
               />
             </div>
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Residence of Deceased:</label>
               <input
                 type="text"
                 name="deceasedRescidenceAtTimeOfDeath"
-                placeholder="Residence at the time of death"
+                // placeholder="Residence at the time of death"
                 className="input"
                 onChange={handleChange}
                 value={formData.deceasedRescidenceAtTimeOfDeath}
@@ -317,6 +336,7 @@ const Form97 = () => {
         <div className="space-y-4">
           <div className="flex flex-col md:flex-row md:justify-between gap-4">
             <div className="flex flex-col w-full md:w-[20%]">
+              <label className="mb-1 font-bold">Stautus:</label>
               <select
                 name="deceasedstatus"
                 className="input"
@@ -384,16 +404,10 @@ const Form97 = () => {
                 value={formData.petitionerDomicile}
               />
             </div>
-            
           </div>
 
-           
-
-
-
-
           <div className="flex flex-col md:flex-row md:!gap-16 gap-4">
-             <div className="flex flex-col w-full md:w-[20%]">
+            <div className="flex flex-col w-full md:w-[20%]">
               <label className="mb-1 font-medium">
                 Full Address of Petitioner
               </label>
@@ -451,51 +465,56 @@ const Form97 = () => {
           <p className="text-md md:text-lg   font-semibold  ">SHEWETH:</p>
           <p className="mb-2">
             (1) That the above named{" "}
+            <label className="font-bold">(Name of Deceased)</label> {" "}
             <input
               type="text"
               name="deceasedFullName"
-              placeholder="Name of Deceased"
+              // placeholder="Name of Deceased"
               className="input me-2"
               onChange={handleChange}
               value={formData.deceasedFullName}
             />{" "}
             died at{" "}
+            <label className="font-bold">(Place of death of the Deceased)</label> {" "}
             <input
               type="text"
               name="deceasedRescidenceAtTimeOfDeath"
-              placeholder="Place of death of the Deceased*"
+              // placeholder="Place of death of the Deceased*"
               className="input me-2"
               onChange={handleChange}
               value={formData.deceasedRescidenceAtTimeOfDeath}
             />{" "}
             on or about the{" "}
+            <label className="font-bold">(Date  of Death)</label> {" "}
             <input
               type="date"
               name="deceasedDeathDate"
-              placeholder=" Date  of Death"
+              // placeholder=" Date  of Death"
               className="input me-2"
               onChange={handledeceasedDeathDateChange}
               value={deceasedDateValue}
             />
-            (insert date of death of the Deceased) .A true copy of
-          </p>
-          <p className="mb-0">
-            Death Certificate of the Deceased is annexed hereto and marked as
+            (insert date of death of the Deceased) .A true copy of Death Certificate of the Deceased is annexed hereto and marked as
             Exhibit{" "}
+            <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber1"
-              placeholder=" Exhibit Number"
+              // placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber1}
             />
+          </p>
+          <p className="mb-0">
+            
             and a true copy of identity proof of the Deceased is annexed hereto
             and marked as Exhibit{" "}
+            <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber2"
-              placeholder=" Exhibit Number"
+              // placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber2}
@@ -506,10 +525,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (2) That the said deceased at the time of his death had a fixed
             place of abode at{" "}
+            <label className="font-bold">(Place Of Abode)</label> {" "}
             <input
               type="text"
               name="placeOfAbode"
-              placeholder=" Place Of Abode"
+              // placeholder=" Place Of Abode"
               className="input me-2"
               onChange={handleChange}
               value={formData.placeOfAbode}
@@ -522,10 +542,11 @@ const Form97 = () => {
             (3) That the said deceased left a writing, which is his last Will
             and testament. The said writing, hereinafter referred to as “the
             Will”, is marked as Exhibit{" "}
+             <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber3"
-              placeholder=" Exhibit Number"
+              // placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber3}
@@ -534,10 +555,11 @@ const Form97 = () => {
             available) is handed in separately for being filed and kept in a
             safe place in theOffice of the Prothonotary and Senior Master. A
             copy of the said Will is hereto annexed and also marked as Exhibit{" "}
+             <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber4"
-              placeholder=" Exhibit Number"
+              // placeholder=" Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber4}
@@ -546,10 +568,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (4) That the said Will (if there is/are Codicil or Codicils, say so)
             was executed at{" "}
+             <label className="font-bold">( Place Of Execution)</label> {" "}
             <input
               type="text"
               name="placeOfExecutionOfWill"
-              placeholder=" Place Of Execution"
+              // placeholder=" Place Of Execution"
               className="input me-2"
               onChange={handleChange}
               value={formData.placeOfExecutionOfWill}
@@ -592,10 +615,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (6) The Petitioner has truly set forth in Schedule No.I, hereto
             annexed and marked as Exhibit{" "}
+             <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber5"
-              placeholder="Exhibit Number"
+              // placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber5}
@@ -611,10 +635,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (7) That the Petitioner has truly set forth in Schedule No. II,
             hereto annexed and marked Exhibit{" "}
+             <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber6"
-              placeholder="Exhibit Number"
+              // placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber6}
@@ -626,10 +651,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (8) That, the Petitioner has truly set forth in Schedule No. III,
             hereto annexed and marked Exhibit{" "}
+             <label className="font-bold">(Exhibit Number)</label> {" "}
             <input
               type="text"
               name="exhibitNumber7"
-              placeholder="Exhibit Number"
+              // placeholder="Exhibit Number"
               className="input me-2"
               onChange={handleChange}
               value={formData.exhibitNumber7}
@@ -644,10 +670,11 @@ const Form97 = () => {
             dividends which have accrued since the date of the death of the
             Deceased and increased value of the assets since the said date are
             of the value of Rs.
+             <label className="font-bold">(Schdule Amount)</label> {" "}
             <input
               type="number"
               name="schduleAmount"
-              placeholder="Schdule Amount"
+              // placeholder="Schdule Amount"
               className="input me-2"
               onChange={handleChange}
               value={formData.schduleAmount}
@@ -658,10 +685,11 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (10 ) That the said Deceased left him surviving as his only heirs
             and next-of- kin according to
+            <label className="font-bold">(Law Applicable To The Deceased)</label> {" "}
             <input
               type="text"
               name="lawApplicableToTheDeceased"
-              placeholder="Law"
+              // placeholder="Law"
               className="input me-2"
               onChange={handleChange}
               value={formData.lawApplicableToTheDeceased}
@@ -720,12 +748,13 @@ const Form97 = () => {
         </p>
         <hr />
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
-          <div className=" flex items-center w-full md:w-[400px] justify-between">
-            <p>Sworn / Solemnly affirmed at </p>
+          <div className=" flex items-center w-full md:w-[300px] justify-between">
+            {/* <p>Sworn / Solemnly affirmed at </p> */}
+            <label className="font-bold">(Swearing Location)</label> {" "}
             <input
               type="text"
               name="swornPlace"
-              placeholder="Swearing Location"
+              // placeholder="Swearing Location"
               className="input w-[40%]"
               onChange={handleChange}
               value={formData.swornPlace}
@@ -736,7 +765,7 @@ const Form97 = () => {
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing"
+              // placeholder="Date of Swearing"
               className="input w-[65%]"
               onChange={handleswornDateChange}
               value={swornDateValue}
@@ -747,7 +776,7 @@ const Form97 = () => {
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for"
+              // placeholder="Advocate for"
               className="input w-[65%]"
               onChange={handleChange}
               value={formData.advocateFor}

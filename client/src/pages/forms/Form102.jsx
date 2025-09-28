@@ -99,7 +99,7 @@ const Form102 = () => {
           <input
             type="text"
             name="petitionNumber"
-            placeholder="Enter Petition No."
+            // placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
             value={formData.petitionNumber || ""}
@@ -108,19 +108,21 @@ const Form102 = () => {
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
+            <label >(Name of deceased)</label>
             <input
               type="text"
               name="deceasedName"
-              placeholder=" Name of Deceased "
+              // placeholder=" Name of Deceased "
               className="input w-full md:w-auto"
               value={formData.deceasedName}
               onChange={handleChange}
             />
             resident
+            <label >(Residence of Deceased)</label>
             <input
               type="text"
               name="deceasedAddress"
-              placeholder=" Residence of Deceased"
+              // placeholder=" Residence of Deceased"
               className="input w-full md:w-auto"
               value={formData.deceasedAddress}
               onChange={handleChange}
@@ -138,10 +140,11 @@ const Form102 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
+            <label >(Name of Executor of Will)</label>
             <input
               type="text"
               name="petitionerName"
-              placeholder=" Executor of Will"
+              // placeholder=" Executor of Will"
               className="input w-full md:w-auto"
               value={formData.petitionerName}
               onChange={handleChange}
@@ -154,11 +157,12 @@ const Form102 = () => {
         {/* paragraph Details Section */}
         <div className="flex flex-wrap gap-2 text-sm md:text-base justify-start mb-2">
           I,
+          <label >(Name of Witness)</label>
           <input
             type="text"
             name="witnessName"
             className="input w-full md:w-auto"
-            placeholder="Witness Name"
+            // placeholder="Witness Name"
             value={formData.witnessName}
             onChange={handleChange}
           />
@@ -167,7 +171,7 @@ const Form102 = () => {
             type="number"
             name="witnessAge"
             className="input  w-full md:w-auto"
-            placeholder="Witness Age"
+            // placeholder="Witness Age"
             value={formData.witnessAge}
             onChange={handleChange}
           />
@@ -176,7 +180,7 @@ const Form102 = () => {
             type="text"
             name="witnessAddress"
             className="input  w-full md:w-auto"
-            placeholder="Witness Address"
+            // placeholder="Witness Address"
             value={formData.witnessAddress}
             onChange={handleChange}
           />
@@ -187,12 +191,12 @@ const Form102 = () => {
 
         {/* Point 1 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
-          1) That I knew and was well acquainted with the deceased
+          1) That I knew and was well acquainted with the deceased <label >(Name of Deceased)</label>
           <input
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name"
+            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
@@ -202,29 +206,32 @@ const Form102 = () => {
         {/* Point 2 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
           2) That on the
+          <label >(Date of Death)</label>
           <input
             type="date"
             name="dateOfDeath"
             className="input  w-full md:w-auto"
-            placeholder="Date Of Death"
+            // placeholder="Date Of Death"
             value={formData.dateOfDeath.split('T')[0]}
             onChange={handleChange}
           />
           , I was present together with
+          <label >(Name of Executor of Will)</label>
           <input
             type="text"
             name="petitionerName"
             className="input  w-full md:w-auto"
-            placeholder="Executor of Will"
+            // placeholder="Executor of Will"
             value={formData.petitionerName}
             onChange={handleChange}
           />
           at the house of
+          <label >(Name of Deceased)</label>
           <input
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name"
+            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
@@ -241,11 +248,12 @@ const Form102 = () => {
         {/* Point 3 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
           3) That thereupon I, this deponent and the said
+          <label >(Name of Executor of Will)</label>
           <input
             type="text"
             name="petitionerName"
             className="input w-full md:w-auto"
-            placeholder="Executor of Will"
+            // placeholder="Executor of Will"
             value={formData.petitionerName}
             onChange={handleChange}
           />
@@ -262,11 +270,12 @@ const Form102 = () => {
         {/* Point 4 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
           4) That the name and signature
+          <label >(Name of Deceased)</label>
           <input
             type="text"
             name="deceasedName"
             className="input w-full md:w-auto"
-            placeholder="Deceased Name"
+            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
@@ -286,11 +295,12 @@ const Form102 = () => {
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
           5) That at the time the said deceased so subscribed his name and
           signature to the said will as aforesaid,
+          <label >(Name of Deceased)</label>
           <input
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            placeholder="Deceased Name"
+            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
@@ -306,11 +316,11 @@ const Form102 = () => {
 
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
           <div className="flex items-center w-full md:w-[310px] justify-between">
-            <p>Sworn at</p>
+            <p>Sworn Location</p>
             <input
               type="text"
               name="swearingLocation"
-              placeholder="Swearing Location"
+              // placeholder="Swearing Location"
               className="input w-[65%]"
               value={formData.swearingLocation}
               onChange={handleChange}
@@ -332,7 +342,7 @@ const Form102 = () => {
             <input
               type="text"
               name="advocateFor"
-              placeholder="Advocate for"
+              // placeholder="Advocate for"
               className="input w-[65%]"
               value={formData.advocateFor}
               onChange={handleChange}

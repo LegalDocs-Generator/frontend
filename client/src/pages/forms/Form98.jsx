@@ -146,7 +146,7 @@ const Form98 = () => {
           <input
             type="text"
             name="petitionNumber"
-            placeholder="Enter Petition No."
+            // placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
             value={formData.petitionNumber || ""}
@@ -156,28 +156,31 @@ const Form98 = () => {
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
+            <label className="font-bold">(Name of Deceased)</label> {" "}
             <input
               type="text"
               name="deceasedName"
-              placeholder="Name of Deceased"
+              // placeholder="Name of Deceased"
               className="input w-full md:w-auto"
               onChange={handleChange}
               value={formData.deceasedName}
             />
             resident
+            <label className="font-bold">(Residence of Deceased)</label> {" "}
             <input
               type="text"
               name="deceasedAddress"
-              placeholder="Residence of Deceased"
+              // placeholder="Residence of Deceased"
               className="input w-full md:w-auto"
               onChange={handleChange}
               value={formData.deceasedAddress}
             />
             having occupation of
+            <label className="font-bold">(Occupation of Deceased)</label> {" "}
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder="Occupation of Deceased"
+              // placeholder="Occupation of Deceased"
               className="input w-full md:w-auto"
               onChange={handleChange}
               value={formData.deceasedOccupation}
@@ -186,10 +189,11 @@ const Form98 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
+            <label className="font-bold">(Executor of Will)</label> {" "}
             <input
               type="text"
               name="petitionerName"
-              placeholder="Executor of Will"
+              // placeholder="Executor of Will"
               className="input w-full md:w-auto"
               onChange={handleChange}
               value={formData.petitionerName}
@@ -455,7 +459,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="adaniAccountNumber"
-                placeholder="Account Number"
+                // placeholder="Account Number"
                 className="input ms-2"
                 onChange={handleChange}
                 value={formData.otherAssets.adaniAccountNumber}
@@ -463,10 +467,11 @@ const Form98 = () => {
             </p>
             <p className="mb-0">
               2. Security Deposit of
+              <label className="font-bold">(Security Deposit)</label> {" "}
               <input
                 type="number"
                 name="adaniSecurityDeposit"
-                placeholder="Security Deposit"
+                // placeholder="Security Deposit"
                 className="input ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.adaniSecurityDeposit}
@@ -475,7 +480,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="adaniAccountNumber"
-                placeholder="Account Number"
+                // placeholder="Account Number"
                 className="input ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.adaniAccountNumber}
@@ -486,7 +491,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="mahanagarGPBearingBPNo"
-                placeholder="BP No."
+                // placeholder="BP No."
                 className="input ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.mahanagarGPBearingBPNo}
@@ -495,7 +500,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="mahanagarBearingCANo"
-                placeholder="CA No."
+                // placeholder="CA No."
                 className="input ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.mahanagarBearingCANo}
@@ -506,7 +511,7 @@ const Form98 = () => {
               <input
                 type="number"
                 name="mahanagarSecurityDeposit"
-                placeholder="Security Deposit"
+                // placeholder="Security Deposit"
                 className="input w-[200px] ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.mahanagarSecurityDeposit}
@@ -515,7 +520,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="mahanagarGPBPNo"
-                placeholder="BP No."
+                // placeholder="BP No."
                 className="input w-[200px] ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.mahanagarGPBPNo}
@@ -524,7 +529,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="mahanagarCANo"
-                placeholder="CA No."
+                // placeholder="CA No."
                 className="input w-[200px] ms-2"
                 onChange={handleChange}
                 value={formData.otherAssets.mahanagarCANo}
@@ -535,7 +540,7 @@ const Form98 = () => {
               <input
                 type="text"
                 name="simCardNumber"
-                placeholder="Card No."
+                // placeholder="Card No."
                 className="input ms-2 me-2"
                 onChange={handleChange}
                 value={formData.otherAssets.simCardNumber}

@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const appURL = import.meta.env.VITE_APP_URL;
+const appURL = import.meta.env.VITE_API_URL;
 
 export const AuthContext = createContext({
     user: null,
