@@ -26,6 +26,7 @@ const Form99 = () => {
     isGeneratingPdf,
     setShowToast,
     showToast,
+    shouldResetForms, setShouldResetForms 
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -52,6 +53,33 @@ const Form99 = () => {
     e.preventDefault();
     handleSubmitForm99(formData, true);
   };
+  
+
+useEffect(() => {
+  if (shouldResetForms) {
+    setFormData({
+      petitionNumber: "",
+      deceasedName: "",
+      deceasedName1: "",
+      deceasedName2: "",
+      deceasedName3: "",
+      deceasedName4: "",
+      deceasedAddress: "",
+      deceasedOccupation: "",
+      petitionerName: "",
+      relationWithDeeceased: "",
+      swearingLocation: "",
+      swornDay: "",
+      swornMonth: "",
+      swornYear: "",
+      advocateFor: "",
+    });
+
+    // Reset the trigger so it doesn’t keep clearing
+    setShouldResetForms(false);
+  }
+}, [shouldResetForms]);
+
 
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
@@ -221,14 +249,14 @@ const Form99 = () => {
             >
               {isSavingNext ? "Saving..." : "Save and Next"}
             </Link>
-            <button
+            {/* <button
               type="button"
               className="button generate_pdf w-full md:w-auto"
               disabled={isGeneratingPdf}
               onClick={handleGeneratePdfForm99}
             >
               {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-            </button>
+            </button> */}
           </div>
         </div>
       </form>

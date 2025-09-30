@@ -33,6 +33,8 @@ const Form101 = () => {
     isGeneratingPdf,
     showToast,
     setShowToast,
+    shouldResetForms,
+    setShouldResetForms,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -41,6 +43,31 @@ const Form101 = () => {
       handleFetchForm101(setFormData);
     }
   }, []);
+
+  useEffect(() => {
+    if (shouldResetForms) {
+      setFormData({
+        petitionNumber: "",
+        deceasedName: "",
+        deceasedName1: "",
+        deceasedName2: "",
+        deceasedName3: "",
+        deceasedName4: "",
+        deceasedAddress: "",
+        deceasedOccupation: "",
+        petitionerName: "",
+        relationWithDeeceased: "",
+        swearingLocation: "",
+        swornDay: "",
+        swornMonth: "",
+        swornYear: "",
+        advocateFor: "",
+      });
+
+      // Reset the trigger so it doesn’t keep clearing
+      setShouldResetForms(false);
+    }
+  }, [shouldResetForms]);
 
   const handleDateChange = (e) => {
     const value = e.target.value;
@@ -76,7 +103,10 @@ const Form101 = () => {
   // Reconstruct ISO date for the <input type="date"> control
   const swornDateValue =
     formData.swornYear && formData.swornMonth && formData.swornDay
-      ? `${formData.swornYear}-${formData.swornMonth.padStart(2, "0")}-${formData.swornDay.padStart(2, "0")}`
+      ? `${formData.swornYear}-${formData.swornMonth.padStart(
+          2,
+          "0"
+        )}-${formData.swornDay.padStart(2, "0")}`
       : "";
 
   return (
@@ -92,15 +122,13 @@ const Form101 = () => {
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
-        2020
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No{" "}
+        {formData.petitionNumber || ".............."} of 2020
       </p>
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Petition Number Field */}
         <div className="flex flex-col md:flex-row justify-center mb-4">
-          <label className="mt-1 mr-2 font-medium font-semibold">
-            Petition Number:
-          </label>
+          <label className="mt-1 mr-2 font-semibold">Petition Number:</label>
           <input
             type="text"
             name="petitionNumber"
@@ -114,7 +142,7 @@ const Form101 = () => {
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
-            <label >(Name of Deceased)</label>
+            <label>(Name of Deceased)</label>
             <input
               type="text"
               name="deceasedName"
@@ -133,7 +161,7 @@ const Form101 = () => {
               onChange={handleChange}
             />
             having occupation of
-            <label >(Occupation of Deceased)</label>
+            <label>(Occupation of Deceased)</label>
             <input
               type="text"
               name="deceasedOccupation"
@@ -146,7 +174,7 @@ const Form101 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
-            <label >(Name of Executor of Will)</label>
+            <label>(Name of Executor of Will)</label>
             <input
               type="text"
               name="petitionerName"
@@ -164,7 +192,7 @@ const Form101 = () => {
         {/* Paragraph Details Section */}
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
           I,
-          <label >(Name of Petitioner)</label>
+          <label>(Name of Petitioner)</label>
           <input
             type="text"
             name="petitionerName"
@@ -173,15 +201,29 @@ const Form101 = () => {
             value={formData.petitionerName}
             onChange={handleChange}
           />
-          <label >(Relation with Deceased)</label>
+          <label>(Relation with Deceased)</label>
           <input
             type="text"
             name="relationWithDeeceased"
-            // placeholder="Relation with Deceased"
-            className="input  w-full md:w-auto"
+            className="input w-full md:w-auto"
             value={formData.relationWithDeeceased}
             onChange={handleChange}
+            list="relationOptions"
           />
+          <datalist id="relationOptions">
+            <option value="Son" />
+            <option value="Daughter" />
+            <option value="Widow" />
+            <option value="Mother" />
+            <option value="Son of pre-deceased son" />
+            <option value="Daughter of a pre-deceased son" />
+            <option value="Son of a pre-deceased daughter" />
+            <option value="Daughter of a pre-deceased daughter" />
+            <option value="Widow of a pre-deceased son" />
+            <option value="Son of predeceased son of a pre-deceased son" />
+            <option value="Daughter of a pre-deceased son of a pre-deceased son" />
+            <option value="Widow of a pre-deceased son of a pre-deceased son" />
+          </datalist>
           , the Petitioner, swear in the name of God that I believe and state
           that the Will referred to
         </div>
@@ -189,7 +231,7 @@ const Form101 = () => {
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
           in the petition herein and marked Exhibit “B” is the last Will and
           testament of
-          <label >(Name of Deceased1)</label>
+          <label>(Name of Deceased1)</label>
           <input
             type="text"
             name="deceasedName1"
@@ -199,7 +241,7 @@ const Form101 = () => {
             onChange={handleChange}
           />
           alias
-          <label >(Name of Deceased 2)</label>
+          <label>(Name of Deceased 2)</label>
           <input
             type="text"
             name="deceasedName2"
@@ -212,7 +254,7 @@ const Form101 = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 text-sm md:text-base  justify-start mb-2">
-          <label >(Name of Deceased 3)</label>
+          <label>(Name of Deceased 3)</label>
           <input
             type="text"
             name="deceasedName3"
@@ -222,8 +264,7 @@ const Form101 = () => {
             onChange={handleChange}
           />
           alias
-          <label >(Name of Deceased 4)</label>
-
+          <label>(Name of Deceased 4)</label>
           <input
             type="text"
             name="deceasedName4"
@@ -325,14 +366,14 @@ const Form101 = () => {
             >
               {isSavingNext ? "Saving..." : "Save and Next"}
             </Link>
-            <button
+            {/* <button
               type="button"
               className="button generate_pdf w-full md:w-auto"
               disabled={isGeneratingPdf}
               onClick={handleGeneratePdfForm101}
             >
               {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-            </button>
+            </button> */}
           </div>
         </div>
       </form>
@@ -340,7 +381,7 @@ const Form101 = () => {
         show={showToast}
         message="Form Submitted Successfully"
         duration={3000}
-        onClose={()=>setShowToast(false)}
+        onClose={() => setShowToast(false)}
       />
     </div>
   );

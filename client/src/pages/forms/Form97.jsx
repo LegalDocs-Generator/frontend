@@ -13,7 +13,7 @@ const Form97 = () => {
     deceasedFullName: "",
     deceasedNationality: "",
     deceasedAddress: "",
-    deceasedReligion: "",
+    deceasedReligion: "Hindu",
     deceasedsect: "",
     deceasedMaritalStatus: "Married",
     deceasedstatus: "Bachelor",
@@ -48,7 +48,7 @@ const Form97 = () => {
     exhibitNumber6: "",
     exhibitNumber7: "",
     schduleAmount: 0,
-    lawApplicableToTheDeceased: "",
+    lawApplicableToTheDeceased: "Indian Succession Act, 1925",
 
     // People array (can initialize with one blank person if needed)
     person: [
@@ -77,9 +77,36 @@ const Form97 = () => {
     handleSubmitForm97,
     handleFetchForm97,
     handleGeneratePdfForm97,
+    shouldResetForms,
+    setShouldResetForms,
     showToast,
     setShowToast,
   } = useContext(DocContext);
+
+  useEffect(() => {
+    if (shouldResetForms) {
+      setFormData({
+        petitionNumber: "",
+        deceasedName: "",
+        deceasedName1: "",
+        deceasedName2: "",
+        deceasedName3: "",
+        deceasedName4: "",
+        deceasedAddress: "",
+        deceasedOccupation: "",
+        petitionerName: "",
+        relationWithDeeceased: "",
+        swearingLocation: "",
+        swornDay: "",
+        swornMonth: "",
+        swornYear: "",
+        advocateFor: "",
+      });
+
+      // Reset the trigger so it doesn’t keep clearing
+      setShouldResetForms(false);
+    }
+  }, [shouldResetForms]);
 
   useEffect(() => {
     if (!user) navigate("/login");
@@ -279,17 +306,15 @@ const Form97 = () => {
               <label className="mb-1 font-bold">Religion of Deceased:</label>
               <select
                 name="deceasedReligion"
-                className="input"
+                className="input me-2"
+                value={formData.deceasedReligion || ""}
                 onChange={handleChange}
-                value={formData.deceasedReligion}
               >
                 <option value="">Select Religion</option>
                 <option value="Hindu">Hindu</option>
                 <option value="Muslim">Muslim</option>
                 <option value="Christian">Christian</option>
-                <option value="Sikh">Sikh</option>
-                <option value="Buddhist">Buddhist</option>
-                <option value="Jain">Jain</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
@@ -465,7 +490,7 @@ const Form97 = () => {
           <p className="text-md md:text-lg   font-semibold  ">SHEWETH:</p>
           <p className="mb-2">
             (1) That the above named{" "}
-            <label className="font-bold">(Name of Deceased)</label> {" "}
+            <label className="font-bold">(Name of Deceased)</label>{" "}
             <input
               type="text"
               name="deceasedFullName"
@@ -475,7 +500,9 @@ const Form97 = () => {
               value={formData.deceasedFullName}
             />{" "}
             died at{" "}
-            <label className="font-bold">(Place of death of the Deceased)</label> {" "}
+            <label className="font-bold">
+              (Place of death of the Deceased)
+            </label>{" "}
             <input
               type="text"
               name="deceasedRescidenceAtTimeOfDeath"
@@ -484,8 +511,7 @@ const Form97 = () => {
               onChange={handleChange}
               value={formData.deceasedRescidenceAtTimeOfDeath}
             />{" "}
-            on or about the{" "}
-            <label className="font-bold">(Date  of Death)</label> {" "}
+            on or about the <label className="font-bold">(Date of Death)</label>{" "}
             <input
               type="date"
               name="deceasedDeathDate"
@@ -494,9 +520,9 @@ const Form97 = () => {
               onChange={handledeceasedDeathDateChange}
               value={deceasedDateValue}
             />
-            (insert date of death of the Deceased) .A true copy of Death Certificate of the Deceased is annexed hereto and marked as
-            Exhibit{" "}
-            <label className="font-bold">(Exhibit Number)</label> {" "}
+            (insert date of death of the Deceased) .A true copy of Death
+            Certificate of the Deceased is annexed hereto and marked as Exhibit{" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber1"
@@ -507,10 +533,9 @@ const Form97 = () => {
             />
           </p>
           <p className="mb-0">
-            
             and a true copy of identity proof of the Deceased is annexed hereto
             and marked as Exhibit{" "}
-            <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber2"
@@ -525,7 +550,7 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (2) That the said deceased at the time of his death had a fixed
             place of abode at{" "}
-            <label className="font-bold">(Place Of Abode)</label> {" "}
+            <label className="font-bold">(Place Of Abode)</label>{" "}
             <input
               type="text"
               name="placeOfAbode"
@@ -542,7 +567,7 @@ const Form97 = () => {
             (3) That the said deceased left a writing, which is his last Will
             and testament. The said writing, hereinafter referred to as “the
             Will”, is marked as Exhibit{" "}
-             <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber3"
@@ -555,7 +580,7 @@ const Form97 = () => {
             available) is handed in separately for being filed and kept in a
             safe place in theOffice of the Prothonotary and Senior Master. A
             copy of the said Will is hereto annexed and also marked as Exhibit{" "}
-             <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber4"
@@ -568,7 +593,7 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (4) That the said Will (if there is/are Codicil or Codicils, say so)
             was executed at{" "}
-             <label className="font-bold">( Place Of Execution)</label> {" "}
+            <label className="font-bold">( Place Of Execution)</label>{" "}
             <input
               type="text"
               name="placeOfExecutionOfWill"
@@ -615,7 +640,7 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (6) The Petitioner has truly set forth in Schedule No.I, hereto
             annexed and marked as Exhibit{" "}
-             <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber5"
@@ -635,7 +660,7 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (7) That the Petitioner has truly set forth in Schedule No. II,
             hereto annexed and marked Exhibit{" "}
-             <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber6"
@@ -651,7 +676,7 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (8) That, the Petitioner has truly set forth in Schedule No. III,
             hereto annexed and marked Exhibit{" "}
-             <label className="font-bold">(Exhibit Number)</label> {" "}
+            <label className="font-bold">(Exhibit Number)</label>{" "}
             <input
               type="text"
               name="exhibitNumber7"
@@ -670,7 +695,7 @@ const Form97 = () => {
             dividends which have accrued since the date of the death of the
             Deceased and increased value of the assets since the said date are
             of the value of Rs.
-             <label className="font-bold">(Schdule Amount)</label> {" "}
+            <label className="font-bold">(Schdule Amount)</label>{" "}
             <input
               type="number"
               name="schduleAmount"
@@ -685,15 +710,27 @@ const Form97 = () => {
           <p className="mt-4 mb-3">
             (10 ) That the said Deceased left him surviving as his only heirs
             and next-of- kin according to
-            <label className="font-bold">(Law Applicable To The Deceased)</label> {" "}
-            <input
-              type="text"
+            <label className="mb-1 font-bold">
+              {" "}
+              (Law Applicable to the Deceased)
+            </label>
+            <select
               name="lawApplicableToTheDeceased"
-              // placeholder="Law"
               className="input me-2"
+              value={formData.lawApplicableToTheDeceased || ""}
               onChange={handleChange}
-              value={formData.lawApplicableToTheDeceased}
-            />{" "}
+            >
+              <option value="">Select Law Applicable</option>
+              <option value="Indian Succession Act, 1925">
+                Indian Succession Act, 1925
+              </option>
+              <option value="Hindu Succession Act, 1956">
+                Hindu Succession Act, 1956
+              </option>
+              <option value="Muslim Personal Law (Shariat) Application Act, 1937">
+                Muslim Personal Law (Shariat) Application Act, 1937
+              </option>
+            </select>{" "}
             (state what Law / name of the Act / name of the personal law
             applicable to the Deceased), the following persons, who are residing
             at the addresses set out against their respective names :-
@@ -750,7 +787,7 @@ const Form97 = () => {
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
           <div className=" flex items-center w-full md:w-[300px] justify-between">
             {/* <p>Sworn / Solemnly affirmed at </p> */}
-            <label className="font-bold">(Swearing Location)</label> {" "}
+            <label className="font-bold">(Swearing Location)</label>{" "}
             <input
               type="text"
               name="swornPlace"
@@ -803,14 +840,14 @@ const Form97 = () => {
           >
             {isSavingNext ? "Saving..." : "Save and Next"}
           </Link>
-          <button
+          {/* <button
             type="button"
             className="button generate_pdf w-full md:w-auto"
             disabled={isGeneratingPdf}
             onClick={handleGeneratePdfForm97}
           >
             {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-          </button>
+          </button> */}
         </div>
       </form>
       <Toast

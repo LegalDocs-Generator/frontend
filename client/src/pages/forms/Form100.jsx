@@ -24,6 +24,8 @@ const Form100 = () => {
     isGeneratingPdf,
     showToast,
     setShowToast,
+    shouldResetForms,
+    setShouldResetForms,
   } = useContext(DocContext);
 
   useEffect(() => {
@@ -50,7 +52,30 @@ const Form100 = () => {
     e.preventDefault();
     handleSubmitForm100(formData, true);
   };
+  useEffect(() => {
+    if (shouldResetForms) {
+      setFormData({
+        petitionNumber: "",
+        deceasedName: "",
+        deceasedName1: "",
+        deceasedName2: "",
+        deceasedName3: "",
+        deceasedName4: "",
+        deceasedAddress: "",
+        deceasedOccupation: "",
+        petitionerName: "",
+        relationWithDeeceased: "",
+        swearingLocation: "",
+        swornDay: "",
+        swornMonth: "",
+        swornYear: "",
+        advocateFor: "",
+      });
 
+      // Reset the trigger so it doesn’t keep clearing
+      setShouldResetForms(false);
+    }
+  }, [shouldResetForms]);
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
       <p className=" text-xl md:text-3xl mt-2 mb-2 font-semibold text-center">
@@ -65,8 +90,8 @@ const Form100 = () => {
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
-        2020
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No{" "}
+        {formData.petitionNumber || ".............."} of 2020
       </p>
       <form onSubmit={handleSaveChanges} className="p-2 md:p-12 space-y-6">
         {/* Petition Number Field */}
@@ -87,7 +112,7 @@ const Form100 = () => {
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
-            <label >(Name of deceased)</label>
+            <label>(Name of deceased)</label>
             <input
               type="text"
               name="deceasedName"
@@ -97,7 +122,7 @@ const Form100 = () => {
               onChange={handleChange}
             />
             resident
-            <label >(Address of Deceased)</label>
+            <label>(Address of Deceased)</label>
             <input
               type="text"
               name="deceasedAddress"
@@ -107,7 +132,7 @@ const Form100 = () => {
               onChange={handleChange}
             />
             having occupation of
-            <label >(Occupation of Deceased)</label>
+            <label>(Occupation of Deceased)</label>
             <input
               type="text"
               name="deceasedOccupation"
@@ -120,7 +145,7 @@ const Form100 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
-            <label >(Name of Executor of Will)</label>
+            <label>(Name of Executor of Will)</label>
             <input
               type="text"
               name="petitionerName"
@@ -208,14 +233,14 @@ const Form100 = () => {
             >
               {isSavingNext ? "Saving..." : "Save and Next"}
             </Link>
-            <button
+            {/* <button
               type="button"
               className="button generate_pdf w-full md:w-auto"
               disabled={isGeneratingPdf}
               onClick={handleGeneratePdfForm100}
             >
               {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-            </button>
+            </button> */}
           </div>
         </div>
       </form>
@@ -223,7 +248,7 @@ const Form100 = () => {
         show={showToast}
         message="Form Submitted Successfully"
         duration={3000}
-        onClose={()=>setShowToast(false)}
+        onClose={() => setShowToast(false)}
       />
     </div>
   );

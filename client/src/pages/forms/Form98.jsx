@@ -68,7 +68,34 @@ const Form98 = () => {
     isGeneratingPdf,
     showToast,
     setShowToast,
+    shouldResetForms, setShouldResetForms 
   } = useContext(DocContext);
+
+
+useEffect(() => {
+  if (shouldResetForms) {
+    setFormData({
+      petitionNumber: "",
+      deceasedName: "",
+      deceasedName1: "",
+      deceasedName2: "",
+      deceasedName3: "",
+      deceasedName4: "",
+      deceasedAddress: "",
+      deceasedOccupation: "",
+      petitionerName: "",
+      relationWithDeeceased: "",
+      swearingLocation: "",
+      swornDay: "",
+      swornMonth: "",
+      swornYear: "",
+      advocateFor: "",
+    });
+
+    // Reset the trigger so it doesn’t keep clearing
+    setShouldResetForms(false);
+  }
+}, [shouldResetForms]);
 
   useEffect(() => {
     if (!user) navigate("/login");
@@ -587,14 +614,14 @@ const Form98 = () => {
               >
                 {isSavingNext ? "Saving..." : "Save and Next"}
               </Link>
-              <button
+              {/* <button
                 type="button"
                 className="button generate_pdf w-full md:w-auto"
                 disabled={isGeneratingPdf}
                 onClick={handleGeneratePdfForm98}
               >
                 {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

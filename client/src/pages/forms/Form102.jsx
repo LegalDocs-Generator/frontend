@@ -4,22 +4,24 @@ import { AuthContext } from "../../store/authStore";
 import { DocContext } from "../../store/docsStore";
 import Toast from "../../components/Toaster";
 
+// ✅ Centralized initial state
+const initialForm102 = {
+  petitionNumber: "",
+  deceasedName: "",
+  deceasedAddress: "",
+  deceasedOccupation: "",
+  petitionerName: "",
+  witnessName: "",
+  witnessAge: "",
+  witnessAddress: "",
+  dateOfDeath: "",
+  swearingLocation: "",
+  swornDate: "",
+  advocateFor: "",
+};
+
 const Form102 = () => {
-  const [formData, setFormData] = useState({
-    petitionNumber: "",
-    deceasedName: "",
-    deceasedAddress: "",
-    deceasedOccupation: "",
-    petitionerName: "",
-    witnessName: "",
-    witnessAge: "",
-    witnessAddress: "",
-    dateOfDeath: "",
-    swearingLocation: "",
-    swornDay: "",
-    swornMonth: "",
-    advocateFor: "",
-  });
+  const [formData, setFormData] = useState(initialForm102);
 
   const { user, navigate } = useContext(AuthContext);
   const {
@@ -31,27 +33,15 @@ const Form102 = () => {
     isGeneratingPdf,
     showToast,
     setShowToast,
+    shouldResetForms,
+    setShouldResetForms,
   } = useContext(DocContext);
 
   useEffect(() => {
     if (!user) navigate("/login");
-    else {
-      handleFetchForm102(setFormData);
-    }
+    else handleFetchForm102(setFormData);
   }, []);
 
-  const handleDateChange = (e) => {
-    const value = e.target.value;
-    if (!value) return;
-    const [year, month, day] = value.split("-");
-
-    setFormData((prev) => ({
-      ...prev,
-      swornYear: year,
-      swornMonth: month,
-      swornDay: day,
-    }));
-  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -60,19 +50,29 @@ const Form102 = () => {
     }));
   };
 
+  const handleDateChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      swornDate: e.target.value,
+    }));
+  };
+
   const handleSaveChanges = async (e) => {
     e.preventDefault();
     handleSubmitForm102(formData, false);
   };
 
-  // Reconstruct ISO date for the <input type="date"> control
-  const swornDateValue =
-    formData.swornYear && formData.swornMonth && formData.swornDay
-      ? `${formData.swornYear}-${formData.swornMonth.padStart(
-          2,
-          "0"
-        )}-${formData.swornDay.padStart(2, "0")}`
-      : "";
+  const handleGenerateAllPdfAndReset = async () => {
+    await handleGenerateAllPdf();
+    setFormData(initialForm102);
+  };
+
+  useEffect(() => {
+    if (shouldResetForms) {
+      setFormData(initialForm102);
+      setShouldResetForms(false);
+    }
+  }, [shouldResetForms]);
 
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
@@ -87,10 +87,11 @@ const Form102 = () => {
         IN THE HIGH COURT OF JUDICATURE AT BOMBAY
       </p>
       <p className="text-center text-md md:text-xl font-semibold">
-        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No {formData.petitionNumber||'..............'} of
-        2020
+        TESTAMENTARY AND INTESTATE JURISDICTION PETITION No{" "}
+        {formData.petitionNumber || ".............."} of 2020
       </p>
-      <form onSubmit={handleSaveChanges} className=" text-md md:text-md ">
+
+      <form onSubmit={handleSaveChanges} className="text-md md:text-md ">
         {/* Petition Number Field */}
         <div className="flex flex-col md:flex-row justify-center mb-4">
           <label className="mt-1 mr-2 font-medium font-semibold">
@@ -99,30 +100,29 @@ const Form102 = () => {
           <input
             type="text"
             name="petitionNumber"
-            // placeholder="Enter Petition No."
             className="input w-[100px]"
             onChange={handleChange}
-            value={formData.petitionNumber || ""}
+            value={formData.petitionNumber}
           />
         </div>
+
+        {/* Deceased Details */}
         <div className="space-y-4 mt-12">
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Petition for probate of a will of
-            <label >(Name of deceased)</label>
+            <label>(Name of deceased)</label>
             <input
               type="text"
               name="deceasedName"
-              // placeholder=" Name of Deceased "
               className="input w-full md:w-auto"
               value={formData.deceasedName}
               onChange={handleChange}
             />
             resident
-            <label >(Residence of Deceased)</label>
+            <label>(Residence of Deceased)</label>
             <input
               type="text"
               name="deceasedAddress"
-              // placeholder=" Residence of Deceased"
               className="input w-full md:w-auto"
               value={formData.deceasedAddress}
               onChange={handleChange}
@@ -131,7 +131,7 @@ const Form102 = () => {
             <input
               type="text"
               name="deceasedOccupation"
-              placeholder=" Occupation of Deceased*"
+              placeholder="Occupation of Deceased*"
               className="input  w-full md:w-auto"
               value={formData.deceasedOccupation}
               onChange={handleChange}
@@ -140,11 +140,10 @@ const Form102 = () => {
 
           <div className="flex flex-wrap gap-2 text-sm md:text-base font-semibold justify-center">
             Deceased.
-            <label >(Name of Executor of Will)</label>
+            <label>(Name of Executor of Will)</label>
             <input
               type="text"
               name="petitionerName"
-              // placeholder=" Executor of Will"
               className="input w-full md:w-auto"
               value={formData.petitionerName}
               onChange={handleChange}
@@ -154,15 +153,14 @@ const Form102 = () => {
         </div>
         <hr className="mt-4 mb-7" />
 
-        {/* paragraph Details Section */}
+        {/* Witness Section */}
         <div className="flex flex-wrap gap-2 text-sm md:text-base justify-start mb-2">
           I,
-          <label >(Name of Witness)</label>
+          <label>(Name of Witness)</label>
           <input
             type="text"
             name="witnessName"
             className="input w-full md:w-auto"
-            // placeholder="Witness Name"
             value={formData.witnessName}
             onChange={handleChange}
           />
@@ -171,7 +169,6 @@ const Form102 = () => {
             type="number"
             name="witnessAge"
             className="input  w-full md:w-auto"
-            // placeholder="Witness Age"
             value={formData.witnessAge}
             onChange={handleChange}
           />
@@ -180,7 +177,6 @@ const Form102 = () => {
             type="text"
             name="witnessAddress"
             className="input  w-full md:w-auto"
-            // placeholder="Witness Address"
             value={formData.witnessAddress}
             onChange={handleChange}
           />
@@ -191,12 +187,11 @@ const Form102 = () => {
 
         {/* Point 1 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
-          1) That I knew and was well acquainted with the deceased <label >(Name of Deceased)</label>
+          1) That I knew and was well acquainted with the deceased{" "}
           <input
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
@@ -206,37 +201,32 @@ const Form102 = () => {
         {/* Point 2 */}
         <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
           2) That on the
-          <label >(Date of Death)</label>
           <input
             type="date"
             name="dateOfDeath"
             className="input  w-full md:w-auto"
-            // placeholder="Date Of Death"
-            value={formData.dateOfDeath.split('T')[0]}
+            value={formData.dateOfDeath ? formData.dateOfDeath.split("T")[0] : ""}
             onChange={handleChange}
           />
           , I was present together with
-          <label >(Name of Executor of Will)</label>
           <input
             type="text"
             name="petitionerName"
             className="input  w-full md:w-auto"
-            // placeholder="Executor of Will"
             value={formData.petitionerName}
             onChange={handleChange}
           />
           at the house of
-          <label >(Name of Deceased)</label>
           <input
             type="text"
             name="deceasedName"
             className="input  w-full md:w-auto"
-            // placeholder="Deceased Name"
             value={formData.deceasedName}
             onChange={handleChange}
           />
         </div>
 
+        {/* Other Points */}
         <div className="text-sm md:text-base leading-relaxed ms-2 md:!ms-16 mb-2">
           and we did then and there see the said deceased set and subscribe his
           name at foot of the testamentary paper in the English language and
@@ -245,82 +235,14 @@ const Form102 = () => {
           testament.
         </div>
 
-        {/* Point 3 */}
-        <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
-          3) That thereupon I, this deponent and the said
-          <label >(Name of Executor of Will)</label>
-          <input
-            type="text"
-            name="petitionerName"
-            className="input w-full md:w-auto"
-            // placeholder="Executor of Will"
-            value={formData.petitionerName}
-            onChange={handleChange}
-          />
-          did at the request of the said deceased and in his presence and in the
-          presence of
-        </div>
-
-        <div className="text-sm md:text-base leading-relaxed ms-2 md:!ms-16 mb-2">
-          each other all being present at the same time set and subscribe our
-          respective names and signatures at foot of the said testamentary paper
-          as witnesses thereto.
-        </div>
-
-        {/* Point 4 */}
-        <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
-          4) That the name and signature
-          <label >(Name of Deceased)</label>
-          <input
-            type="text"
-            name="deceasedName"
-            className="input w-full md:w-auto"
-            // placeholder="Deceased Name"
-            value={formData.deceasedName}
-            onChange={handleChange}
-          />
-          subscribed at the foot of the testamentary paper as of the party
-          executing the same is in the
-        </div>
-
-        <div className="text-sm md:text-base leading-relaxed ms-2 md:!ms-16 mb-2">
-          proper hand-writing of the said deceased and the name and signature
-          also subscribed and written at foot of the said testamentary paper as
-          of the parties attesting execution of the same are in the proper
-          respective handwritings of the said and of me this deponent
-          respectively.
-        </div>
-
-        {/* Point 5 */}
-        <div className="flex flex-wrap items-start gap-2 text-sm md:text-base mb-2 ms-2 md:!ms-10">
-          5) That at the time the said deceased so subscribed his name and
-          signature to the said will as aforesaid,
-          <label >(Name of Deceased)</label>
-          <input
-            type="text"
-            name="deceasedName"
-            className="input  w-full md:w-auto"
-            // placeholder="Deceased Name"
-            value={formData.deceasedName}
-            onChange={handleChange}
-          />
-          he was of sound
-        </div>
-
-        <div className="text-sm md:text-base leading-relaxed ms-2 md:!ms-16 mb-2">
-          and disposing mind, memory and understanding and to the best of my
-          belief made and published the name of his free will and pleasure.
-        </div>
-
+        {/* Swearing Location & Date */}
         <hr />
-
         <div className=" gap-4 mt-7  text-sm md:text-base ml-0 md:ml-11">
           <div className="flex items-center w-full md:w-[310px] justify-between">
             <p>Sworn Location</p>
             <input
               type="text"
               name="swearingLocation"
-              // placeholder="Swearing Location"
               className="input w-[65%]"
               value={formData.swearingLocation}
               onChange={handleChange}
@@ -331,9 +253,8 @@ const Form102 = () => {
             <input
               type="date"
               name="swornDate"
-              placeholder="Date of Swearing"
               className="input w-[65%]"
-              value={swornDateValue}
+              value={formData.swornDate || ""}
               onChange={handleDateChange}
             />
           </div>
@@ -342,7 +263,6 @@ const Form102 = () => {
             <input
               type="text"
               name="advocateFor"
-              // placeholder="Advocate for"
               className="input w-[65%]"
               value={formData.advocateFor}
               onChange={handleChange}
@@ -352,7 +272,6 @@ const Form102 = () => {
         <hr />
 
         {/* Buttons */}
-
         <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center mt-6 gap-4">
           <Link
             to="/form101"
@@ -370,30 +289,23 @@ const Form102 = () => {
             >
               {isSavingChanges ? "Saving..." : "Save Changes"}
             </button>
-            <Link
-              type="button"
-              className="button save_next w-full md:w-auto "
-              disabled={isGeneratingPdf}
-              onClick={handleGeneratePdfForm102}
-            >
-              {isGeneratingPdf ? "Sending email..." : "Generate PDF"}
-            </Link>
             <button
               type="button"
               className="button generate_pdf w-full md:w-auto"
               disabled={isGeneratingPdf}
-              onClick={handleGenerateAllPdf}
+              onClick={handleGenerateAllPdfAndReset}
             >
               {isGeneratingPdf ? "Sending email..." : "Generate All PDFs"}
             </button>
           </div>
         </div>
       </form>
+
       <Toast
         show={showToast}
         message="Form Submitted Successfully"
         duration={3000}
-        onClose={()=>setShowToast(false)}
+        onClose={() => setShowToast(false)}
       />
     </div>
   );
