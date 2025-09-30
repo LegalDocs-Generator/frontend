@@ -51,9 +51,30 @@ const Form102 = () => {
   };
 
   const handleDateChange = (e) => {
+    const value = e.target.value; // "YYYY-MM-DD"
+    if (!value) return;
+
+    const [year, month, day] = value.split("-");
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
     setFormData((prev) => ({
       ...prev,
-      swornDate: e.target.value,
+      swornYear: year,
+      swornMonth: monthNames[parseInt(month) - 1],
+      swornDay: day,
     }));
   };
 
@@ -73,6 +94,28 @@ const Form102 = () => {
       setShouldResetForms(false);
     }
   }, [shouldResetForms]);
+
+  const swornDateValue =
+    formData.swornYear && formData.swornMonth && formData.swornDay
+      ? `${formData.swornYear}-${(
+          [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ].indexOf(formData.swornMonth) + 1
+        )
+          .toString()
+          .padStart(2, "0")}-${formData.swornDay.padStart(2, "0")}`
+      : "";
 
   return (
     <div className="border m-4 md:m-10 rounded-2xl p-4 md:!p-10 bg-white text-sm md:text-base max-h-screen overflow-scroll">
@@ -205,7 +248,9 @@ const Form102 = () => {
             type="date"
             name="dateOfDeath"
             className="input  w-full md:w-auto"
-            value={formData.dateOfDeath ? formData.dateOfDeath.split("T")[0] : ""}
+            value={
+              formData.dateOfDeath ? formData.dateOfDeath.split("T")[0] : ""
+            }
             onChange={handleChange}
           />
           , I was present together with
@@ -254,7 +299,7 @@ const Form102 = () => {
               type="date"
               name="swornDate"
               className="input w-[65%]"
-              value={formData.swornDate || ""}
+              value={swornDateValue}
               onChange={handleDateChange}
             />
           </div>
